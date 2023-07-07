@@ -14,3 +14,5 @@
 {% embed url="https://medium.com/coupang-engineering/kr/home" %}
 
 {% embed url="https://tech.kakao.com/blog/" %}
+
+{% embed url="https://netflixtechblog.medium.com/" %}
