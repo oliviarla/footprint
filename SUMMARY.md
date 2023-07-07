@@ -69,4 +69,4 @@
 * [이력서 작성하기](etc/undefined.md)
 * [Embedded](etc/embedded/README.md)
   * [라즈베리파이에서 네오픽셀 적용기](etc/embedded/undefined.md)
-* [기술블로그](etc/undefined-1.md)
+* [기술블로그](etc/tech-blog.md)
