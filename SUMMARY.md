@@ -19,7 +19,10 @@
 * [JVM부터 GC, 스레드 동기화까지!](java/jvm-gc/README.md)
   * [자바 정의와 동작방식](java/jvm-gc/java-basic.md)
   * [JVM의 정의와 메모리 구조](java/jvm-gc/jvm-memory.md)
-  * [GC의 정의와 알고리즘](java/jvm-gc/gc-algorithm.md)
+  * [GC의 정의와 알고리즘](java/jvm-gc/gc-algorithm/README.md)
+    * [가비지 컬렉션의 정의와 가비지 컬렉터가 처리하는 Heap 영역](java/jvm-gc/gc-algorithm/heap.md)
+    * [Heap 영역을 제외한 GC 처리 영역](java/jvm-gc/gc-algorithm/heap-gc.md)
+    * [Java GC 알고리즘](java/jvm-gc/gc-algorithm/java-gc.md)
   * [스레드 동기화](java/jvm-gc/thread-synchronization.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
@@ -39,13 +42,13 @@
 * [Kubernetes](infra/kubernetes/README.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
   * [쿠버네티스 인 액션](infra/kubernetes/undefined.md)
-* [클린 아키텍처](infra/undefined/README.md)
-  * [만들면서 배우는 클린 아키텍처](infra/undefined/undefined/README.md)
-    * [계층형 아키텍처의 문제와 의존성 역전](infra/undefined/undefined/undefined.md)
-    * [유스케이스](infra/undefined/undefined/undefined-1.md)
-    * [웹 어댑터](infra/undefined/undefined/undefined-2.md)
-    * [영속성 어댑터](infra/undefined/undefined/undefined-3.md)
-    * [아키텍처 요소 테스트](infra/undefined/undefined/undefined-4.md)
+* [클린 아키텍처](infra/clean-architecture/README.md)
+  * [만들면서 배우는 클린 아키텍처](infra/clean-architecture/clean-book/README.md)
+    * [계층형 아키텍처의 문제와 의존성 역전](infra/clean-architecture/clean-book/1.md)
+    * [유스케이스](infra/clean-architecture/clean-book/2.md)
+    * [웹 어댑터](infra/clean-architecture/clean-book/3.md)
+    * [영속성 어댑터](infra/clean-architecture/clean-book/4.md)
+    * [아키텍처 요소 테스트](infra/clean-architecture/clean-book/5.md)
 
 ## 🏔 CS
 

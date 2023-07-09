@@ -99,7 +99,7 @@
 
 ### 메모리 특성
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption><p>Shared Multiprocessor Architecture</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption><p>Shared Multiprocessor Architecture</p></figcaption></figure>
 
 * 공유 멀티프로세서 아키텍처
   * CPU 코어마다 L1, L2 캐시가 존재한다.
