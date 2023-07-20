@@ -1,3 +1,8 @@
+---
+cover: .gitbook/assets/geio-tischler-7hww7t6NLcg-unsplash.jpg
+coverY: 0
+---
+
 # 🐶 ABOUT
 
 ### 이곳은..?
