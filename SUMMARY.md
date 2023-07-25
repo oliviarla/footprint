@@ -49,6 +49,11 @@
     * [웹 어댑터](infra/clean-architecture/clean-book/3.md)
     * [영속성 어댑터](infra/clean-architecture/clean-book/4.md)
     * [아키텍처 요소 테스트](infra/clean-architecture/clean-book/5.md)
+    * [경계 간 매핑 전략](infra/clean-architecture/clean-book/6.md)
+    * [애플리케이션 조립](infra/clean-architecture/clean-book/undefined.md)
+    * [아키텍처 경계 강제하기](infra/clean-architecture/clean-book/undefined-1.md)
+    * [지름길 사용하기](infra/clean-architecture/clean-book/undefined-2.md)
+    * [아키텍처 스타일 결정하기](infra/clean-architecture/clean-book/undefined-3.md)
 
 ## 🏔 CS
 
