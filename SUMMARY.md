@@ -76,6 +76,9 @@
     * [CentOS7에서 MySQL 8 버전 설치하기](cs/database/mysql/centos7-mysql-8.md)
 * [컴퓨터 구조](cs/computer-architecture.md)
 * [자료 구조](cs/data-structure.md)
+* [웹 기술](cs/undefined/README.md)
+  * [HTTP](cs/undefined/http/README.md)
+    * [쿠키와 세션](cs/undefined/http/undefined.md)
 
 ## 🕹 ETC
 
