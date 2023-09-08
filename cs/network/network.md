@@ -27,8 +27,11 @@
 
 * OSI 모델
   * 범용적인 네트워크 구조
-* TCP/IP 모델
-  * 인터넷에 특화된 네트워크 구조
+*   TCP/IP 모델
+
+    * 인터넷에 특화된 네트워크 구조
+
+    <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 네트워크의 분류
 

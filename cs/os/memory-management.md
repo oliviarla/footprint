@@ -8,7 +8,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
 
 ## Swap
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 메인 메모리에 원하는 데이터가 없다면 하드 디스크의 데이터 접근해 메모리로 올려두고(swap in), 메모리에서 사용하지 않을 것 같은 데이터는 하드디스크에 저장한다. (swap out)
 * 어떤 프로세스를 swap in, swap out 할지는 CPU 스케줄러에 의해 결정된다.
@@ -22,7 +22,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
   * 하나의 연속된 메모리 블록에 프로세스나 파일의 데이터를 할당하는 것
   * 사용 가능한 메모리 블록이 전체 메모리 공간에 걸쳐 여기저기 랜덤하게 분포되지 않는다.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt="" width="284"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (2).png" alt="" width="284"><figcaption></figcaption></figure>
 
 *   외부 단편화(External Fragmentation)
 
@@ -31,7 +31,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
       * 프로세스를 page 단위로 나누고, 프레임 단위로 매핑하여 메모리를 효율적으로 사용할 수 있다.
     * 아래와 같이 프로세스가 할당된 Assigned Space가 아닌 Fragment에 새로운 프로세스를 할당할 수 있으나, 프로세스가 50KB의 메모리 공간을 필요로 할 경우 할당이 불가능하다.
 
-    <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 * 내부 단편화(Internal Fragmentation)
   * 외부 단편화 해결을 위해 page 단위로 메모리를 관리하게 되었는데, 이 page 내부에 할당된 프로세스 외에 공간이 남아 발생하는 문제
   * 아래와 같이 Assigned Space에 프로세스가 Used Space 만큼만 사용해 Fragment가 사용되지 않는 것을 볼 수 있다.
