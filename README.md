@@ -1,6 +1,20 @@
 ---
-cover: .gitbook/assets/geio-tischler-7hww7t6NLcg-unsplash.jpg
+cover: .gitbook/assets/2b165cb34873aed1af2f4fc13c40cdd8.jpg
 coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # 🐶 ABOUT
