@@ -1,10 +1,8 @@
 # Table of contents
 
-* [🐶 ABOUT](README.md)
-
 ## 🏝 자바 <a href="#java" id="java"></a>
 
-* [객체 지향 프로그래밍](java/oop.md)
+* [객체 지향 프로그래밍](README.md)
 * [자바의 정석](java/bible-of-java/README.md)
   * [1. JVM과 자바 코드 실행 방식](java/bible-of-java/1.-jvm.md)
   * [2. 데이터 타입, 변수, 배열](java/bible-of-java/2..md)
@@ -24,6 +22,10 @@
     * [Heap 영역을 제외한 GC 처리 영역](java/jvm-gc/gc-algorithm/heap-gc.md)
     * [Java GC 알고리즘](java/jvm-gc/gc-algorithm/java-gc.md)
   * [스레드 동기화](java/jvm-gc/thread-synchronization.md)
+
+***
+
+* [🐶 ABOUT](about.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
