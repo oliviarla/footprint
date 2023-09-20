@@ -3,12 +3,12 @@
 ## 🍽️ REST Docs를 사용하는 이유
 
 * **테스트가 성공**해야만 문서가 생성되므로, 테스트 코드를 짜야 하는 의무가 생긴다.
-* 테스트 코드에만 REST Docs 관련 코드가 생길 뿐, 프로덕션 코드에는 아무런 영향이 없다.
+* Swagger와 달리 테스트 코드에만 REST Docs 관련 코드가 생길 뿐, 프로덕션 코드에는 아무런 영향이 없다.
 
 ## 🍽️ 적용 방법
 
 {% hint style="info" %}
-build.gradle.kts 에서 REST Docs 적용하는 방법을 알아봅시다!
+build.gradle.kts 에서 REST Docs 적용하는 방법을 알아보자.
 {% endhint %}
 
 ### 의존성 추가
@@ -31,21 +31,37 @@ tasks.test {
     outputs.dir(snippetsDir)
 }
 
-// 3. snippetsDir에서 얻은 snippets를 사용해 index.html 파일을 생성한다.
+
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     configurations(asciidoctorExt.name)
     dependsOn(tasks.test)
 }
 
-// 4. gradle build하여 jar 파일을 빌드하기 전, 
-//    src/main/resources/static/docs에 index.html 파일을 복사한다.
-tasks.build {
-    dependsOn(tasks.asciidoctor)
-    copy {
-        from("build/docs/asciidoc")
-        into("src/main/resources/static/docs")
+// 3. snippetsDir에서 얻은 snippets를 사용해 index.html 파일을 생성한다.
+//     생성된 파일들은 build 디렉토리와 프로덕션 디렉토리 모두에 추가한다. 
+tasks.asciidoctor {
+    doFirst {
+        delete("src/main/resources/static/docs")
     }
+    inputs.dir(snippetsDir)
+    configurations(asciidoctorExt.name)
+    dependsOn(tasks.test)
+    doLast {
+        copy {
+            from("build/docs/asciidoc")
+            into("src/main/resources/static/docs")
+        }
+        copy {
+            from("build/docs/asciidoc")
+            into("build/resources/main/static/docs")
+        }
+    }
+}
+
+// 4. bootJar 사용 시 asciidoctor가 실행되어야 한다.
+tasks.bootJar {
+    dependsOn(tasks.asciidoctor)
 }
 ```
 
