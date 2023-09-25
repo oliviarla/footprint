@@ -20,22 +20,15 @@ build.gradle.kts 에서 REST Docs 적용하는 방법을 알아보자.
 val asciidoctorExt: Configuration by configurations.creating
 
 dependencies {
-		testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.springframework.restdocs:spring-restdocs-asciidoctor")
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
-// 2. test 시 restdocs에서 자동 생성한 snippets를 저장할 폴더를 명시한다.
+// 2. test 시 restdocs에서 자동 생성할 snippets를 저장할 폴더를 명시한다.
 val snippetsDir by extra { file("build/generated-snippets") }
 tasks.test {
     outputs.dir(snippetsDir)
-}
-
-
-tasks.asciidoctor {
-    inputs.dir(snippetsDir)
-    configurations(asciidoctorExt.name)
-    dependsOn(tasks.test)
 }
 
 // 3. snippetsDir에서 얻은 snippets를 사용해 index.html 파일을 생성한다.
@@ -65,7 +58,7 @@ tasks.bootJar {
 }
 ```
 
-> `src/main/resources/static` 폴더가 없으면 4번 과정에서 복사가 제대로 되지 않으므로 만들어주어야 한다.
+> `src/main/resources/static` 폴더가 없으면 3번 과정에서 복사가 제대로 되지 않으므로 만들어주어야 한다.
 
 ### 테스트 코드 동작 검증
 
@@ -101,9 +94,9 @@ include::{snippets}/index/response-body.adoc[]
 
 ### REST Docs 보기
 
-* gradlew 파일이 있는 경로에서 `./gradlew build` 명령어를 사용해 jar 파일을 생성한다. 혹은 Intellij gradle 플러그인을 사용해 build할 수도 있다.
-* `jar -tf build/libs/(프로젝트명).jar | grep index.html` 로 index.html 이 정상적으로 포함되었는지 확인한다.
-* `java -jar (프로젝트명).jar` 로 애플리케이션을 구동시킨 후, `http://localhost:8080/api/docs/index.html` 로 접근해 제대로 동작하는지 확인한다.
+* gradlew 파일이 있는 경로에서 `./gradlew bootjar` 명령어를 사용해 jar 파일을 생성한다. 혹은 Intellij gradle 플러그인을 사용해 jar 파일을 생성할 수도 있다.
+* `java -jar (프로젝트명).jar` 혹은 인텔리제이를 사용해 애플리케이션을 구동시킨 후, `http://localhost:8080/api/docs/index.html` 로 접근해 제대로 동작하는지 확인한다.
+  * 만약 jar 파일 실행 시 제대로 동작하지 않는다면 `jar -tf build/libs/(프로젝트명).jar | grep index.html` 로 jar 파일 내부에 index.html 이 정상적으로 포함되었는지 확인한다.
 
 #### 참고 자료
 

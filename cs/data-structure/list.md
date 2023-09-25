@@ -21,6 +21,28 @@
 * Null 값을 입력할 수 있다.
 * 공간이 부족한 경우 현재 **공간의 절반** 만큼의 메모리를 더 할당받는다.
 
+```java
+List<String> lst = new ArrayList<>();
+
+lst.add("hello");
+lst.addAll("hello world!", "hello guys!");
+
+// 인덱스 위치에 저장된 값 조회
+int idx = 0;
+lst.get(idx);
+
+// 리스트 길이 조회
+int size = lst.size();
+
+// 제거 시 index/객체 모두 입력 가능
+// +) List<Integer>의 경우 index 기반 제거가 먼저 동작한다.
+lst.remove(1);
+lst.remove("hello");
+
+int[] data = {1, 2, 3};
+Arrays.asList(data);
+```
+
 ## LinkedList
 
 * 데이터가 컴퓨터 메모리 내부에 순차적으로 저장되지 않고 주소 단위로 서로 연결되는 선형 데이터 구조
