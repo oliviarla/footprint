@@ -81,7 +81,7 @@
 
 <figure><img src="../../../.gitbook/assets/image (22).png" alt="" width="375"><figcaption><p>새로운 객체가 eden 영역에 할당</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt="" width="375"><figcaption><p>참조중인 객체만 survivor 영역으로 이동</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (2).png" alt="" width="375"><figcaption><p>참조중인 객체만 survivor 영역으로 이동</p></figcaption></figure>
 
 <figure><img src="../../../.gitbook/assets/image (4) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
 
