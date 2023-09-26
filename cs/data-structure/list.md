@@ -31,7 +31,7 @@ lst.add("hello");
 lst.add(0, "hello"); // 특정 index에 원소 추가
 lst.addAll(List.of("hello world!", "hello guys!")); // 컬렉션의 모든 원소 추가
 
-// 인덱스 위치에 저장된 값 조회
+// 인덱스 기반 조회
 int idx = 0;
 String s = lst.get(idx);
 
@@ -58,14 +58,15 @@ int indexOfNumber1 = lst.indexOf("hello"); // index 반환, 탐색 실패 시 -1
   * 반복자를 통해 순회해야만 특정 위치의 원소를 조회할 수 있다.
 
 ```java
+// 선언
 List<String> lst = new LinkedList<>();
 
-// 원소 추가
+// 추가
 lst.add("A");
 lst.add(2, "E"); // 특정 인덱스에 추가
 lst.addAll(List.of("hello world!", "hello guys!")); // 컬렉션의 모든 원소 추가
 
-// 원소 제거
+// 제거
 lst.remove(); // 0번째 index제거
 lst.remove("B"); // 특정 원소를 찾아 제거
 lst.remove(3); // index로 제거
