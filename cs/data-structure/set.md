@@ -1,3 +1,7 @@
+---
+description: 중복을 허용하지 않는 데이터 셋
+---
+
 # Set
 
 ## 특징
@@ -5,14 +9,18 @@
 * 고유한 원소들을 저장하는 자료구조
 * 수학의 집합 개념과 유사하다.
 * 중복된 값을 저장할 수 없다.
-* 저장되는 순서를 유지할 수 없다. 따라서 index 기반 탐색이 불가능하다.
-* 값을 추가하거나 삭제할 때&#x20;
-* 종류
-  * Hash-Based Set
-    * 해시 테이블로 표현되는 Set이다.
-    * 각 원소는 해시코드에 기반한 버킷에 저장된다.
+* 일반적으로 저장되는 순서를 유지할 수 없다. 따라서 리스트와 달리 index 기반 탐색이 불가능하다.
+* 두 가지 구현 방식이 있다.
+  *   Hash-Based Set
+
+      * 해시 테이블로 표현되는 Set이다.
+      * 각 원소를 해싱하여 얻은 인덱스 위치에 원소가 저장된다.
+      * 다음 그림처럼 여러 원소(Key)들을 Hash Table에 저장하는 방식이다.
+
+      <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
   * Tree-Based Set
-    * 이진 탐색 트리로 표현되는 Set이다.
+    * 자가 균형 이진 탐색 트리로 표현되는 Set이다.
+    * 일반적으로 red-black tree를 사용한다.
     * 각 원소는 트리의 노드에 저장된다.
 
 ## HashSet
@@ -77,7 +85,7 @@ int length = set.size();
 boolean isContain4 = set.contains(4);
 
 // 비교 
-// +) Set 인터페이스에는 없는 메서드들이므로, Set이 아닌 TreeSet 객체여야 동작한다.
+// +) Set 인터페이스에는 없는 메서드들이므로, Set이 아닌 SortedSet 또는 TreeSet의 객체여야 동작한다.
 Integer minOfSet = set.first();
 Integer maxOfSet = set.last();
 Integer moreThan3 = set.higher(3);
@@ -87,7 +95,7 @@ Integer lessThan3 = set.lower(3);
 ## LinkedHashSet
 
 * HashSet을 상속받았으며, doubly-linked list를 기반으로 하는 LinkedHashMap을 통해 구현되어 있다.
-* 입력된 순서를 유지한다.
+* 일반적인 Set과 다르게 **입력된 순서를 유지**한다.
 
 ```java
 // 선언

@@ -1,3 +1,7 @@
+---
+description: 인덱스를 기반으로 한 데이터 구조
+---
+
 # List
 
 ## 특징
@@ -55,7 +59,7 @@ int indexOfNumber1 = lst.indexOf("hello"); // index 반환, 탐색 실패 시 -1
 * 데이터가 컴퓨터 메모리 내부에 순차적으로 저장되지 않고, **주소 단위로 서로 연결**되는 선형 데이터 구조이다.
 * 삽입과 삭제는 단순히 Prev와 Next 값을 변경해주면 되기 때문에 O(1)의 시간 복잡도를 갖는다.
 * 특정 인덱스의 원소를 탐색하려면 O(N)의 시간 복잡도를 갖는다.
-  * 반복자를 통해 순회해야만 특정 위치의 원소를 조회할 수 있다.
+  * `get(int index)` 메서드를 사용하면 내부적으로는 리스트 원소를 하나씩 순회하여 특정 위치의 원소를 조회한다.
 
 ```java
 // 선언
@@ -71,6 +75,10 @@ lst.remove(); // 0번째 index제거
 lst.remove("B"); // 특정 원소를 찾아 제거
 lst.remove(3); // index로 제거
 lst.clear(); //모든 원소 제거
+
+// 검색
+String str = lst.get(1); // 특정 인덱스의 값 조회
+int idx = strings.indexOf("hello guys!"); // 특정 값의 인덱스 조회
 ```
 
 > 자바의 LinkedList 클래스는 Deque 인터페이스까지 구현하고 있지만 여기서는 다루지 않도록 한다.
