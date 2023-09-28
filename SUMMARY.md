@@ -24,9 +24,11 @@
     * [Heap 영역을 제외한 GC 처리 영역](java/jvm-gc/gc-algorithm/heap-gc.md)
     * [Java GC 알고리즘](java/jvm-gc/gc-algorithm/java-gc.md)
   * [스레드 동기화](java/jvm-gc/thread-synchronization.md)
-* [모던 자바 인 액션](java/undefined/README.md)
-  * [1장](java/undefined/1.md)
-  * [2장](java/undefined/2.md)
+* [모던 자바 인 액션](java/modern-java-in-action/README.md)
+  * [1장: 자바의 역사](java/modern-java-in-action/1.md)
+  * [2장: 동작 파라미터화](java/modern-java-in-action/2.md)
+  * [3장: 람다](java/modern-java-in-action/3.md)
+  * [4장](java/modern-java-in-action/4.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
