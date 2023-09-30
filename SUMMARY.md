@@ -28,7 +28,8 @@
   * [1장: 자바의 역사](java/modern-java-in-action/1.md)
   * [2장: 동작 파라미터화](java/modern-java-in-action/2.md)
   * [3장: 람다](java/modern-java-in-action/3.md)
-  * [4장](java/modern-java-in-action/4.md)
+  * [4장: 스트림](java/modern-java-in-action/4.md)
+  * [5장: 스트림 활용](java/modern-java-in-action/5.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
