@@ -30,6 +30,7 @@
   * [3장: 람다](java/modern-java-in-action/3.md)
   * [4장: 스트림](java/modern-java-in-action/4.md)
   * [5장: 스트림 활용](java/modern-java-in-action/5.md)
+  * [6장](java/modern-java-in-action/6.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
