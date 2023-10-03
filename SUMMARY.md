@@ -32,6 +32,7 @@
   * [5장: 스트림 활용](java/modern-java-in-action/5.md)
   * [6장: 스트림으로 데이터 수집](java/modern-java-in-action/6.md)
   * [7장: 병렬 데이터 처리와 성능](java/modern-java-in-action/7.md)
+  * [8장: 컬렉션 API 개선](java/modern-java-in-action/8-api.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
