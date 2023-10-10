@@ -1,5 +1,16 @@
 # Queue
 
+## Queue
+
+* FIFO(First In First Out), 즉 선입선출을 기반으로 하는 선형 자료 구조이다.
+* 큐에서 데이터를 꺼낼 때(dequeue)에는 큐의 가장 앞에 저장된 (가장 먼저 입력된) 값이 꺼내지며, 데이터를 집어 넣을 때(enqueue)에는 큐의 가장 끝에 저장된다.
+
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
+
+
+
+
+
 ## Deque
 
 * Doubly-Ended Queue
