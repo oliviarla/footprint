@@ -90,6 +90,8 @@
   * [Map](cs/data-structure/map.md)
   * [Set](cs/data-structure/set.md)
   * [Queue](cs/data-structure/queue.md)
+  * [PriorityQueue](cs/data-structure/priorityqueue.md)
+  * [Stack](cs/data-structure/stack.md)
 * [웹 기술](cs/web/README.md)
   * [HTTP](cs/web/http/README.md)
     * [쿠키와 세션](cs/web/http/cookie-and-session.md)
