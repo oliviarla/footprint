@@ -22,6 +22,8 @@ description: 선입선출을 기반으로 한 선형 자료구조
 
 ## Queue in Java
 
+<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption><p>Java에서 제공하는 Queue 클래스 구조 (geeksforgeeks)</p></figcaption></figure>
+
 ### LinkedList
 
 * ArrayList는 가장 첫 번째 데이터를 제거할 경우, 빈 공간이 생기게 되고 이를 채우기 위해 뒷 원소들을 모두 앞으로 이동시켜야 하므로 비효율적이다.
@@ -56,9 +58,6 @@ String result = q.element();
 
 * ArrayDeque는 말그대로 **배열 기반**으로 구현되어 head, tail 포인터를 가지는 **Deque**이다.
 * ArrayDeque의 클래스 구조는 아래와 같다.
-
-<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
-
 * Stack이나 Queue로 사용할 수 있다.
   * Stack 클래스나 LinkedList 클래스를 Queue로 사용할 때 보다 빠른 성능을 보인다.
 
