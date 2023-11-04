@@ -14,7 +14,7 @@
 
 * 아래와 같이 직접 matches를 사용할 경우 매번 Pattern 인스턴스가 새로 생성된다.
 
-```scss
+```java
 s.matches(
 	"^(?=.)M*(C[MD]|D?C{0,3})"
 	+"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
@@ -23,7 +23,7 @@ s.matches(
 * 아래와 같이 Pattern final 객체를 선언해두면 반복해서 match()할 때 인스턴스를 재사용하도록 캐싱할 수 있다.
 * 코드의 의미도 훨씬 잘 드러난다.
 
-```tsx
+```java
 static final Pattern ROMAN = Pattern.compile(
 	"^(?=.)M*(C[MD]|D?C{0,3})"
 	+"(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");

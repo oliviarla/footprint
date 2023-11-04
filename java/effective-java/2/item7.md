@@ -9,7 +9,7 @@
 * 사용되지 않는 객체 참조 하나를 살려둘 경우, 해당 객체를 참조하는 모든 객체들이 연달아 회수되지 못한다.
 * 아래는 스택에서 꺼낸 더이상 사용하지 않는 객체를 가비지 컬렉터가 회수하지 않아 메모리 누수가 발생하는 코드이다.
 
-```tsx
+```java
 public Object pop() {
 	if (size == 0)
 		throw new EmptyStackException();
@@ -20,7 +20,7 @@ public Object pop() {
 * 메모리 누수를 막기 위해 스택에서 꺼내어 더이상 사용하지 않는 객체를 null 처리하여 참조 해제한다.
 * 직접 자기 메모리를 관리하는 클래스의 경우 원소를 다 사용한 즉시 원소가 참조한 객체들을 null 처리해야 한다.
 
-```tsx
+```java
 public Object pop() {
 	if (size == 0)
 		throw new EmptyStackException();

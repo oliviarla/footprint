@@ -17,7 +17,7 @@
 * getSuppressed 메서드 사용 시 숨겨진 예외 가져오기 가능
 * catch절을 함께 사용해 다수의 예외 처리 가능
 
-```jsx
+```java
 static String firstLineOfFile(String path, String defaultVal) {
 	try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 		return br.readLine();

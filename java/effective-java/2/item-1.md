@@ -3,7 +3,13 @@
 ## 정적 팩토리 메서드
 
 * static factory method
-* 직접적으로 생성자를 통해 객체를 생성하는 것이 아닌 정적 메서드를 통해서 객체를 생성하는 것
+* 직접 생성자를 호출해 객체를 생성하는 것이 아닌 정적 메서드를 통해서 객체를 생성하는 것
+
+```java
+public static MyObject create() {
+    return new MyObject();
+}
+```
 
 ## **정적 팩토리 메서드의 장점**
 

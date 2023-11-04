@@ -32,7 +32,7 @@ enum 타입이 다른 인터페이스를 구현하도록 선언은 가능
 * 방식 1\~2 로 생성된 싱글톤 클래스를 직렬화 할 때 모든 인스턴스를 transient로 선언하고, readResolve 메소드 제공해야 한다.
 * 직렬화된 인스턴스를 역직렬화할 때마다 새로운 가짜 인스턴스가 생성되기 때문이다.
 
-```tsx
+```java
 private Object readResolve(){
 	return INSTANCE;
 }
