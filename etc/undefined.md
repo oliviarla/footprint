@@ -8,4 +8,4 @@
 
 
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption><p>토스의 이력서 추천</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption><p>토스의 이력서 추천</p></figcaption></figure>
