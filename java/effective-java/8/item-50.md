@@ -38,7 +38,8 @@ public final class Period {
 
 ## Lombok Getter는 방어적 복사 불가
 
-> Lombok getter에서는 안전할까? -> 안전하지 않다. 같은 객체를 계속해서 반환하도록 구현되어 있다.
+* Lombok getter에서는 같은 객체를 계속해서 반환하도록 구현되어 있다.
+* 아래와 같이 직접 수행해보면 같은 객체를 반환함을 알 수 있다.
 
 ```java
 public class item50 {
@@ -51,7 +52,7 @@ public class item50 {
     }
   }
 
-  //getter를 직접 구현한 클래스이다!
+  //getter를 직접 구현
   public static final class CustomGetter {
     private final Temp temp;
 
@@ -63,7 +64,7 @@ public class item50 {
     }
   }
 
-  //lombok의 getter를 사용한 클래스이다!
+  //lombok의 getter를 사용
   @Getter
   public static final class LombokGetter {
     private final Temp temp;

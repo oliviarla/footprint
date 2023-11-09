@@ -65,7 +65,7 @@ $`sudo pip3 install --upgrade setuptools`
 
 **cmd에서 아래 내용만 입력하면 됨**
 
-***
+
 
 ```sh
 $ cd ~

@@ -1,6 +1,6 @@
 # OSI 7계층
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 각 레이어의 프로토콜은 하위 레이어의 프로토콜이 제공하는 기능을 사용해 동작한다.
 * 데이터의 앞쪽에 붙는 것은 헤더이고, 뒤쪽에 붙는 것은 트레일러이다.
