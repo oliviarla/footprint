@@ -114,7 +114,7 @@
   * [자바 정의와 동작방식](java/jvm-gc/java-basic.md)
   * [JVM의 정의와 메모리 구조](java/jvm-gc/jvm-memory.md)
   * [GC의 정의와 알고리즘](java/jvm-gc/gc-algorithm/README.md)
-    * [가비지 컬렉션의 정의와 가비지 컬렉터가 처리하는 Heap 영역](java/jvm-gc/gc-algorithm/heap.md)
+    * [가비지 컬렉터 이해하기](java/jvm-gc/gc-algorithm/undefined.md)
     * [Heap 영역을 제외한 GC 처리 영역](java/jvm-gc/gc-algorithm/heap-gc.md)
     * [Java GC 알고리즘](java/jvm-gc/gc-algorithm/java-gc.md)
   * [스레드 동기화](java/jvm-gc/thread-synchronization.md)
