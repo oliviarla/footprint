@@ -65,7 +65,7 @@
 * 아래 그림과 같이 힙 영역을 **객체의 오래된 정도를 기준으로** 영역을 작게 나누어, 가장 최신의 객체는 `Young Generation`, 오래된 객체는 `Old Generation`, 프로그램이 죽을 때까지 사용되는 객체는 `Permenent Generation`에 담을 수 있다.
 * 오래 쓰인 object를 담는 영역은 쭉 참조되는 경우가 많기 때문에 가끔 확인해서 비우고, 새로생긴 object를 담는 영역은 자주 비우도록 처리하면 GC가 도는 영역을 대폭 줄일 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ### **young generation**
 
@@ -124,7 +124,8 @@
 
 * GC를 위한 특별한 객체로 GC 프로세스의 시작점이다.
 * GC 루트로부터 직/간접적으로 참조되는 객체는 GC 대상에서 제외된다.
-* GC 알고리즘의 대부분(Hotspot VM)은 GC 루트로부터 객체 그래프를 순회하여 참조되고 있는 객체들을 식별하고 GC 수집 대상을 찾는 형태이다.
+* GC 알고리즘의 대부분(Hotspot JVM)은 GC 루트부터 객체 그래프를 순회하기 시작하여 참조되고 있는 객체들을 식별하고 GC 수집 대상을 찾는 형태이다.
+* GC 프로세스는 애플리케이션에 정의된 모든 GC 루트에 대해 실행된다.
 
 ### 타입
 
