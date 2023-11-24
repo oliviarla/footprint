@@ -15,7 +15,7 @@
 * 네트워크를 통한 실제 사용자 데이터를 처리하는 계층
 * 프로토콜
   * HTTP/HTTPS
-  * FTP - File Transfer Protocol)
+  * FTP - File Transfer Protocol
   * SMTP/POP3 - 이메일을 주고받을 때 사용하는 프로토콜
   * DNS
 * 종단 간의 통신이 완성되는 계층
@@ -49,7 +49,7 @@
 
 #### IP(Internet Protocol)
 
-* 컴퓨터 네트워크에서 장치들을 나타내는 수단이며 , v4( 와 v6(128bit) 2 가지가 존재한다
+* 컴퓨터 네트워크에서 장치들을 나타내는 수단이며 , v4(32bit) 와 v6(128bit) 2 가지가 존재한다
 
 #### IP 헤더
 
