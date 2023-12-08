@@ -139,6 +139,7 @@
   * [클래스 별 설명](spring/security/undefined.md)
 * [Spring Data](spring/spring-data/README.md)
   * [Pageable](spring/spring-data/pageable.md)
+  * [Spring Data Couchbase](spring/spring-data/spring-data-couchbase.md)
 * [Spring REST Docs](spring/spring-rest-docs.md)
 * [Spring Annotations](spring/spring-annotations.md)
 * [QueryDSL](spring/querydsl/README.md)
