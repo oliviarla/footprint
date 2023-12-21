@@ -1,6 +1,8 @@
 # Objects
 
 {% hint style="info" %}
+since 1.7
+
 java.util 패키지에 존재하는 Objects 클래스는 객체에 대한 작업을 수행하거나 작업 수행 전 특정 상태를 확인하기 위한 정적 유틸리티 메서드로 구성된다.
 
 해시코드 계산, 문자열 반환, 두 객체 비교, 범위 값 확인 등을 null-safe하게 수행하도록 메서드를 제공한다.
@@ -37,3 +39,15 @@ public static <T> T requireNonNull(T obj) {
 [item-43.md](../effective-java/7/item-43.md)
 {% endcontent-ref %}
 
+## equals
+
+* Objects에서는 null-safe한 equals 메서드를 제공한다.
+* 두 객체가 모두 null이면 true를 반환한다.
+* 두 객체 중 하나만 null이라면 false를 반환한다.
+* 두 객체가 Object.equals()를 통해 동일하다고 판정되면 true를 반환한다.
+
+```java
+public static boolean equals(Object a, Object b) {
+  return (a == b) || (a != null && a.equals(b));
+}
+```
