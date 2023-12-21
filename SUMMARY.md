@@ -129,6 +129,8 @@
   * [8장: 컬렉션 API 개선](java/modern-java-in-action/8-api.md)
   * [15장: CompletableFuture와 Reactive 개요](java/modern-java-in-action/15-completablefuture-reactive.md)
   * [16장: CompletableFuture](java/modern-java-in-action/16-completablefuture.md)
+* [자바의 이모저모](java/undefined/README.md)
+  * [Objects](java/undefined/objects.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
