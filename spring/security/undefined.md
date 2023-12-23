@@ -1,82 +1,47 @@
-# 클래스 별 설명
+# 로그아웃 처리
 
-## 🩵 Spring Security
+## 로그아웃 처리 방법
 
-#### **SecurityContextHolder**
+* [Spring Security 공식 문서](https://docs.spring.io/spring-security/reference/servlet/authentication/logout.html#creating-custom-logout-endpoint)에 의하면, Logout을 위한 엔드포인트, 즉 Controller에 Logout API를 작성하는 것보다는 **LogoutFilter를 사용하는 것을 권장**한다.
+* SecurityContextLogoutHandler 라는 클래스에서는 HttpSession을 invalidate해주거나, SecurityContext에 저장되어 있는 Authentication을 제거해주기 때문에 안전한 로그아웃 위해 사용하는 것을 권장한다.
+  * Logout API를 따로 작성하면 이 핸들러를 직접 생성하거나 주입받아 아래와 같이 코드를 작성해주어야 하므로 번거로워진다.
+  * `new SecurityContextLogoutHandler().doLogout(request, response, authentication);`
 
-* 보안 주체의 세부 정보를 포함하여 응용프로그램의 현재 보안 컨텍스트에 대한 세부 정보를 저장
+## LogoutFilter 사용 방법
 
-#### **SecurityContext**
+* SecurityConfiguration의 SecurityFilterChain에서 간단하게 로그아웃 처리하는 코드를 작성할 수 있다.
+* `logoutRequestMatcher` : 어떤 URL일 때 LogoutFilter가 실행될 지 지정할 수 있다.
+* `addLogoutHandler` : Logout시에 어떤 동작을 할 것인지에 대해 클래스 형태 또는 람다 형태로 정의할 수 있다. 아래 예시에서는 간단하게 람다를 사용해 쿠키를 제거해주었다.
+* `logoutSuccessHandler` : 로그아웃 필터에서 모든 작업이 오류 없이 수행되었을 때 어떤 동작을 할 것인지에 대해 클래스 형태 또는 람다 형태로 정의할 수 있다. 아래 예시에서는 간단하게 response status를 OK로 변경해주었다.
+* 이외에도 `deleteCookies` , `clearAuthentication` 등 로그아웃 요구사항에 맞게 다양하게 커스텀하여 활용할 수 있다.
 
-* `Authentication` 을 보관하고, 요청 시 반환해준다.
+```java
+httpSecurity
+    // ...
+    .logout(
+        httpSecurityLogoutConfigurer ->
+                httpSecurityLogoutConfigurer
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/v1/logout", "POST"))
+                    .addLogoutHandler(
+                        (request, response, authentication) ->
+                            Arrays.stream(request.getCookies())
+                                .map(
+                                    cookie -> {
+                                      cookie.setMaxAge(0);
+                                      cookie.setValue(null);
+                                      return cookie;
+                                    })
+                                .forEach(response::addCookie))
+                    .logoutSuccessHandler(
+                        (request, response, authentication) ->
+                            response.setStatus(HttpServletResponse.SC_OK)))
+    )
+```
 
-#### Authentication
+## LogoutFilter
 
-* **현재 접근하는 주체의 정보와 권한을 저장**하는 인터페이스
-* 이 객체에 접근하려면 `SecurityContextHolder`를 통해 `SecurityContext` 로 접근해 꺼내와야 한다.
-* `Principal`을 상속한 객체이다.
-  * principal은 일반적으로 UserDetails로 캐스팅된다.
+* LogoutFilter를 활성화하면 기본적으로 LogoutSuccessHandler 하나와 LogoutHandler 두 개가 등록된다.
+* 커스텀 LogoutSuccessHandler가 등록되면, 해당 LogoutSuccessHandler만 동작하게 된다.
+* 커스텀 LogoutHandler가 등록되면, 기존 LogoutHandler와 함께 커스텀 LogoutHandler도 동작하게 된다.
 
-#### UsernamePasswordAuthenticationToken
-
-*   Authentication을 implements한 AbstractAuthenticationToken를 상속한 하위 클래스
-
-    (단순히 말하면, **Authentication을 구현**했다고 보면 됨)
-* User의 ID가 principal 역할을 하고, Password가 Credential 역할을 한다.
-* 생성자에서 authorities 를 입력받으면, Authenticated된 객체를 생성한다.
-* 생성자에서 authorities를 입력받지 못하면, Authenticated되기 전 객체가 생성된다.
-
-#### **AuthenticationProvider**
-
-* 실제 인증을 처리하는 인터페이스
-* **authenticate()**: 인증 전의 Authentication 객체를 입력받아 인증된 Authentication 객체를 반환한다.
-* 사용자는 Custom한 AuthenticationProvider을 작성해서 AuthenticationManager에 등록해야 한다.
-
-#### **AuthenticationManager**
-
-* AuthenticationManager에 등록된 AuthenticationProvider에 의해 인증 작업이 처리된다.
-* 인증이 성공되면 **인증된** Authentication **객체를 Security Context에 저장**하고 인증 상태 유지를 위해 **세션에 저장**한다.
-* 인증이 실패하면 AuthenticationException이 발생한다.
-
-#### ProviderManager
-
-* `List<AuthenticationProvider>`를 순회하면서 authenticate 작업을 처리한다.
-
-#### **UserDetails**
-
-* 인증에 성공하면 생성되는 객체
-* UsernamePasswordAuthenticationToken을 생성하기 위해 사용
-* 사용자는 User나 CustomUserDetails클래스를 작성해 UserDetails를 implements해야 한다.
-
-#### UserDetailsService
-
-* 사용자는 `UserDetailsService` 를 구현한 `CustomUserDetailsService` 클래스를 생성해야 한다.
-* `loadUserByUsername` 메서드
-  * `CustomUserDetailsService` 클래스는 UserDetails를 반환하는 이 메서드를 Override해야 한다.
-  * 이 메서드 내부에서는 userRepository를 통해 가져온 User 객체를 UserPrincipal로 변환해 반환한다.
-
-## 🩵 JWT
-
-#### TokenProvider
-
-* 토큰을 제공해주는 클래스
-* secretKey는 설정 파일에 등록해두고, 객체가 생성될 때 Base64로 인코딩해 사용한다.
-* createToken(): 토큰을 생성
-* getAuthentication(): token을 통해 UserId
-* getUserId()
-* resolveToken()
-* validateToken()
-
-#### TokenAuthenticationFilter
-
-* 필터 인터페이스를 구현해야 한다.
-*   필터 내부의 로직은 아래와 같다.
-
-    1. HTTP 요청으로부터 토큰을 추출해낸다.
-    2. 유효성 검사를 진행한다.
-    3. 유효성 검사가 완료되면 `Authentication` 객체를 생성한다.
-    4. 생성된 `Authentication` 객체를 SecurityContext에 저장한다.
-
-    ```java
-    SecurityContextHolder.getContext().authentication = jwtTokenProvider.getAuthentication(it)
-    ```
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
