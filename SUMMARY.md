@@ -150,6 +150,9 @@
   * [중급 문법](spring/querydsl/undefined-2.md)
   * [순수 JPA와 QueryDSL](spring/querydsl/jpa-querydsl.md)
   * [스프링 데이터 JPA와 QueryDSL](spring/querydsl/jpa-querydsl-1.md)
+* [Page](spring/page.md)
+* [Lombok](spring/lombok/README.md)
+  * [Log Annotations](spring/lombok/log-annotations.md)
 
 ## 📽 인프라 <a href="#infra" id="infra"></a>
 
