@@ -138,11 +138,10 @@
 * [Spring Security](spring/security/README.md)
   * [로그인 처리](spring/security/authentication.md)
   * [로그아웃 처리](spring/security/undefined.md)
-  * [클래스 별 설명](spring/security/undefined-1.md)
-  * [JWT](spring/security/jwt.md)
-  * [메소드 방식 인가 처리](spring/security/undefined-2/README.md)
-    * [어노테이션 권한 설정 방식](spring/security/undefined-2/undefined.md)
-    * [맵 기반 권한 설정 방식](spring/security/undefined-2/undefined-1.md)
+  * [JWT 인증 방식](spring/security/jwt.md)
+  * [메소드 방식 인가 처리](spring/security/undefined-1/README.md)
+    * [어노테이션 권한 설정 방식](spring/security/undefined-1/undefined.md)
+    * [맵 기반 권한 설정 방식](spring/security/undefined-1/undefined-1.md)
 * [Spring Data](spring/spring-data/README.md)
   * [Pageable](spring/spring-data/pageable.md)
   * [Spring Data Couchbase](spring/spring-data/spring-data-couchbase.md)
@@ -158,6 +157,8 @@
   * [@Data](spring/lombok/data.md)
   * [@Builder](spring/lombok/builder.md)
   * [Log Annotations](spring/lombok/log-annotations.md)
+* [Netty](spring/netty/README.md)
+  * [1장: 네티 맛보기](spring/netty/1.md)
 
 ## 📽 인프라 <a href="#infra" id="infra"></a>
 
