@@ -160,6 +160,8 @@
   * [Log Annotations](spring/lombok/log-annotations.md)
 * [Netty](spring/netty/README.md)
   * [1장: 네티 맛보기](spring/netty/1.md)
+* [재고 시스템으로 알아보는 동시성이슈 해결방법](spring/undefined.md)
+* [실습으로 배우는 선착순 이벤트 시스템](spring/undefined-1.md)
 
 ## 📽 인프라 <a href="#infra" id="infra"></a>
 
