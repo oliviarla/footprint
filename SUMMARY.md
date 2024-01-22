@@ -146,6 +146,8 @@
 * [Spring Data](spring/spring-data/README.md)
   * [Pageable](spring/spring-data/pageable.md)
   * [Spring Data Couchbase](spring/spring-data/spring-data-couchbase.md)
+  * [Spring Data Redis](spring/spring-data/spring-data-redis/README.md)
+    * [Serializer](spring/spring-data/spring-data-redis/serializer.md)
 * [Spring REST Docs](spring/spring-rest-docs.md)
 * [Spring Annotations](spring/spring-annotations.md)
 * [Spring Test](spring/spring-test/README.md)
@@ -169,6 +171,11 @@
   * [4장: 채널 파이프라인과 코덱](spring/netty/4.md)
 * [재고 시스템으로 알아보는 동시성이슈 해결방법](spring/undefined.md)
 * [실습으로 배우는 선착순 이벤트 시스템](spring/undefined-1.md)
+
+## 🕋 DB
+
+* [MySQL](db/mysql/README.md)
+  * [CentOS7에서 MySQL 8 버전 설치하기](db/mysql/centos7-mysql-8.md)
 
 ## 📽 인프라 <a href="#infra" id="infra"></a>
 
@@ -208,13 +215,11 @@
 * [네트워크](cs/network/README.md)
   * [네트워크](cs/network/network.md)
   * [OSI 7계층](cs/network/osi-7.md)
-  * [TCP/IP 계층](cs/network/tcp-ip.md)
+  * [TCP/IP 스택](cs/network/tcp-ip.md)
   * [TCP 네트워크](cs/network/tcp.md)
   * [네이글 알고리즘](cs/network/undefined.md)
 * [데이터베이스](cs/database/README.md)
   * [트랜잭션](cs/database/undefined.md)
-  * [MySQL](cs/database/mysql/README.md)
-    * [CentOS7에서 MySQL 8 버전 설치하기](cs/database/mysql/centos7-mysql-8.md)
 * [컴퓨터 구조](cs/computer-architecture/README.md)
   * [레지스터](cs/computer-architecture/undefined.md)
 * [자료 구조](cs/data-structure/README.md)
