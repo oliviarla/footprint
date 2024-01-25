@@ -3,7 +3,6 @@
 * Docker 컨테이너 간의 통신을 관리하고 격리하기 위해 Docker Network라는 개념이 존재한다.
 * 여러 컨테이너가 서로 통신하고 데이터를 주고받을 때 도커 네트워크를 통해 통신하도록 한다.
 * 같은 호스트 내에 실행중인 여러 컨테이너 간에 연결을 돕는 논리적 네트워크 개념이다.
-* Docker에서는&#x20;
 
 > veth
 >
@@ -14,7 +13,7 @@
 * 하지만 외부에서는 컨테이너 eth0의 IP에 접근할 수 없다. 즉, 도커로 MySQL을 띄우더라도 Spring Application에서는 접근하지 못하는 상황이 발생할 수 있는 것이다.
 * 이를 위해 실행중인 컨테이너마다 veth를 통해 외부 네트워크에 컨테이너 어플리케이션 주소를 노출시킨다.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 네트워크 드라이버
 

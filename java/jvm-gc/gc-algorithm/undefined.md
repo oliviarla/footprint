@@ -65,7 +65,7 @@
 * 아래 그림과 같이 힙 영역을 **객체의 오래된 정도를 기준으로** 영역을 작게 나누어, 가장 최신의 객체는 `Young Generation`, 오래된 객체는 `Old Generation`, 프로그램이 죽을 때까지 사용되는 객체는 `Permenent Generation`에 담을 수 있다.
 * 오래 쓰인 object를 담는 영역은 쭉 참조되는 경우가 많기 때문에 가끔 확인해서 비우고, 새로생긴 object를 담는 영역은 자주 비우도록 처리하면 GC가 도는 영역을 대폭 줄일 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **young generation**
 
@@ -114,7 +114,7 @@
 
 <figure><img src="../../../.gitbook/assets/image (3) (1) (2).png" alt="" width="375"><figcaption><p>참조중인 객체만 survivor 영역으로 이동</p></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
 
 <figure><img src="../../../.gitbook/assets/image (16).png" alt="" width="375"><figcaption><p>특정 age를 넘긴 객체는 old generation(Tenured)로 이동</p></figcaption></figure>
 

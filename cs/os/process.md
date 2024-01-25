@@ -2,7 +2,7 @@
 
 ### Process State
 
-<figure><img src="../../.gitbook/assets/Untitled 4 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Untitled 4 (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **new**
   * 프로세스가 처음 생성된 상태

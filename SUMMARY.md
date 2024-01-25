@@ -132,6 +132,12 @@
 * [자바의 이모저모](java/undefined/README.md)
   * [Atomic](java/undefined/atomic.md)
   * [Objects](java/undefined/objects.md)
+  * [NIO](java/undefined/nio.md)
+* [Netty](java/netty/README.md)
+  * [1장: 네티 맛보기](java/netty/1.md)
+  * [2장: 네티의 주요 특징](java/netty/2.md)
+  * [3장: 부트스트랩](java/netty/3.md)
+  * [4장: 채널 파이프라인과 코덱](java/netty/4.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
@@ -164,11 +170,6 @@
   * [@Data](spring/lombok/data.md)
   * [@Builder](spring/lombok/builder.md)
   * [Log Annotations](spring/lombok/log-annotations.md)
-* [Netty](spring/netty/README.md)
-  * [1장: 네티 맛보기](spring/netty/1.md)
-  * [2장: 네티의 주요 특징](spring/netty/2.md)
-  * [3장: 부트스트랩](spring/netty/3.md)
-  * [4장: 채널 파이프라인과 코덱](spring/netty/4.md)
 * [재고 시스템으로 알아보는 동시성이슈 해결방법](spring/undefined.md)
 * [실습으로 배우는 선착순 이벤트 시스템](spring/undefined-1.md)
 
@@ -176,6 +177,19 @@
 
 * [MySQL](db/mysql/README.md)
   * [CentOS7에서 MySQL 8 버전 설치하기](db/mysql/centos7-mysql-8.md)
+* [MongoDB](db/mongodb/README.md)
+  * [](db/mongodb/undefined.md)
+* [Redis](db/redis/README.md)
+  * [Sentinel](db/redis/sentinel.md)
+  * [Cluster](db/redis/cluster.md)
+  * [Transaction](db/redis/transaction.md)
+  * [자료구조](db/redis/undefined/README.md)
+    * [String](db/redis/undefined/string.md)
+    * [List](db/redis/undefined/list.md)
+    * [Set](db/redis/undefined/set.md)
+    * [Hash](db/redis/undefined/hash.md)
+    * [Bitmaps](db/redis/undefined/bitmaps.md)
+    * [SortedSet](db/redis/undefined/sortedset.md)
 
 ## 📽 인프라 <a href="#infra" id="infra"></a>
 
