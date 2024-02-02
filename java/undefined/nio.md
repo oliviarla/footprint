@@ -8,12 +8,14 @@ description: 기존의 I/O API를 대체하기 위해 Java 1.4에 추가된 New 
 
 ### 채널
 
-* 하드웨어 장치, 파일, 네트워크 소켓 또는 하나 이상의 개별 I/O 작업(예: 읽기 또는 쓰기)을 수행할 수 있는 프로그램 구성 요소에 대해 성립된 연결을 나타내는 타입이다.
+* 파일, 네트워크 소켓 처럼 I/O 작업(읽기 또는 쓰기)을 수행할 수 있는 구성 요소에 대한 연결을 나타내는 타입이다.
 * 따라서 여러 종류의 채널을 제공한다.
   * FileChannel: 파일에 데이터를 읽고 쓴다.
   * DatagramChannel: UDP를 이용해 네트워크에서 데이터를 읽고 쓴다.
   * SocketChannel: TCP를 이용해 네트워크에서 데이터를 읽고 쓴다.
   * ServerSocketChannel: 클라이언트의 TCP 연결 요청을 수신(listening)할 수 있으며, SocketChannel은 각 연결마다 생성된다.
+* bind(SocketAddress local) 메서드를 통해 자신의 OS 포트에 연결할 수 있다.
+* connect(SocketAddress remote) 메서드를 통해 원격 서버와 연결할 수 있다.
 
 ### 버퍼
 
@@ -36,6 +38,7 @@ description: 기존의 I/O API를 대체하기 위해 Java 1.4에 추가된 New 
     * 읽기 또는 쓰기 작업 중인 위치를 나타낸다. 버퍼 객체가 생성될 때 0으로 초기화되고, 데이터를 쓰거나 읽는 메서드가 호출되면 자동으로 증가한다.
   * limit
     * 읽고 쓸 수 있는 버퍼 공간의 최대치로, capacity보다 작은 값이어야 한다.
+  * mark
 
 #### 버퍼 생성하기
 

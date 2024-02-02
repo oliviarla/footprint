@@ -1,3 +1,7 @@
+---
+description: 자바 객체에 대한 다양한 메서드를 제공하는 클래스
+---
+
 # Objects
 
 {% hint style="info" %}

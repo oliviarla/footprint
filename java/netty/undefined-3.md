@@ -2,7 +2,7 @@
 description: 채널에서 발생한 이벤트가 이동하는 채널 파이프라인과 이벤트 핸들러를 상속받아 구현한 코덱에 대해 알아본다.
 ---
 
-# 4장: 채널 파이프라인과 코덱
+# 채널 파이프라인과 코덱
 
 ## 이벤트 실행
 
@@ -307,5 +307,130 @@ public class EchoServerV4SecondHandler extends ChannelInboundHandlerAdapter {
 
 ### 사용자 정의 코덱
 
-* 코덱을 사용자가 직접 구현해 사용할 수 있다.
+* 사용자가 직접 필요한 프로토콜을 구현해 사용할 수 있다.
+* 아래는 간단한 Http 웹서버 예제를 구현하는 방법이다.
 
+**1) 서버 구동을 위한 부트스트랩 작성**
+
+```java
+public final class HttpHelloWorldServer {
+
+    static final boolean SSL = System.getProperty("ssl") != null;
+    static final int PORT = Integer.parseInt(System.getProperty("port", SSL? "8443" : "8080"));
+
+    public static void main(String[] args) throws Exception {
+        // Configure SSL.
+        final SslContext sslCtx = ServerUtil.buildSslContext();
+
+        // Configure the server.
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+            b.option(ChannelOption.SO_BACKLOG, 1024);
+            b.group(bossGroup, workerGroup)
+             .channel(NioServerSocketChannel.class)
+             .handler(new LoggingHandler(LogLevel.INFO))
+             .childHandler(new HttpHelloWorldServerInitializer(sslCtx));
+
+            Channel ch = b.bind(PORT).sync().channel();
+
+            System.err.println("Open your web browser and navigate to " +
+                    (SSL? "https" : "http") + "://127.0.0.1:" + PORT + '/');
+
+            ch.closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
+    }
+}
+```
+
+**2) 이벤트 핸들러 작성**
+
+* Bootstrap의 childHandler 메서드에 이벤트 핸들러를 등록하기 위해 ChannelInitializer를 아래와 같이 구현한다.
+* `HttpServerCodec`과 직접 정의할 사용자 코덱인 `HttpHelloWorldServerHandler`를 핸들러로 추가한다.
+
+> HttpServerCodec
+>
+> * 간단한 웹 서버를 생성하는 데 사용하는 코덱
+> * HttpRequestDecoder
+>   * ByteBuf 객체를 HttpRequest와 HttpContent로 디코딩해준다.
+> * HttpResponseEncoder
+>   * HttpResponse를 ByteBuf 로 인코딩해준다.
+
+<pre class="language-java"><code class="lang-java">public class HttpHelloWorldServerInitializer extends ChannelInitializer&#x3C;SocketChannel> {
+
+    private final SslContext sslCtx;
+
+    public HttpHelloWorldServerInitializer(SslContext sslCtx) {
+        this.sslCtx = sslCtx;
+    }
+
+    @Override
+    public void initChannel(SocketChannel ch) {
+        ChannelPipeline p = ch.pipeline();
+        if (sslCtx != null) {
+            p.addLast(sslCtx.newHandler(ch.alloc()));
+        }
+<strong>        p.addLast(new HttpServerCodec());
+</strong>        p.addLast(new HttpContentCompressor((CompressionOptions[]) null));
+        p.addLast(new HttpServerExpectContinueHandler());
+<strong>        p.addLast(new HttpHelloWorldServerHandler());
+</strong>    }
+}
+</code></pre>
+
+**3) 사용자 정의 코덱 작성**
+
+* 아래는 사용자 정의 코덱인 `HttpHelloWorldServerHandler` 이다.
+* ChannelInboundHandler를 구현하기 때문에, channelRead 이벤트로 수신되는 HttpRequest, HttpMessage, LastHttpContent 객체를 처리할 수 있다. 각 객체에 대한 자세한 내용은 9장에 나온다.
+* channelReadComplete 메서드를 통해 웹브라우저로부터 데이터가 모두 수신되었을 때 채널 버퍼의 내용을 웹 브라우저에 전달한다.
+* channelRead0 메서드를 통해 content가 "Hello World"인 HttpResponse를 채널에 쓴다.
+
+```java
+public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+    private static final byte[] CONTENT = { 'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd' };
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+        ctx.flush();
+    }
+
+    @Override
+    public void channelRead0(ChannelHandlerContext ctx, HttpObject msg) {
+        if (msg instanceof HttpRequest) {
+            HttpRequest req = (HttpRequest) msg;
+
+            boolean keepAlive = HttpUtil.isKeepAlive(req);
+            FullHttpResponse response = new DefaultFullHttpResponse(req.protocolVersion(), OK,
+                                                                    Unpooled.wrappedBuffer(CONTENT));
+            response.headers()
+                    .set(CONTENT_TYPE, TEXT_PLAIN)
+                    .setInt(CONTENT_LENGTH, response.content().readableBytes());
+
+            if (keepAlive) {
+                if (!req.protocolVersion().isKeepAliveDefault()) {
+                    response.headers().set(CONNECTION, KEEP_ALIVE);
+                }
+            } else {
+                // Tell the client we're going to close the connection.
+                response.headers().set(CONNECTION, CLOSE);
+            }
+
+            ChannelFuture f = ctx.write(response);
+
+            if (!keepAlive) {
+                f.addListener(ChannelFutureListener.CLOSE);
+            }
+        }
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        cause.printStackTrace();
+        ctx.close();
+    }
+}
+```
