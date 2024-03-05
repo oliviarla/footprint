@@ -10,7 +10,7 @@
 * offset은 배열의 인덱스와 비슷한 개념이라고 보면 되며, `0 ~ 2^32-1` 사이의 값이어야 한다.
 * value는 배열의 인덱스에 저장되는 값이라고 보면 되며, bit를 저장하기 때문에 0 또는 1로 설정 가능하다.
 
-<figure><img src="../../../.gitbook/assets/Untitled.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Untitled (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 활용
 

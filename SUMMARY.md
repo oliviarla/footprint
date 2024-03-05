@@ -2,7 +2,7 @@
 
 * [🐶 ABOUT](README.md)
 
-## 🏝 자바 <a href="#java" id="java"></a>
+## 🏝️ 자바 <a href="#java" id="java"></a>
 
 * [객체 지향 프로그래밍](<README (1).md>)
 * [자바의 정석](java/bible-of-java/README.md)
@@ -99,7 +99,7 @@
     * [item 78) 공유 중인 가변 데이터는 동기화해 사용하라](java/effective-java/11/item-78.md)
     * [item 79) 과도한 동기화는 피하라](java/effective-java/11/item-79.md)
     * [item 80) 스레드보다는 실행자, 태스크, 스트림을 애용하라](java/effective-java/11/item-80.md)
-    * [item 81) wait와 notify보다는 동시성 유틸리티를 애용하라Page 3](java/effective-java/11/item-81-wait-notify-page-3.md)
+    * [item 81) wait와 notify보다는 동시성 유틸리티를 애용하라](java/effective-java/11/item-81-wait-notify.md)
     * [item 82) 스레드 안전성 수준을 문서화하라](java/effective-java/11/item-82.md)
     * [item 83) 지연 초기화는 신중히 사용하라](java/effective-java/11/item-83.md)
     * [item 84) 프로그램의 동작을 스레드 스케줄러에 기대지 말라](java/effective-java/11/item-84.md)
@@ -127,11 +127,17 @@
   * [6장: 스트림으로 데이터 수집](java/modern-java-in-action/6.md)
   * [7장: 병렬 데이터 처리와 성능](java/modern-java-in-action/7.md)
   * [8장: 컬렉션 API 개선](java/modern-java-in-action/8-api.md)
+  * [9장: 람다를 이용한 리팩토링, 테스팅, 디버깅](java/modern-java-in-action/9.md)
+  * [10장: 람다를 이용한 DSL](java/modern-java-in-action/10-dsl.md)
+  * [11장: null 대신 Optional](java/modern-java-in-action/11-null-optional.md)
+  * [12장: 날짜와 시간 API](java/modern-java-in-action/12-api.md)
   * [15장: CompletableFuture와 Reactive 개요](java/modern-java-in-action/15-completablefuture-reactive.md)
   * [16장: CompletableFuture](java/modern-java-in-action/16-completablefuture.md)
 * [자바의 이모저모](java/undefined/README.md)
+  * [Javax](java/undefined/javax.md)
   * [Objects](java/undefined/objects.md)
   * [NIO](java/undefined/nio.md)
+  * [Thread](java/undefined/thread.md)
   * [Concurrent](java/undefined/concurrent/README.md)
     * [Atomic](java/undefined/concurrent/atomic.md)
     * [Executor, ExecutorService](java/undefined/concurrent/executor-executorservice.md)
@@ -146,6 +152,10 @@
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
+* [Spring Core](spring/spring-core/README.md)
+  * [Cron Expression](spring/spring-core/cron-expression.md)
+  * [Bean](spring/spring-core/bean/README.md)
+    * [Aware](spring/spring-core/bean/aware.md)
 * [Spring MVC](spring/mvc.md)
 * [Spring Security](spring/security/README.md)
   * [로그인 처리](spring/security/authentication.md)
@@ -196,7 +206,7 @@
     * [Bitmaps](db/redis/undefined/bitmaps.md)
     * [SortedSet](db/redis/undefined/sortedset.md)
 
-## 📽 인프라 <a href="#infra" id="infra"></a>
+## 📽️ 인프라 <a href="#infra" id="infra"></a>
 
 * [Docker](infra/docker/README.md)
   * [Docker](infra/docker/docker.md)
@@ -220,7 +230,7 @@
     * [지름길 사용하기](infra/clean-architecture/clean-book/undefined-2.md)
     * [아키텍처 스타일 결정하기](infra/clean-architecture/clean-book/undefined-3.md)
 
-## 🏔 CS
+## 🏔️ CS
 
 * [운영 체제](cs/os/README.md)
   * [Introduction](cs/os/introduction.md)
@@ -253,9 +263,17 @@
   * [HTTP](cs/web/http/README.md)
     * [쿠키와 세션](cs/web/http/cookie-and-session.md)
 
-## 🕹 ETC
+## 🪂 Big Data
 
+* [Apache Hadoop](big-data/apache-hadoop.md)
+
+## 🕹️ ETC
+
+* [Git](etc/git/README.md)
+  * [내부 구조](etc/git/undefined.md)
+  * [내가 자주 사용하는 명령어 모음](etc/git/undefined-1.md)
+  * [Commit Convention](etc/git/commit-convention.md)
 * [이력서 작성하기](etc/undefined.md)
 * [Embedded](etc/embedded/README.md)
   * [라즈베리파이에서 네오픽셀 적용기](etc/embedded/undefined.md)
-* [기술블로그](etc/tech-blog.md)
+* [기술블로그 모음집](etc/tech-blog.md)

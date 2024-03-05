@@ -32,7 +32,7 @@
   * zllen: 저장된 엔트리 개수
   * zlend: zip list의 끝을 나타내는 바이트 |11111111|
 
-<figure><img src="../../../.gitbook/assets/Untitled (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Untitled (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 문제점
   * 데이터가 추가/변경될 때 prevlen이 1byte였던 엔트리의 앞에 255 이상의 길이를 가진 엔트리를 추가하는 경우, prevlen이 5bytes로 늘어나게 된다.

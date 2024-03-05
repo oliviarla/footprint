@@ -1,4 +1,4 @@
-# 1장: 네티 맛보기
+# 네티 맛보기
 
 ### Echo Server
 
@@ -21,7 +21,8 @@ public class EchoServer {
                     ChannelPipeline p = ch.pipeline();
                     p.addLast(new EchoServerHandler()); // 에코 서버 데이터 핸들러 등록
                 }
-						});
+						
+        });
             ChannelFuture f = b.bind(8888).sync();
             f.channel().closeFuture().sync();
         }

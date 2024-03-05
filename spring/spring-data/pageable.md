@@ -1,6 +1,6 @@
 # Pageable
 
-<figure><img src="../../.gitbook/assets/Untitled (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Untitled (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Pageable
 

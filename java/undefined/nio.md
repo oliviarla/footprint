@@ -86,9 +86,22 @@ SelectionKey key = channel.register(selector, SelectionKey.OP_READ);
 
 * 채널에서 발생하는 이벤트의 종류를 나타내는 타입이다.
 * 이벤트의 종류로는 아래 네 가지 종류가 존재한다.
-  * OP\_CONNECT (1 << 0)
-  * OP\_ACCEPT (1 << 2)
-  * OP\_READ (1 << 3)
-  * OP\_WRITE (1 << 4)
+  * OP\_CONNECT (1 << 0) : 다른 서버에 연결할 준비가 됨
+  * OP\_ACCEPT (1 << 2) : 연결 요청을 수락할 준비가 됨
+  * OP\_READ (1 << 3) : 데이터를 채널에서 읽어들일 준비가 됨
+  * OP\_WRITE (1 << 4) : 채널에 데이터를 쓸 준비가 됨
 * interest set을 통해 셀렉터에 등록된 채널이 확인하고자 하는 이벤트의 집합을 확인할 수 있다.
 * ready set을 통해 셀렉터에 등록된 채널에서 바로 처리할 수 있도록 이벤트를 준비할 수 있다.
+
+```java
+Selector selector = Selector.open();
+channel.configureBlocking(false);
+int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE; 
+SelectionKey key = channel.register(selector, interestSet);
+```
+
+
+
+**출처**
+
+[https://blog.naver.com/beanpole2020/221466876314](https://blog.naver.com/beanpole2020/221466876314)
