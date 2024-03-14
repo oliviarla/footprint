@@ -1,3 +1,7 @@
+---
+description: 자바의 새로운 날짜, 시간 클래스를 알아본다.
+---
+
 # 12장: 날짜와 시간 API
 
 ## 기존 자바의 날짜와 시간 API
@@ -122,17 +126,138 @@ Period threeWeeks = Period.ofWeeks(3);
 
 ## 날짜 조정, 파싱, 포매팅
 
-### LocalDate
+### 기존 클래스로부터 새로운 클래스 생성
+
+* 자바의 새로운 날짜와 시간 클래스들은 모두 불변이다. 대신 기존 객체에 값을 변경하여 새로운 객체를 만들어내는 메서드를 제공하여 편리하게 사용할 수 있다.
+* `withXXX` 메서드를 제공하여 기존의 LocalDate 객체에서 특정 값만 변경하여 새로운 LocalDate 객체를 반환한다.
+  * 내부의 변수를 바꾸는 것이 아닌 새로운 객체를 반환하는 것이므로 새로운 변수에 할당해주어야 한다.
+  * 첫번째 인수로 TemporalField를 입력할 수도 있다.
+
+```java
+LocalDate date1 = LocalDate.of(2017, 9, 21); // 2017-09-21
+LocalDate date2 = date1.withYear(2011); // 2011-09-21
+LocalDate date3 = date2.withDayOfMonth(25); // 2011-09-25
+LocalDate date4 = date3.with(ChronoField.MONTH_OF_YEAR, 2); // 2011-02-25
+```
+
+* 지정된 시간을 추가하거나 뺄 수도 있다.
+
+```
+LocalDate date1 = LocalDate.of(2017, 9, 21); // 2017-09-21
+LocalDate date2 = date1.plusWeek(1); // 2017-09-28
+LocalDate date3 = date2.minusYear(6); // 2011-09-28
+LocalDate date4 = date3.plus(6, ChronoUnit.MONTHS); // 2012-03-28
+```
 
 ### TemporalAdjusters
 
+* 다음주 일요일, 돌아오는 평일 등 복잡한 날짜 조정 기능을 정적 메서드로 제공하는 클래스이다.
 
+| method                       | description                                |
+| ---------------------------- | ------------------------------------------ |
+| dayOfWeekInMonth             |  서수 요일에 해당하는 날짜를 반환                        |
+| firstDayOfMonth              |   현재 달의 첫 번쨰 날짜를 반환                        |
+| firstDayOfNextMonth          |  다음 날의 첫 번째 날짜를 반환                         |
+| firstDayOfNextYear           |   내년의 첫 번째 날짜를 반환                          |
+| firstDayOfYear               |   올해의 첫 번째 날짜를 반환                          |
+| firstInMonth                 |   현재 달의 첫 번째 요일에 해당하는 날짜를 반환               |
+| lastDayOfMonth               |   현재달의 마지막 날짜를 반환                          |
+| lastDayOfNextMonth           |   다음 달의 마지막 날짜를 반환                         |
+| lastDayOfNextYear            |   내년의 마지막 날짜를 반환                           |
+| lastDayOfYear                |   올해의 마지막 날짜를 반환                           |
+| lastInMonth                  |   현재 달의 마지막 요일에 해당하는 날짜 반환                 |
+|  next / previous             |  현재 달에서 현재 날짜 이후로 지정한 요일이 처음으로 나타나는 날짜를 반환 |
+|  nextOrSame / previousOrSame |  현재 날짜 이후로 지정한 요일이 처음 / 이전으로 나타나는 날짜를 반환   |
 
+* 커스텀 TemporalAdjuster도 구현 가능하다.
 
+```java
+public class NextWorkingDay implements TemporalAdjuster {
+    @Override
+    public Temporal adjustInto(Temporal temporal) {
+        DayOfWeek today = DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK)); // 현재 날짜 읽기
+        int dayToAdd = 1;
+        if (today == DayOfWeek.FRIDAY) {
+            dayToAdd = 3;
+        } else if (today == DayOfWeek.SATURDAY) {
+            dayToAdd = 2;
+        }
+        return temporal.plus(dayToAdd, ChronoUnit.DAYS);
+    }
+}
+```
 
+### DateTimeFormatter
 
+* 정적 팩토리 메서드와 상수를 이용해 포매터를 만들 수 있다.
+* 아래와 같이 포매터를 이용해 날짜 객체를 문자열으로 만들 수 있다.
 
+```java
+LocalDate date = LocalDate.of(2014, 3, 18);
+date.format(DateTimeFormatter.BASIC_ISO_DATE); //20140318
+```
 
+* 혹은 문자열을 파싱해 객체로 만들 수 있다.
 
+```java
+LocalDate parse = LocalDate.parse("20140318", DateTimeFormatter.BASIC_ISO_DATE);
+LocalDate parse2 = LocalDate.parse("2014-03-18", DateTimeFormatter.ISO_LOCAL_DATE);
+```
 
+* 원하는 패턴을 입력하여 포매터를 사용할 수 있다.
 
+```java
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+LocalDate localDate = LocalDate.of(2014, 3, 18);
+String formattedDate = localDate.format(formatter);
+LocalDate parse1 = LocalDate.parse(formattedDate, formatter);
+```
+
+* Locale 정보를 넣어 국가별 최적화된 포매터도 만들어 사용할 수 있다. `parseCaseInsensitive()`를 통해 정해진 형식과 정확히 일치하지 않는 입력을 해석할 수 있도록 한다.
+
+```java
+DateTimeFormatter italianFormatter = new DateTimeFormatterBuilder()
+                .appendText(ChronoField.DAY_OF_MONTH)
+                .appendLiteral(". ")
+                .appendText(ChronoField.MONTH_OF_YEAR)
+                .appendLiteral(" ")
+                .appendText(ChronoField.YEAR)
+                .parseCaseInsensitive()
+                .toFormatter(Locale.ITALIAN);
+```
+
+## 시간대
+
+### ZoneId
+
+* 새로운 날짜와 시간 API의 편리함 중 하나는 시간대를 간단하게 처리할 수 있다는 점이다.
+* 기존 TimeZone을 대체할 수 있는 ZoneId 클래스가 새롭게 등장했다.
+* 새로운 클래스를 이용하면 서머타임같은 복잡한 사항이 자동으로 처리된다.
+* ZoneRules 클래스에 40여개의 시간대가 있다.
+* 기존의 TimeZone 객체에서 toZoneId 메서드를 사용해 ZoneId 객체를 얻을 수 있다.
+
+```java
+ZoneId zoneId = TimeZone.getDefault().toZoneId();
+```
+
+* LocalDateTime을 비롯한 클래스들을 ZonedDateTime으로 변경할 수 있다.
+
+```java
+ZoneId krZone = ZoneId.of("Asia/Tokyo");
+LocalDateTime dt = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45);
+ZonedDateTime zdt = dt.atZone(krZone);
+```
+
+### ZoneOffset
+
+* UTC / GMC 기준으로 시간대를 표현하기 위해 ZoneOffset 클래스를 사용할 수 있다.
+
+```java
+ZoneOffset nyoffset = ZoneOffset.of("-5:00");
+LocalDateTime dt = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45);
+OffsetDateTime odt = OffsetDateTime.of(dt, nyoffset);
+```
+
+### ISO-8601 외의 캘린더 시스템
+
+* 전세계적으로 통용되는 ISO-8601 캘린더 시스템 외에 ThaiBuddhistDate, MinguoDate, JapaneseDate, HijrahDate를 제공한다.

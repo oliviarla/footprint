@@ -12,10 +12,10 @@
 
 #### critical section
 
-* race condition을 피하기 위해 이 영역을 두어 관리한다.
 * 공유 데이터의 일관성을 보장하기 위해 하나의 프로세스/스레드만 진입해 실행 가능한 영역
-* 하나의 프로세스/스레드만 진입해 실행하는 것을 mutual exclusion이라고 한다
-* lock을 사용해 mutual exclusion을 구현할 수 있다
+* race condition을 피하기 위해 이 영역을 두어 관리한다.
+* 하나의 프로세스/스레드만 진입해 실행하는 것을 mutual exclusion이라고 한다.
+* lock을 사용해 mutual exclusion을 구현할 수 있다.
 
 #### Solution to Critical-Section Problem
 
@@ -162,7 +162,7 @@ void main() {
 #### mutex
 
 * critical section에 진입하기 위해 mutex lock을 취득해야 한다.
-* mutex lock을 취득하지 못한 스레드는 큐에 들어간 후 대기 상태로 전환
+* mutex lock을 취득하지 못한 스레드는 큐에 들어간 후 대기 상태로 전환된다.
 * mutex lock을 쥐고 있던 스레드가 lock을 반환하면 대기 큐에 있던 스레드 중 하나가 실행된다.
 
 #### condition variables
@@ -170,13 +170,8 @@ void main() {
 * 대기 큐(waiting queue)를 가진다.
 * 조건이 충족되길 기다리는 스레드들이 대기 상태로 머무는 곳
 * wait()
-  * 스레드가 자기 자신을 conditino variable의 대기 큐에 넣고 대기 상태로 전환한다.
+  * 스레드가 자기 자신을 condition variable의 대기 큐에 넣고 대기 상태로 전환한다.
 * signal()
   * 대기 큐에 있는 스레드 중 하나를 깨운다.
 * broadcast()
   * 대기 큐에 있는 모든 스레드를 깨운다.
-
-
-
-
-
