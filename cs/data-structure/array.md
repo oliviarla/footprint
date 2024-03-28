@@ -19,7 +19,7 @@ description: 인접한 메모리에 원소들을 일렬로 저장하는 데이�
 ## 자바의 배열
 
 * 리스트와 달리 primitive 타입, 객체 타입 모두 배열로 선언 가능하다.
-  * ex) `Integer[] arr = new Integer[100];`
+  * ex) `Integer[] arr = new Integer[100]; int[] arr = new int[100];`
 
 #### 배열 기본 동작
 
@@ -37,6 +37,9 @@ System.out.println(weeks[5]);
 
 // 배열 길이 조회
 System.out.println(odds.length);
+
+// 배열 내용 채우기(덮어쓰기)
+Arrays.fill(odds, Integer.MIN_VALUE);
 ```
 
 #### 배열 정렬
@@ -56,8 +59,17 @@ Arrays.sort(arr, Collections.reverseOrder());
 boolean isSame = Arrays.equals(arr1, arr2);
 ```
 
+#### 배열 <-> 리스트
 
+```java
+// 배열 -> 리스트
+String[] arr = {"a", "b", "c"};
+Arrays.asList(arr);
 
-#### 참고
+// 리스트 -> 배열
+List<Integer> list = new ArrayList<>();
+int[] arr = list.stream().mapToInt(Integer::intValue).toArray();
 
-[https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EC%9E%90%EB%B0%94-%EB%B0%B0%EC%97%B4Array-%EB%AC%B8%EB%B2%95-%EC%9D%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC](https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EC%9E%90%EB%B0%94-%EB%B0%B0%EC%97%B4Array-%EB%AC%B8%EB%B2%95-%EC%9D%91%EC%9A%A9-%EC%B4%9D%EC%A0%95%EB%A6%AC)
+List<String> list = new ArrayList<>();
+String[] arr = list.toArray(new String[list.size()]);
+```
