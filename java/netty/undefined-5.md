@@ -7,11 +7,72 @@
 * 다음은 자바 ByteBuffer와의 차이점이다.
   * 별도 읽기 인덱스, 쓰기 인덱스 보유
   * flip() 메서드 없이 읽기 쓰기 작업 전환
-  * 가변 바이트 버퍼
+  * 용량을 필요에 따라 확장 가능
   * 바이트 버퍼 풀
-  * 복합 버퍼
+  * 내장 복합 버퍼 형식으로 zero copy 달성 가능
   * 자바 바이트 버퍼와 네티 바이트 버퍼 상호 변환
-* 읽기, 쓰기 메서드가 실행될 때 각각 해당하는 인덱스를 증가시킨다. 읽기, 쓰기에 대해 인덱스가 각각 존재하기 때문에 별도의 flip 메서드 호출 없이 읽기와 쓰기가 가능하다. 하나의 바이트 버퍼에 읽기 작업과 쓰기 작업을 동시에 수행할 수도 있다.
+* 읽기, 쓰기에 대해 인덱스가 각각 존재하기 때문에 별도의 flip 메서드 호출 없이 읽기와 쓰기가 가능하다.
+* 하나의 바이트 버퍼에 읽기 작업과 쓰기 작업을 동시에 수행할 수도 있다.
+
+## 힙 버퍼 vs 다이렉트 버퍼
+
+### 힙 버퍼
+
+* 보조 배열(backing array)이라고 불리며 가장 자주 이용되는 방식이다.
+* JVM의 힙 공간에 데이터를 저장하여 풀링이 사용되지 않는 경우 할당과 해제 속도가 빠르다.
+
+```java
+ByteBuf heapBuf = ...;
+if(heapBuf.hasArray()) {
+    byte[] array = heapBuf.array();
+    int offset = heapBuf.arrayOffset() + heapBuf.readerIndex(); // 첫번째 바이트
+    int length = heapBuf.readableBytes(); // 읽기 가능한 바이트 수
+    handleArray(array, offset, length);
+}
+```
+
+### 다이렉트 버퍼
+
+* JDK의 ByteBuffer 클래스는 네이티브 호출을 통해 운영체제의 커널 영역에 메모리를 할당하도록 허용하여 네이티브 입출력 작업을 호출하기 전후에 버퍼의 내용을 중간 버퍼로 복사하지 않게 할 수 있다.
+* 힙 버퍼를 사용하면 소켓 통신 전에 JVM 힙 공간에 저장되어 있는 버퍼를 다이렉트 버퍼로 복사해야 한다. 반면 다이렉트 버퍼는 가비지 컬렉션이 적용되지 않는 힙 바깥에 저장되어 소켓 통신에 그대로 사용할 수 있다.
+* 버퍼 할당과 해제에 대한 비용이 힙 버퍼 방식에 비해 크다.
+* 컨테이너의 데이터를 배열로 접근해야하는 경우 아래와 같이 복사해주는 로직이 필요하므로 힙 버퍼 방식이 편할 수 있다.
+
+```java
+ByteBuf directBuf = ...;
+if(directBuf.hasArray()) {
+    int length = directBuf.readableBytes(); // 읽기 가능한 바이트 수
+    byte[] array = new byte[length];
+    directBuf.getBytes(directBuf.readableIndex(), array);
+    handleArray(array, 0, length);
+}
+
+```
+
+### 복합 버퍼
+
+* 여러 ByteBuf의 집합을 사용하는 패턴으로, ByteBuf 인스턴스를 필요에 따라 추가/삭제할 수 있다.
+* 네티는 CompositeByteBuf 클래스를 제공하여 복합 버퍼를 사용할 수 있도록 한다.
+* 헤더와 본문으로 구성되는 HTTP 메시지를 복합 버퍼로 묶어 사용할 수 있다.
+* CompositeByteBuf를 사용하는 소켓 입출력 작업을 최적화해 JDK ByteBuffer에 비해 성능과 메모리 소비 면에서 이점이 있다.
+
+```java
+CompositeByteBuf messageBuf = Unpooled.compositeBuffer();
+ByteBuf headerBuf = ...;
+ByteBuf bodyBuf = ...;
+messageBuf.addComponents(headerBuf, bodyBuf);
+// ...
+messageBuf.removeComponent(0); // 헤더 제거
+for (ByteBuf buf : messageBuf) {
+    System.out.println(buf.toString());
+}
+
+// 다이렉트 버퍼와 비슷한 방식으로 데이터 접근 가능
+int length = messageBuf.readableBytes();
+byte[] array = new byte[length];
+directBuf.getBytes(messageBuf.readableIndex(), array);
+handleArray(array, 0, length);
+```
 
 ## 바이트 버퍼 풀
 
@@ -60,6 +121,30 @@ assertEquals(7, buf.writableBytes());
 assertEquals(1, buf.readShort());
 ```
 
+* 아래는 읽을 수 있는 바이트를 모두 읽는 코드이다.
+
+```java
+ByteBuf buf = ...;
+while(buffer.isReadable()) {
+    System.out.println(buffer.readByte());
+}
+```
+
+### 인덱스 관리
+
+* markReaderIndex/markWriterIndex 메서드와 resetReaderIndex/resetWriterIndex 메서드를 제공하여 인덱스를 지정하거나 초기화할 수 있다.
+* readerIndex(int), writerIndex(int) 메서드를 통해 지정한 위치로 인덱스를 이동할 수도 있다.
+
+### 특정 바이트 검색
+
+* ByteBufProcessor의 편의성 메서드를 이용해 특정 문자를 검색할 수 있다.
+* 다음은 '\r' 문자의 인덱스를 바이트 버퍼에서 찾는 코드이다.
+
+```java
+ByteBuf buf = ...;
+int index = buffer.forEachByte(ByteBufProcessor.FIND_CR);
+```
+
 ### 버퍼 초기화
 
 * clear() 메서드를 통해 버퍼 데이터를 초기화할 수 있다.
@@ -75,6 +160,9 @@ buf.clear();
 assertEquals(0, buf.readableBytes());
 assertEquals(11, buf.writableBytes());
 ```
+
+* 혹은 discardReadBytes() 메서드를 이용해 이미 읽은 부분은 배열에서 제거하고 앞으로 읽을 부분과 기록 가능한 남은 부분만을 배열에서 남길 수 있다.
+* 하지만 배열의 앞부분을 제거하고 뒷 부분을 앞으로 땡겨오기 위해 메모리 복사가 이뤄지므로 메모리가 아주 중요한 상황 등 꼭 필요할 경우에만 사용해야 한다.
 
 ### 가변 크기 버퍼
 
