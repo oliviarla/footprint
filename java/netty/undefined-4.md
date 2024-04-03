@@ -1,123 +1,162 @@
-# 이벤트 모델
+---
+description: 이벤트 핸들러를 상속받아 구현한 코덱에 대해 알아본다.
+---
 
-## 이벤트 루프
+# 코덱
 
-### 개념
+## 개념
 
-* 이벤트 루프 구현 방법에는 두 가지 방식이 존재한다. 네티는 후자의 방식으로 구현된다.
-  * 이벤트 리스너와 이벤트 처리 스레드에 기반한 방법으로, 보통 UI 처리 프레임워크가 사용하는 방법이다. 이벤트를 처리하는 로직을 가진 메서드를 대상 객체의 이벤트 리스너에 등록하는 방식이며, 대부분 이벤트 처리 스레드는 단일 스레드로 구현한다.
-  * 이벤트 큐에 이벤트를 등록하고, 이벤트 루프가 이벤트 큐에 접근해 처리하는 방법이다. 이벤트를 처리하기 위한 이벤트 루프 스레드를 여러 개 두면, 가장 먼저 이벤트 큐에 접근한 스레드가 가장 앞에 있는 이벤트를 가져와 수행할 수 있다.
-* 이벤트 루프
-  * 이벤트를 실행하기 위한 무한루프 스레드
-  * 객체에서 이벤트가 발생하면 이벤트 큐에 추가하고, 이벤트 루프는 이벤트 큐에 존재하는 이벤트를 꺼내 수행한다.
-  * 이벤트 루프가 처리한 이벤트의 결과를 콜백 패턴 혹은 퓨처 패턴으로 반환할 수 있으며, 네티는 두 방식 모두 지원한다.
+* 네티의 ChannelInboundHandler와 ChannelOutboundHandler는 각각 인코더와 디코더 역할을 한다.
+* 데이터 전송 시에는 인코더를 사용해 패킷으로 변환하고, 수신 시에는 디코더를 사용해 패킷을 데이터로 변환한다.
+* 인코더 클래스의 경우 ChannelOutboundHandlerAdapter를 상속받은 추상 클래스인 MessageToMessageEncoder를 상속받아 encode 메서드를 구현하는 템플릿 메서드 패턴으로 구현된다. 이를 통해 다양한 종류의 인코더/디코더를 제공할 수 있다.
+* 아래와 같이 write 이벤트가 발생할 경우 ChannelOutboundHandler에서 데이터를 인코딩해주게 된다.
 
-### 단일 스레드 및 다중 스레드 이벤트 루프
+<figure><img src="../../.gitbook/assets/image (5).png" alt="" width="375"><figcaption></figcaption></figure>
 
-* 이벤트를 처리하는 스레드가 하나인지, 두개 이상인지에 따라 나뉜다.
-* 단일 스레드 이벤트 루프
-  * 구현이 단순하고 예측 가능한 동작을 보장한다.
-  * 이벤트가 발생한 순서대로 처리할 수 있다.
-  * 다중 코어 CPU를 효율적으로 사용하지 못해 처리 시간이 오래걸리는 이벤트가 존재하면 나중에 들어온 이벤트의 수행 시간도 점점 뒤로 밀려나게 된다.
-* 다중 스레드 이벤트 루프
-  * 단일 스레드 이벤트 루프에 비해 구현이 복잡하지만 다중 코어 CPU를 효율적으로 사용한다.
-  *   여러 이벤트 루프 스레드가 이벤트 큐에 접근하여 스레드 경합이 발생하고, 이벤트의 발생 순서와 실행 순서가 일치하지 않는다.
+## 종류
 
-      > 스레드 경합
-      >
-      > 다중 스레드 애플리케이션에서 각 스레드가 공유 자원의 단일 액세스 권한(락)을 획득하기 위해 경합을 벌이는 것으로, 스레드가 많아질수록 CPU 자원을 많이 소비하는 작업이다.
-  * 스레드 개수를 너무 많이 설정하거나 제한하지 않으면 과도한 GC가 발생하거나 OOM 에러가 발생할 수 있다.
+* base64 코덱
+  * 8bit 이진 데이터를 문자 코드에 영향받지 않는 공통 ASCII 영역의 문자로 이뤄진 문자열로 변환하는 base64 인코딩을 지원한다.
+* bytes 코덱
+  * 바이트 배열 데이터에 대한 송수신을 지원한다.
+* compression 코덱
+  * 송수신 데이터의 압축을 지원하며, 다양한 압축 알고리즘을 지원한다.
+* http 코덱
+  * HTTP 프로토콜을 지원하며, 세부 구현체로 cors 코덱, multipart 코덱, websocketx 코덱을 지원한다.
+* marshalling 코덱
+  * 네트워크를 통해 송/수신 가능한 형태로 변환하는 JBoss의 marshalling 라이브러리를 지원한다.
+  * JBoss marshalling 라이브러리는 기존 JDK의 직렬화/역직렬화 문제점을 해결하기 위해 고안되었다.
+* protobuf 코덱
+  * 구글의 프로토콜 버퍼를 사용한 데이터 송수신을 지원한다.
+* rtsp 코덱
+  * 실시간 데이터 스트리밍을 위해 만들어진 애플리케이션 레벨의 rtsp 프로토콜을 지원한다.
+* sctp 코덱
+  * sctp 전송 계층을 사용하도록 하는 코덱이며, 부트스트랩의 채널을 NioSctpChannel 혹은 NioSctpServerChannel로 설정해야 한다.
+* string 코덱
+  * 문자열의 송수신을 지원하여, 텔넷이나 채팅 서버의 프로토콜에 이용된다.
+* serialization 코덱
+  * 자바의 객체를 직렬화/역직렬화 할 수 있도록 지원하는 코덱이며, JDK의 ObjectOutputStream/ObjectInputStream과 호환되지 않는다.
 
-## 네티의 이벤트 루프
+## 사용자 정의 코덱
 
-* 네티는 단일 스레드 이벤트 루프와 다중 스레드 이벤트 루프를 모두 사용할 수 있다.
-* 네티는 **다중 스레드 이벤트 루프를 사용하더라도 이벤트의 발생 순서와 실행 순서를 보장**한다.
-* 네티의 이벤트가 발생하는 채널은 하나의 이벤트 루프에만 등록된다.&#x20;
-* 각 이벤트 루프는 이벤트 큐를 가진다. 즉, 이벤트 큐를 공유하지 않기 때문에 각 이벤트 루프는 순차적으로 이벤트를 처리할 수 있게 된다.
-* 네티는 이벤트 처리를 위해 SingleThreadEventExecutor를 사용한다.
-* 아래는 네티 4.1 버전의 SingleThreadEventExecutor다.&#x20;
-* taskQueue를 두어 이벤트를 Runnable 타입으로 저장하고, pollTaskFrom을 통해 이벤트를 하나 가져온다.
-* 이벤트 큐에 입력된 모든 task를 수행하기 위해 runAllTasks() 메서드를 사용할 수 있다. 내부적으로 taskQueue에서 이벤트를 하나씩 가져와 run() 메서드를 통해 수행한다.
+* 사용자가 직접 필요한 프로토콜을 구현해 사용할 수 있다.
+* 아래는 간단한 Http 웹서버 예제를 구현하는 방법이다.
+
+**1) 서버 구동을 위한 부트스트랩 작성**
 
 ```java
-public abstract class SingleThreadEventExecutor extends AbstractScheduledEventExecutor implements OrderedEventExecutor {
-    private final Queue<Runnable> taskQueue;
-    
-    protected Runnable pollTask() {
-        assert inEventLoop();
-        return pollTaskFrom(taskQueue);
-    }
+public final class HttpHelloWorldServer {
 
-    protected static Runnable pollTaskFrom(Queue<Runnable> taskQueue) {
-        for (;;) {
-            Runnable task = taskQueue.poll();
-            if (task != WAKEUP_TASK) {
-                return task;
-            }
-        }
-    }
-    
-    protected boolean runAllTasks() {
-        assert inEventLoop();
-        boolean fetchedAll;
-        boolean ranAtLeastOne = false;
+    static final boolean SSL = System.getProperty("ssl") != null;
+    static final int PORT = Integer.parseInt(System.getProperty("port", SSL? "8443" : "8080"));
 
-        do {
-            fetchedAll = fetchFromScheduledTaskQueue();
-            if (runAllTasksFrom(taskQueue)) {
-                ranAtLeastOne = true;
-            }
-        } while (!fetchedAll); // keep on processing until we fetched all scheduled tasks.
+    public static void main(String[] args) throws Exception {
+        // Configure SSL.
+        final SslContext sslCtx = ServerUtil.buildSslContext();
 
-        if (ranAtLeastOne) {
-            lastExecutionTime = getCurrentTimeNanos();
-        }
-        afterRunningAllTasks();
-        return ranAtLeastOne;
-    }
+        // Configure the server.
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+            b.option(ChannelOption.SO_BACKLOG, 1024);
+            b.group(bossGroup, workerGroup)
+             .channel(NioServerSocketChannel.class)
+             .handler(new LoggingHandler(LogLevel.INFO))
+             .childHandler(new HttpHelloWorldServerInitializer(sslCtx));
 
-    protected final boolean runAllTasksFrom(Queue<Runnable> taskQueue) {
-        Runnable task = pollTaskFrom(taskQueue);
-        if (task == null) {
-            return false;
-        }
-        for (;;) {
-            safeExecute(task); // 내부적으로 Runnable.run()이 실행됨
-            task = pollTaskFrom(taskQueue);
-            if (task == null) {
-                return true;
-            }
+            Channel ch = b.bind(PORT).sync().channel();
+
+            System.err.println("Open your web browser and navigate to " +
+                    (SSL? "https" : "http") + "://127.0.0.1:" + PORT + '/');
+
+            ch.closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
         }
     }
 }
 ```
 
-## 네티의 비동기 I/O 처리
+**2) 이벤트 핸들러 작성**
 
-* 네티의 비동기 I/O 메서드 호출의 결과를 ChannelFuture 객체로 돌려받을 수 있다.
-* ChannelFuture 객체에 채널 리스너를 등록해두면, 비동기 작업이 완료되었을 때 특정 동작을 수행하도록 할 수 있다.
-* 네티에서 기본 제공하는 채널 리스너는 아래와 같다.
-  * ChannelFutureListener.CLOSE: 작업 완료 이벤트를 수신하면 무조건 ChannelFuture에 포함된 채널을 닫는다.
-  * ChannelFutureListener.CLOSE\_ON\_FAILURE : 작업 완료 이벤트를 수신했는데 결과가 실패일 때 채널을 닫는다.
-  * ChannelFutureListener.FIRE\_EXCEPTION\_ON\_FAILURE : 작업 완료 이벤트를 수신했는데 결과가 실패일 때 채널 예외 이벤트를 발생시킨다.
-* 아래는 네티의 채널 리스너를 등록하여 데이터 전송이 완료되면 소켓 채널을 닫도록 구현한 코드이다. 커스텀 채널 리스너를 구현해 사용할 수도 있다.
+* Bootstrap의 childHandler 메서드에 이벤트 핸들러를 등록하기 위해 ChannelInitializer를 아래와 같이 구현한다.
+* `HttpServerCodec`과 직접 정의할 사용자 코덱인 `HttpHelloWorldServerHandler`를 핸들러로 추가한다.
 
-<pre class="language-java"><code class="lang-java">@Sharable
-public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+> HttpServerCodec
+>
+> * 간단한 웹 서버를 생성하는 데 사용하는 코덱
+> * HttpRequestDecoder
+>   * ByteBuf 객체를 HttpRequest와 HttpContent로 디코딩해준다.
+> * HttpResponseEncoder
+>   * HttpResponse를 ByteBuf 로 인코딩해준다.
+
+<pre class="language-java"><code class="lang-java">public class HttpHelloWorldServerInitializer extends ChannelInitializer&#x3C;SocketChannel> {
+
+    private final SslContext sslCtx;
+
+    public HttpHelloWorldServerInitializer(SslContext sslCtx) {
+        this.sslCtx = sslCtx;
+    }
+
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        ChannelFuture channelFuture = ctx.writeAndFlush(msg);
-        // 기본 제공 채널 리스너 사용
-<strong>        channelFuture.addListener(ChannelFutureListener.CLOSE);
-</strong>        
-        // 커스텀 채널 리스너 사용
-        channelFuture.addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture future) throws Exception {
-                System.out.println("전송한 Byte : " + writeMessageSize);
-                future.channel().close();
+    public void initChannel(SocketChannel ch) {
+        ChannelPipeline p = ch.pipeline();
+        if (sslCtx != null) {
+            p.addLast(sslCtx.newHandler(ch.alloc()));
+        }
+<strong>        p.addLast(new HttpServerCodec());
+</strong>        p.addLast(new HttpContentCompressor((CompressionOptions[]) null));
+        p.addLast(new HttpServerExpectContinueHandler());
+<strong>        p.addLast(new HttpHelloWorldServerHandler());
+</strong>    }
+}
+</code></pre>
+
+**3) 사용자 정의 코덱 작성**
+
+* 아래는 사용자 정의 코덱인 `HttpHelloWorldServerHandler` 이다.
+* ChannelInboundHandler를 구현하기 때문에, channelRead 이벤트로 수신되는 HttpRequest, HttpMessage, LastHttpContent 객체를 처리할 수 있다. 각 객체에 대한 자세한 내용은 9장에 나온다.
+* channelReadComplete 메서드를 통해 웹브라우저로부터 데이터가 모두 수신되었을 때 채널 버퍼의 내용을 웹 브라우저에 전달한다.
+* channelRead0 메서드를 통해 content가 "Hello World"인 HttpResponse를 채널에 쓴다.
+
+```java
+public class HttpHelloWorldServerHandler extends SimpleChannelInboundHandler<HttpObject> {
+    private static final byte[] CONTENT = { 'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd' };
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+        ctx.flush();
+    }
+
+    @Override
+    public void channelRead0(ChannelHandlerContext ctx, HttpObject msg) {
+        if (msg instanceof HttpRequest) {
+            HttpRequest req = (HttpRequest) msg;
+
+            boolean keepAlive = HttpUtil.isKeepAlive(req);
+            FullHttpResponse response = new DefaultFullHttpResponse(req.protocolVersion(), OK,
+                                                                    Unpooled.wrappedBuffer(CONTENT));
+            response.headers()
+                    .set(CONTENT_TYPE, TEXT_PLAIN)
+                    .setInt(CONTENT_LENGTH, response.content().readableBytes());
+
+            if (keepAlive) {
+                if (!req.protocolVersion().isKeepAliveDefault()) {
+                    response.headers().set(CONNECTION, KEEP_ALIVE);
+                }
+            } else {
+                // Tell the client we're going to close the connection.
+                response.headers().set(CONNECTION, CLOSE);
             }
-        });
+
+            ChannelFuture f = ctx.write(response);
+
+            if (!keepAlive) {
+                f.addListener(ChannelFutureListener.CLOSE);
+            }
+        }
     }
 
     @Override
@@ -126,7 +165,4 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 }
-</code></pre>
-
-
-
+```
