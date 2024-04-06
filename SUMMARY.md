@@ -147,14 +147,13 @@
     * [Interrupt](java/variety/concurrent/interrupt.md)
   * [Assertions](java/variety/assertions.md)
 * [Netty](java/netty/README.md)
-  * [네티 맛보기](java/netty/undefined.md)
-  * [네티의 주요 특징](java/netty/undefined-1.md)
-  * [부트스트랩](java/netty/undefined-2.md)
-  * [채널 파이프라인](java/netty/undefined-3.md)
-  * [코덱](java/netty/undefined-4.md)
-  * [이벤트 모델](java/netty/undefined-5.md)
-  * [바이트 버퍼](java/netty/undefined-6.md)
-  * [ChannelHandler](java/netty/channelhandler.md)
+  * [네티 맛보기](java/netty/example.md)
+  * [네티의 주요 특징](java/netty/features.md)
+  * [부트스트랩](java/netty/bootstrap.md)
+  * [채널 파이프라인](java/netty/channel-pipeline.md)
+  * [코덱](java/netty/codec.md)
+  * [이벤트 루프](java/netty/eventloop.md)
+  * [바이트 버퍼](java/netty/bytebuffer.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
