@@ -87,7 +87,7 @@ try {
 * 이를 통해 커널에서 사용되는 값을 변경할 수 있다.
 * 애플리케이션에서 socket.send() 호출 시 커널의 시스템 함수를 호출해 애플리케이션에서 수신한 데이터를 데이터 송신용 커널 버퍼에 쌓아두었다가 인터넷으로 전송한다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 이렇게 전달된 데이터는 데이터 수신용 커널 버퍼에 쌓이고, 애플리케이션에서 socket.read() 호출 시 데이터를 읽을 수 있다.
 * 네티는 JVM 기반으로 동작하므로 자바에서 설정할 수 있는 소켓 옵션을 모두 사용 가능하다.'

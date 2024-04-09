@@ -32,15 +32,23 @@ docker exec -it mysql -u root -p
 
 ## 기본 명령어
 
-#### docker ps -a
+* 현재 실행중인 모든 컨테이너 조회
 
-* 현재 실행중인 모든 컨테이너를 조회할 수 있다.
+```
+docker ps -a
+```
 
-#### docker image ls
+* 도커에 다운받은 모든 이미지 조회
 
-* 도커에 다운받은 모든 이미지를 조회할 수 있다.
+```
+docker image ls
+```
 
+* 사용되지 않는 모든 리소스 제거
 
+```
+docker system prune -a
+```
 
 자세한 명령은 아래 공식 문서를 확인하도록 한다.
 

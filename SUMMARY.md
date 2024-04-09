@@ -191,6 +191,9 @@
   * [Log Annotations](spring/lombok/log-annotations.md)
 * [재고 시스템으로 알아보는 동시성이슈 해결방법](spring/undefined.md)
 * [실습으로 배우는 선착순 이벤트 시스템](spring/undefined-1.md)
+* [Spring Cloud](spring/spring-cloud/README.md)
+  * [Service Discovery](spring/spring-cloud/service-discovery/README.md)
+    * [Spring Cloud Netflix Eureka](spring/spring-cloud/service-discovery/spring-cloud-netflix-eureka.md)
 
 ## 🕋 DB
 
