@@ -137,6 +137,7 @@
   * [16장: CompletableFuture](java/modern-java-in-action/16-completablefuture.md)
   * [17장: 리액티브 프로그래밍](java/modern-java-in-action/17.md)
   * [18장: 함수형 프로그래밍](java/modern-java-in-action/18.md)
+  * [19장: 함수형 프로그래밍 기법](java/modern-java-in-action/19.md)
 * [자바의 이모저모](java/variety/README.md)
   * [Javax](java/variety/javax.md)
   * [Objects](java/variety/objects.md)
