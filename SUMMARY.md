@@ -16,9 +16,9 @@
   * [바이트 코드 조작](java/undefined/undefined-3.md)
   * [컴파일러](java/undefined/undefined-4.md)
   * [GC](java/undefined/gc/README.md)
-    * [기본 동작](java/undefined/gc/undefined.md)
-    * [Heap 영역을 제외한 GC 처리 영역](java/undefined/gc/heap-gc.md)
-    * [(WIP) GC 알고리즘](java/undefined/gc/wip-gc.md)
+    * [기본 동작](java/jvm-gc/gc-algorithm/undefined.md)
+    * [Heap 영역을 제외한 GC 처리 영역](java/jvm-gc/gc-algorithm/heap-gc.md)
+    * [(WIP) GC 알고리즘](java/jvm-gc/gc-algorithm/wip-java-gc.md)
   * [리플렉션](java/undefined/undefined-5.md)
   * [다이나믹 프록시](java/undefined/undefined-6.md)
   * [어노테이션 프로세서](java/undefined/undefined-7.md)
@@ -160,11 +160,12 @@
 * [Netty](java/netty/README.md)
   * [네티 맛보기](java/netty/example.md)
   * [네티의 주요 특징](java/netty/features.md)
-  * [부트스트랩](java/netty/bootstrap.md)
   * [채널 파이프라인](java/netty/channel-pipeline.md)
   * [코덱](java/netty/codec.md)
   * [이벤트 루프](java/netty/eventloop.md)
   * [바이트 버퍼](java/netty/bytebuffer.md)
+  * [부트스트랩](java/netty/bootstrap.md)
+  * [네티 테스트](java/netty/undefined.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
