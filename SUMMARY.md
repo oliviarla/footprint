@@ -165,7 +165,7 @@
   * [이벤트 루프](java/netty/eventloop.md)
   * [바이트 버퍼](java/netty/bytebuffer.md)
   * [부트스트랩](java/netty/bootstrap.md)
-  * [네티 테스트](java/netty/undefined.md)
+  * [네티 테스트](java/netty/unittest.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
