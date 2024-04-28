@@ -1,4 +1,4 @@
-# (WIP) Java GC 알고리즘
+# (WIP) GC 알고리즘
 
 ## GC 알고리즘
 
@@ -60,10 +60,8 @@
 ## CMS GC
 
 * Concurrent Mark Sweep 의 줄임말로 멀티 GC 스레드를 활용하는 GC이다.
-* 앱실행과 함께 할 수 있는 Concurrent Mark, Concurrent Sweep 작업과 STW가 꼭 필요한 Initial Mark, Remark 작업으로 단계를 나누어 를 사용하는 방식이다.
-* STW로 인해 응답하지 못하는 시간이 길어지지 않도록 하는 것이 이 GC의 목표이기 때문에 STW 시간이 짧았다.
-* 하지만 다른 GC 방식보다 메모리와 CPU를 더 많이 사용하고, Compaction 단계가 기본적으로 제공되지 않았다.
-* 결론적으로는 G1GC에 대체되어 JDK 14에서 아예 제거되었다.
+* STW로 인해 응답하지 못하는 시간이 길어지지 않도록 하는 것이 이 GC 방식의 목표이기 때문에 애플리케이션 실행을 멈추지 않고 진행 가능한 Concurrent Mark, Concurrent Sweep 작업과 STW가 꼭 필요한 Initial Mark, Remark 작업으로 단계를 나누어 STW를 줄였다.
+* 하지만 다른 GC 방식보다 메모리와 CPU를 더 많이 사용하고, Compaction 단계가 기본적으로 제공되지 않는 단점이 존재하였고, 결국 G1GC에 의해 대체되어 JDK 14에서 아예 제거되었다.
 
 <figure><img src="../../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
 
@@ -241,4 +239,3 @@
 * 사용 가능한 메모리를 모두 사용하면 프로그램이 종료된다.
 * 메모리 풋프린트와 처리량을 낮추면서 대기시간이 가장 낮은 형태로  최소한의 작업만 수행하는 데 초점을 맞추고 있다.
 * GC의 영향을 피하면서 성능이나 메모리 부하 테스팅하고 싶을 때 사용할 수 있다.
-* 스카우터
