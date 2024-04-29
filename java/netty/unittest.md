@@ -97,12 +97,7 @@ public void testFramesDecoded() {
         new FrameChunkDecoder(3)); // 3바이트 초과하면 예외 발생
 
     assertTrue(channel.writeInbound(input.readBytes(2)));
-    try {
-        channel.writeInbound(input.readBytes(4));
-        Assert.fail();
-    } catch (TooLongFrameException e) {
-        // expected exception
-    }
+    assertThrows(TooLongFrameException.class, () -> channel.writeInbound(input.readBytes(4)));
     assertTrue(channel.writeInbound(input.readBytes(3)));
     assertTrue(channel.finish());
 

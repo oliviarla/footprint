@@ -21,7 +21,7 @@
   * 특수한 힙 영역이었지만, JDK 8 이후부터 Metaspace로 인해 대체되었다.
   * static 메서드와 필드에 대한 참조, primitive type 변수, 바이트코드에 대한 데이터와 이름, JIT 컴파일에 대한 정보를 포함하는 영역이었다.
 
-<figure><img src="../../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
 ## Code Cache
 
