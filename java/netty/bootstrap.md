@@ -197,7 +197,7 @@ graph LR
 * 클라이언트 소켓 채널의 소켓 옵션을 설정한다. 사용하는 채널 유형에 따라 옵션도 다르게 구성되며, bind / connect 메서드에 의해 채널의 옵션이 설정된다.
 * 채널이 이미 생성된 후에는 영향을 미치지 않는다.
 
-## 채널에서 클라이언트 부트스트랩
+## 부트스트랩의 이벤트 루프 공유
 
 * 서버가 다른 시스템에 대해 클라이언트처럼 동작해야 하는 경우 ServerChannel도 두고 클라이언트 Channel도 두어야 한다.
 * 새로운 Bootstrap을 만들어 이를 해결할 수 있지만, 새로운 클라이언트 채널에 대한 EventLoop를 정의해야 하므로 새로운 스레드가 필요하다. 이 경우 ServerBootstrap의 자식 채널과 클라이언트 채널 간 데이터 교환 시 컨텍스트 스위칭이 필요하다.
@@ -205,7 +205,7 @@ graph LR
 * EventLoop를 최대한 재사용하여 스레드 생성 비용을 줄이는 것이 네티 애플리케이션 가이드에서 권장되고 있다.
 * 아래 그림과 같이 ServerChannel으로 생성된 자식 채널의 EventLoop를 클라이언트로써의 통신을 위해 생성한 Bootstrap과 채널에서 공유할 수 있다.
 
-
+<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
 
 * 아래는 EventLoop를 공유하는 예시 코드이다. ChannelInboundHandler에서 새로운 부트스트랩을 만들고 이벤트 루프는 기존의 이벤트 루프를 사용한다.
 

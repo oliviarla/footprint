@@ -161,11 +161,11 @@
   * [네티 맛보기](java/netty/example.md)
   * [네티의 주요 특징](java/netty/features.md)
   * [채널 파이프라인](java/netty/channel-pipeline.md)
-  * [코덱](java/netty/codec.md)
   * [이벤트 루프](java/netty/eventloop.md)
   * [바이트 버퍼](java/netty/bytebuffer.md)
   * [부트스트랩](java/netty/bootstrap.md)
   * [네티 테스트](java/netty/unittest.md)
+  * [코덱](java/netty/codec.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 

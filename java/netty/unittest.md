@@ -13,6 +13,8 @@
   * **readInbound** 메서드는 처리된 인바운드 메시지를 반환한다. 이를 통해 사용자는 예상된 결과가 나왔는지 확인할 수 있다.
   * **finish** 메서드는 EmbeddedChannel을 완료되었다고 표시하고, 전체 인바운드, 아웃바운드 데이터를 읽을 수 있다면 true를 반환하고 채널을 close한다.
 
+<figure><img src="../../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
+
 ## 인바운드 테스트
 
 * 아래와 같은 JUnit 테스트에서 EmbeddedChannel을 사용할 수 있다.
