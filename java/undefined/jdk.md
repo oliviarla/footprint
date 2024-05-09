@@ -49,7 +49,7 @@ java -jar hello.jar
 
 * 아래의 그림을 보면 컴파일러인 `javac`, 바이트 코드를 JVM 상에서 실행하는 `java` 등은 JDK에 속하고 `java.lang` 과 같은 라이브러리는 JRE에 속한다. JVM은 JDK, JRE에 모두 속하고 있다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>자세한 구성도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>자세한 구성도</p></figcaption></figure>
 
 
 
