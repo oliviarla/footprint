@@ -1,4 +1,4 @@
-# HTTPS와 웹소켓 지원
+# 다양한 ChannelHandler와 코덱
 
 ## SSL/TLS
 
@@ -130,58 +130,6 @@ if (isClient) {
     pipeline.addLast("codec", new HttpClientCodec());
 } else {
     pipeline.addLast("codec", new HttpServerCodec());
-}
-```
-
-### 웹소켓
-
-* 요청-응답 상호작용에 기반을 두는 HTTP 프로토콜과 달리 실시간으로 정보를 갱신해야 하는 상황에 사용되는 프로토콜이다.
-* 양방향 트래픽을 위한 단일 TCP 연결을 지원하여 HTTP 풀링 방식보다 효율적이다.
-* 웹소켓이 정의하는 특수한 메시지 형식인 프레임이 존재하며, 데이터 프레임과 제어 프레임으로 나뉜다.
-* 데이터 프레임은 바이너리 혹은 텍스트 데이터가 존재할 수 있고, 제어 프레임은 close, ping, pong에 대한 데이터가 존재한다.
-* 아래는 웹소켓 지원을 위해 파이프라인을 구성한 것이다.
-  * WebSocketServerProtocolHandler 클래스를 파이프라인에 추가하여 핸드쉐이크와 세가지 제어 프레임을 처리한다.
-  * TextFrameHandler, BinaryFrameHandler, ContinuationFrameHandler 클래스를 정의하여 각 데이터 프레임을 처리할 수 있도록 한다.
-
-```java
-public class WebSocketServerInitializer extends ChannelInitializer<Channel> {
-    @Override
-    protected void initChannel(Channel ch) throws Exception {
-        ch.pipeline().addLast(
-            new HttpServerCodec(),
-            new HttpObjectAggregator(65536),
-            new WebSocketServerProtocolHandler("/websocket"),
-            new TextFrameHandler(),
-            new BinaryFrameHandler(),
-            new ContinuationFrameHandler());
-    }
-
-    public static final class TextFrameHandler extends
-        SimpleChannelInboundHandler<TextWebSocketFrame> {
-        @Override
-        public void channelRead0(ChannelHandlerContext ctx,
-            TextWebSocketFrame msg) throws Exception {
-            // Handle text frame
-        }
-    }
-
-    public static final class BinaryFrameHandler extends
-        SimpleChannelInboundHandler<BinaryWebSocketFrame> {
-        @Override
-        public void channelRead0(ChannelHandlerContext ctx,
-            BinaryWebSocketFrame msg) throws Exception {
-            // Handle binary frame
-        }
-    }
-
-    public static final class ContinuationFrameHandler extends
-        SimpleChannelInboundHandler<ContinuationWebSocketFrame> {
-        @Override
-        public void channelRead0(ChannelHandlerContext ctx,
-            ContinuationWebSocketFrame msg) throws Exception {
-            // Handle continuation frame
-        }
-    }
 }
 ```
 
