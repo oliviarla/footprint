@@ -166,8 +166,8 @@
   * [부트스트랩](java/netty/bootstrap.md)
   * [네티 테스트](java/netty/unittest.md)
   * [코덱](java/netty/codec.md)
-  * [다양한 ChannelHandler와 코덱](java/netty/channelhandler.md)
-  * [웹소켓](java/netty/undefined.md)
+  * [다양한 ChannelHandler와 코덱](java/netty/https.md)
+  * [웹소켓](java/netty/websocket.md)
   * [UDP 브로드캐스팅](java/netty/udp.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
