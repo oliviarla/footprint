@@ -1,65 +1,84 @@
-# 다이나믹 프록시
+# 어노테이션 프로세서
 
-## JDK 다이나믹 프록시
+## 개념
 
-* 런타임에 특정 인터페이스를 구현하는 클래스 또는 인스턴스를 만드는 기술이다.
-* 아래와 같이 `Proxy.newProxyInstance` 메서드를 이용해 동적으로 프록시 클래스를 만들 수 있다.
+* 소스 코드 레벨에서 컴파일 시 특정 어노테이션이 붙어있는 것을 참조하여 새로운 코드를 생성하거나 수정해주기 위한 기능이다.
+* 어노테이션 프로세서를 사용하는 툴로는 롬복과 AutoService 등이 존재한다.
+* 인터페이스나 클래스를 상속받아 메서드를 재정의할 때 사용되는 `@Override` 역시 어노테이션 프로세서를 사용한다.
+* java agent를 사용해 런타임에 바이트 코드를 조작하는 것과 달리 컴파일 시 조작하기 때문에 런타임에 수행해야 하는 비용이 없어진다.
+* 기존 클래스 코드 변경하는 기능은 제공하지 않기 때문에 편법이 필요하다.
+* 롬복은 컴파일 시점에 어노테이션 프로세서를 사용해 소스코드의 Abstract Syntax Tree를 조작한다.
 
-```java
-BookService bookService = (BookService) Proxy.newProxyInstance(BookService.class.getClassLoader(), new Class[]{BookService.class},
-    new InvocationHandler() {
-        BookService bookService = new DefaultBookService();
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (method.getName().equals("rent")) { 
-            System.out.println("before method call");
-            Object invoke = method.invoke(bookService, args);
-            System.out.println("after method call");
-            return invoke;
-        }
-        return method.invoke(bookService, args); 
-        }
-    });
-```
+## Annotation Processor 만들기
 
-## 클래스 기반 다이나믹 프록시
-
-* 상속을 사용하지 못하는 경우 프록시를 만들 수 없다.
-* 인터페이스가 있을 때는 인터페이스의 프록시를 만들어 사용해야 한다.
-
-### CGLIB
-
-* MethodInterceptor로 핸들러를 만들어 어떤 작업을 수행할 지 Enhancer에 넘기면 클래스의 프록시 객체를 얻을 수 있다.
+* 여러 라운드에 거쳐 소스 및 컴파일 된 코드를 처리할 수 있다.
+* 라운드는 Spring Security의 필터 체인과 비슷한 개념이다.
+* 아래는 `@Magic` 이라는 어노테이션이 붙은 인터페이스가 존재하면 해당 인터페이스를 구현하여 `"rabbit!" 이라는 문자열이 반환되는 pullOut 메서드를 가진 클래스`를 생성하도록 하는 프로세서이다.
 
 ```java
-MethodInterceptor handler = new MethodInterceptor() {
-    BookService bookService = new BookService();
+@AutoService(Processor.class)
+public class MagicMojaProcessor extends AbstractProcessor {
+
     @Override
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("before method call");
-        return method.invoke(bookService, objects);
-    } 
-};
-BookService bookService = (BookService) Enhancer.create(BookService.class, handler);
-```
+    public Set<String> getSupportedAnnotationTypes() {
+        return Set.of(Magic.class.getName());
+    }
+    @Override
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Magic.class);
 
-### ByteBuddy
+        for (Element element : elements) {
+            Name elementName = element.getSimpleName();
+            
+            // 인터페이스에만 어노테이션이 적용 가능하다.
+            if (element.getKind() != ElementKind.INTERFACE) {
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Magic annotation can not be used on " + elementName);
+            } else {
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "Processing " +
+                elementName); 
+            }
+            
+            TypeElement typeElement = (TypeElement) element;
+            ClassName className = ClassName.get(typeElement);
+            
+            // 메서드 생성
+            MethodSpec pullOut = MethodSpec.methodBuilder("pullOut")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(String.class)
+                .addStatement("return $S", "Rabbit!")
+                .build();
 
-* 바이트버디를 이용해서도 다이나믹 프록시를 생성할 수 있다.
+            // 타입 생성
+            TypeSpec magicMoja = TypeSpec.classBuilder("MagicMoja")
+                .addModifiers(Modifier.PUBLIC)
+                .addSuperinterface(className)
+                .addMethod(pullOut)
+                .build();
 
-```java
-Class<? extends BookService> proxyClass = new ByteBuddy().subclass(BookService.class)
-    .method(named("rent"))
-    .intercept(InvocationHandlerAdapter.of(new InvocationHandler() {
-        BookService bookService = new BookService();
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            System.out.println("before method call");
-            return method.invoke(bookService, args);
+            Filer filer = processingEnv.getFiler();            
+            try {
+                JavaFile.builder(className.packageName(), magicMoja)
+                    .build()
+                    .writeTo(filer);
+            } catch (IOException e) {
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "FATAL ERROR: " + e);
+            } 
         }
-    }))
-    .make()
-    .load(BookService.class.getClassLoader())
-    .getLoaded();
-BookService bookService = proxyClass.getConstructor(null).newInstance();
+
+        return true; // 다른 프로세서가 프로세싱하지 않도록 true를 반환한다.
+    }
+}
 ```
+
+### `@AutoService`
+
+* 서비스 프로바이더 레지스트리 생성기이다.
+* Processor를 적용하기 위해서는 /resource/META-INF/javax.annotation.processor.Processor 파일에 Processor 구현체의 클래스패스를 등록해야 한다.
+* 이 파일을 직접 생성해 프로세서를 등록하려면 기존 프로젝트를 먼저 빌드하고, 이후에 파일을 생성해 다시 빌드해야 하는 귀찮은 과정이 있다.
+* AutoService 를 사용하면 파일을 자동으로 생성해 프로세서를 등록해주므로 편리하다.
+
+### JavaPoet
+
+* 자바 소스코드 생성하는 유틸리티이다.
+* `JavaFile` 클래스를 제공하여 새로운 클래스를 생성할 수 있으며, 이 클래스를 프로세서의 Filer를 통해 파일로 저장할 수 있다.
+* Intellij 에서 어노테이션 프로세서 기능을 활성화시키는 이유가 바로 이 어노테이션 프로세서로 만들어낸 클래스 파일을 읽을 수 있기 위함이다.

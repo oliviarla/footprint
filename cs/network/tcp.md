@@ -5,7 +5,7 @@
 * 클라이언트가 서버로 SYN 패킷을 송신하면, 서버는 SYN-ACK 패킷을 클라이언트에 전송한다. 이 때 서버 소켓의 상태는 SYN\_RECEIVED 이다.
 *   SYN-ACK 패킷을 수신한 클라이언트는 서버로 ACK 패킷을 보낸다.
 
-    <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 소켓 종료
 
@@ -23,7 +23,7 @@
 
     &#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

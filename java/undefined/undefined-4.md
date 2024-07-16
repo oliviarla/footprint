@@ -1,68 +1,65 @@
-# 리플렉션
+# 다이나믹 프록시
 
-## 클래스 정보 조회
+## JDK 다이나믹 프록시
 
-* `Class<T>`라는 타입을 통해 클래스의 모든 정보(ex. 필드, 메서드, 상위 클래스, 인터페이스, 어노테이션, 생성자 등)를 조회할 수 있다.
-* 클래스를 문자열을 통해 읽을 수 있으며, `Class.forName("MyClass")` 와 같이 사용할 수 있다. 만약 해당 클래스가 없다면 ClassNotFoundException이 발생한다.
-
-## 어노테이션과 리플렉션
-
-* `@Retention` : 어노테이션을 유지하는 기간을 설정한다.
-  * SOURCE, CLASS, RUNTIME 속성을 사용 가능하며 기본적으로 RUNTIME 속성이 사용된다.
-  * 리플렉션으로 어노테이션을 읽으려면 RUNTIME 속성을 사용해야 한다.
-* `@Inherited` : 부모 클래스에 어노테이션을 붙였을 때 자식 클래스에도 어노테이션을 적용한다.
-* `@Target` : 어노테이션을 어디에서까지 사용할 수 있는지 설정한다.
-  * TYPE, FIELD, METHOD 등 어느 곳에 어노테이션을 붙일 수 있는지 지정한다.
-* 어노테이션은 primitive 타입 혹은 boxing된 타입을 필드로 가질 수 있다.
+* 런타임에 특정 인터페이스를 구현하는 클래스 또는 인스턴스를 만드는 기술이다.
+* 아래와 같이 `Proxy.newProxyInstance` 메서드를 이용해 동적으로 프록시 클래스를 만들 수 있다.
 
 ```java
-public @interface PersonAnnotation {
-    String name() default "kim";
-    int age() default 20;
-}
+BookService bookService = (BookService) Proxy.newProxyInstance(BookService.class.getClassLoader(), new Class[]{BookService.class},
+    new InvocationHandler() {
+        BookService bookService = new DefaultBookService();
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (method.getName().equals("rent")) { 
+            System.out.println("before method call");
+            Object invoke = method.invoke(bookService, args);
+            System.out.println("after method call");
+            return invoke;
+        }
+        return method.invoke(bookService, args); 
+        }
+    });
 ```
 
-* 리플렉션을 통해 어노테이션의 정보를 얻을 수 있다.
+## 클래스 기반 다이나믹 프록시
+
+* 상속을 사용하지 못하는 경우 프록시를 만들 수 없다.
+* 인터페이스가 있을 때는 인터페이스의 프록시를 만들어 사용해야 한다.
+
+### CGLIB
+
+* MethodInterceptor로 핸들러를 만들어 어떤 작업을 수행할 지 Enhancer에 넘기면 클래스의 프록시 객체를 얻을 수 있다.
 
 ```java
-PersonAnnotation personAnnotation = Son.class.getAnnotations(); // 상속받은 어노테이션까지 조회
-String nameOfSon = personAnnotation.name();
-int ageOfSon = personAnnotation.age();
-
-Mom.class.getDeclaredAnnotations(); // 자신 클래스에 붙은 어노테이션만 조회
+MethodInterceptor handler = new MethodInterceptor() {
+    BookService bookService = new BookService();
+    @Override
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+        System.out.println("before method call");
+        return method.invoke(bookService, objects);
+    } 
+};
+BookService bookService = (BookService) Enhancer.create(BookService.class, handler);
 ```
 
-## 클래스 정보 수정 및 실행
+### ByteBuddy
 
-### 객체 생성하기
+* 바이트버디를 이용해서도 다이나믹 프록시를 생성할 수 있다.
 
 ```java
-Constructor<NullValue> constructor = NullValue.class.getDeclaredConstructor();
-constructor.setAccessible(true); // private일 경우 접근 가능하도록 허용해주어야 한다.
-NullValue nullValue = constructor.newInstance();
+Class<? extends BookService> proxyClass = new ByteBuddy().subclass(BookService.class)
+    .method(named("rent"))
+    .intercept(InvocationHandlerAdapter.of(new InvocationHandler() {
+        BookService bookService = new BookService();
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            System.out.println("before method call");
+            return method.invoke(bookService, args);
+        }
+    }))
+    .make()
+    .load(BookService.class.getClassLoader())
+    .getLoaded();
+BookService bookService = proxyClass.getConstructor(null).newInstance();
 ```
-
-### 객체의 필드 조회/수정하기
-
-```java
-Book book = (Book) Book.class.getConstructor(String.class).newInstance("myBook");
-Field name = Book.class.getDeclaredField("name");
-name.setAccessible(true);
-String nameOfBook = name.get(book); // 필드 조회하기
-name.set(book, "myUpdatedBook"); // 필드 수정하기
-```
-
-### 메서드 실행하기
-
-```java
-Book book = new Book();
-Method setTotalPages = book.getClass().getDeclaredMethod("setTotalPages", long.class);
-setTotalPages.setAccessible(true); // private일 경우 접근 가능하도록 허용해주어야 한다.
-setTotalPages.invoke(book, 150);
-```
-
-## 주의점
-
-* 지나친 사용은 성능 이슈를 야기할 수 있으니 반드시 필요한 경우에만 사용해야 한다.
-* 컴파일 타임에 확인되지 않은 문제가 런타임에 발생할 수 있다.
-* 접근 지시자를 무시할 수 있다.

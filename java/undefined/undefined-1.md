@@ -10,7 +10,7 @@
 
 ### 메모리 특성
 
-<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption><p>Shared Multiprocessor Architecture</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1) (1).png" alt=""><figcaption><p>Shared Multiprocessor Architecture</p></figcaption></figure>
 
 * 공유 멀티프로세서 아키텍처
   * CPU 코어마다 L1, L2 캐시가 존재한다.
@@ -46,7 +46,7 @@
 * 참조, 비참조 유형의 객체가 존재한다.
 * 참조중인 객체이지만 사용되지 않는다면 메모리 누수가 발생한 것이다.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 발생 원인
 
