@@ -251,6 +251,7 @@
     * [Hash](db/redis/undefined/hash.md)
     * [Bitmaps](db/redis/undefined/bitmaps.md)
     * [SortedSet](db/redis/undefined/sortedset.md)
+  * [Lettuce 단일 서버, 클러스터 서버, 풀링 사용 방법](db/redis/lettuce.md)
 
 ## 📽️ 인프라 <a href="#infra" id="infra"></a>
 
