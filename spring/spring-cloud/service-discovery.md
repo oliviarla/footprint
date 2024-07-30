@@ -27,6 +27,18 @@ eureka:
             defaultZone: http://127.0.0.1:8761/eureka
 ```
 
+* Eureka에 서비스를 등록하기 위해 아래와 같이 EnableDiscoveryClient 어노테이션을 붙여주어야 한다.
+
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+public class UserServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(UserServiceApplication.class, args);
+    }
+}
+```
+
 ### 랜덤 포트
 
 * 랜덤 포트 사용 시 유레카 대시보드에서 0이라는 숫자가 그대로 나타나기 때문에 instance-id를 지정하여 대시보드에서 정보가 보이도록 해야 한다.

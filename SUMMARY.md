@@ -213,6 +213,10 @@
     * [Serializer](spring/spring-data/spring-data-redis/serializer.md)
 * [Spring REST Docs](spring/spring-rest-docs.md)
 * [Spring Annotations](spring/spring-annotations.md)
+* [Spring Cloud](spring/spring-cloud/README.md)
+  * [Service Discovery](spring/spring-cloud/service-discovery.md)
+  * [API Gateway](spring/spring-cloud/api-gateway.md)
+  * [Spring Cloud Config](spring/spring-cloud/spring-cloud-config.md)
 * [Test](spring/test/README.md)
   * [테스트 용어 정리](spring/test/undefined.md)
   * [JUnit](spring/test/junit.md)
@@ -230,9 +234,6 @@
   * [Log Annotations](spring/lombok/log-annotations.md)
 * [재고 시스템으로 알아보는 동시성이슈 해결방법](spring/undefined.md)
 * [실습으로 배우는 선착순 이벤트 시스템](spring/undefined-1.md)
-* [Spring Cloud](spring/spring-cloud/README.md)
-  * [Service Discovery](spring/spring-cloud/service-discovery.md)
-  * [API Gateway](spring/spring-cloud/api-gateway.md)
 
 ## 🕋 DB
 

@@ -118,7 +118,6 @@ public class ZuulLoggingFilter extends ZuulFilter {
 ## Spring Cloud Gateway
 
 * 네티 기반의 웹서버로 구현되어 있어 비동기 처리가 가능하다.
-*
 
 <figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
 
@@ -127,7 +126,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
 * 앞서 Zuul 예제와 동일하게 두 대의 WAS를 띄워둔다.
 * 그리고 api gateway를 위한 새로운 애플리케이션을 구현한다.
 * 아래와 같이 yaml 파일을 작성하거나 RouteLocator 빈을 등록하여 라우트 정보를 설정할 수 있다.
-  * Zuul과 달리 `localhost:8000/first-service/welcome`으로 접속하면 `localhost:8081/first-service/welcome`과 동일한 결과가 반환되니 주의해야 한다.
+  * Zuul과 달리 `localhost:8000/first-service/welcome`으로 접속하면 `localhost:8081/first-service/welcome` URI가 호출된다. 이를 변경하려면 RewritePath 필터를 추가하면 된다.
   * 필터를 등록하여 헤더를 추가하거나 원하는 로직을 작성할 수 있다.
 
 ```yaml
@@ -154,6 +153,8 @@ spring:
                   filters:
                     - AddRequestHeader=first-request, header1
                     - AddResponseHeader=first-response, header2
+                    # 
+                    - RewritePath=/first-service/(?<segment>.*), /$\{segment}
                 - id: second-service
                   uri: http://localhost:8082/
                   predicates:
@@ -184,7 +185,7 @@ public class FilterConfig {
 
 ### 커스텀 필터
 
-* 커스텀 필터를 아래와 같이 구현할 수 있다. 이후, 커스텀 필터를 등록해주어야 한다.
+* 커스텀 필터를 아래와 같이 구현할 수 있다. 이후, 커스텀 필터를 Route에 등록해주어야 한다.
 
 ```java
 @Component
