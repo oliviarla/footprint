@@ -33,11 +33,11 @@
     * [아키텍처 경계 강제하기](programming/clean-architecture/clean-book/undefined-1.md)
     * [지름길 사용하기](programming/clean-architecture/clean-book/undefined-2.md)
     * [아키텍처 스타일 결정하기](programming/clean-architecture/clean-book/undefined-3.md)
-* [디자인 패턴](programming/undefined/README.md)
-  * [전략 패턴](programming/undefined/undefined.md)
-  * [옵저버 패턴](programming/undefined/undefined-1.md)
-  * [데코레이터 패턴](programming/undefined/undefined-2.md)
-  * [팩토리 패턴](programming/undefined/undefined-3.md)
+* [디자인 패턴](programming/design-patterns/README.md)
+  * [전략 패턴](programming/design-patterns/strategy.md)
+  * [옵저버 패턴](programming/design-patterns/observer.md)
+  * [데코레이터 패턴](programming/design-patterns/decorator.md)
+  * [팩토리 패턴](programming/design-patterns/factory.md)
 
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
@@ -288,8 +288,8 @@
   * [ReplicationSet](infra/kubernetes/replicationset.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
-  * [카프카 개요](infra/kafka/undefined.md)
-  * [카프카 설치](infra/kafka/undefined-1.md)
+  * [카프카 개요](infra/kafka/intro.md)
+  * [카프카 설치](infra/kafka/practice.md)
   * [Kafka Broker](infra/kafka/kafka-broker.md)
   * [Producer/Consumer](infra/kafka/producer-consumer.md)
   * [Kafka Connect](infra/kafka/kafka-connect.md)
