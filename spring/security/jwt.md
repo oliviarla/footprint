@@ -32,7 +32,7 @@ description: 회원 인증을 처리하는 방법 중 하나
 
 ## 웹사이트 인증 방식
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt="" width="484"><figcaption><p>mechanism of JWT Authentication With HTTP</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt="" width="484"><figcaption><p>mechanism of JWT Authentication With HTTP</p></figcaption></figure>
 
 * 로그인 창에서 username, password를 입력하면, 인증이 이뤄진 후 토큰을 생성해 클라이언트로 보낸다.
 * 이제 이 토큰은 API에 대한 열쇠와 같은 역할을 한다. 토큰이 있다면 토큰과 함께 마이페이지의 내 정보 API 요청을 보내게 된다.

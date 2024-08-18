@@ -11,7 +11,7 @@
 * 참조되지 않는 객체를 제거하기 전에 미리 수행되어야 하는 작업이다.
 * 마킹 프로세스가 완료되면 아래 그림과 같이 참조되지 않는 주황색 부분만 마킹된다.
 
-<figure><img src="../../../../.gitbook/assets/image (18) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (18) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### **Sweep**
 
@@ -26,7 +26,7 @@
 * 남아있는 참조 객체를 이동해 메모리 압축 작업을 수행하면 새 메모리 할당이 훨씬 빨라진다.
 * 이 때에도 새 객체를 할당할 수 있는 여유 공간 블록에 대한 참조를 메모리 할당자가 들고 있도록 한다.
 
-<figure><img src="../../../../.gitbook/assets/image (12) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (12) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ## JVM Generations
 
@@ -34,7 +34,7 @@
 * 아래 그림과 같이 힙 영역을 **객체의 오래된 정도를 기준으로** 영역을 나누어, 가장 최신의 객체는 `Young Generation`, 오래된 객체는 `Old Generation`, 프로그램이 죽을 때까지 사용되는 객체는 `Permenent Generation`에 담을 수 있다.
 * 오래된 객체는 앞으로도 계속해서 참조될 확률이 높기 때문에 GC 빈도를 줄이고, 새로운 객체를 담는 영역은 비교적 자주 GC 작업을 하여 GC에 영향받는 메모리 영역을 대폭 줄일 수 있다.
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **young generation**
 
@@ -94,11 +94,11 @@ Minor GC에 비해 비교적 적게 발생하며, STW가 발생한다. 모든 
 
 * 또다시 eden 영역이 가득 차면 `minor GC` 작업을 진행한다. 참조 객체와 첫번째 survivor 영역의 객체들은 또다시 비어있는 survivor 영역(To survivor space)으로 이동한다. `minor GC` 작업이 완료되면 eden과 from survivor 영역이 모두 비워진다. 객체가 이동될 때 마다 age가 늘어나며, 이는 old generation으로 이동할 척도가 된다.
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
 
 * 또다시 `minor GC`를 수행할 때 age가 특정 임계값을 넘긴 객체는 old generation으로 이동한다. 이러한 과정을 반복하며 old generation 영역이 가득 차게 되면 `major GC`가 발생한다.
 
-<figure><img src="../../../../.gitbook/assets/image (16) (1).png" alt="" width="375"><figcaption><p>특정 age를 넘긴 객체는 old generation(Tenured)로 이동</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (16) (1) (1).png" alt="" width="375"><figcaption><p>특정 age를 넘긴 객체는 old generation(Tenured)로 이동</p></figcaption></figure>
 
 ## GC Roots
 

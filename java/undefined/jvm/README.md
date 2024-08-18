@@ -22,7 +22,7 @@
 * 컴파일된 바이트 코드 형태의 클래스들이 JVM에 전달되면, 아래 그림과 같은 흐름으로 코드가 실행되게 된다.
 * 내부 구성 요소인 Class Loader, Runtime Data Areas, Execution Engine에 대해서는 아래에서 간략히 설명한다.
 
-<figure><img src="../../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Class Loaders
 
