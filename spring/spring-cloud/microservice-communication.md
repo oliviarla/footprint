@@ -102,7 +102,7 @@ public class UserService {
 }
 ```
 
-### 예외 처
+### 예외 처리
 
 * FeignClient 사용 중에 만약 http uri가 잘못되었다면 FeignException이 발생할 것이다.
 * try-catch로 예외를 처리할 수도 있지만 ErrorDecoder를 이용해 예외를 집약적으로 처리할 수 있다.
