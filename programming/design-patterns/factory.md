@@ -7,7 +7,7 @@
 
 ## 개념
 
-* 객체 생성을 캡슐화하는 디자인 패턴으로, 여기서 파생된 팩토리 메서드 패턴과 추상 팩토리 패턴이 존재한다.
+* 객체 생성을 캡슐화하는 디자인 패턴으로, 여기서 파생된 **팩토리 메서드 패턴**과 **추상 팩토리 패턴**이 존재한다.
 
 ### 팩토리 메서드 패턴
 
@@ -19,7 +19,7 @@
 ```mermaid
 classDiagram
 
-Product <|.. ConcreteProduct
+Product <|-- ConcreteProduct
 
 class Creator {
   factoryMethod()
@@ -30,11 +30,12 @@ class ConcreteCreator {
   factoryMethod()
 }
 
-Creator <|.. ConcreteCreator
+Creator <|-- ConcreteCreator
 ConcreteProduct <.. ConcreteCreator
 ```
 
 * 의존성 역전 원칙이 적용되었기 때문에 Creator 객체를 사용하는 곳에서는 세세한 객체에 의존하지 않고 추상화된 인터페이스에만 의존할 수 있다.
+* 팩토리 메서드 패턴은 템플릿 메서드 패턴의 일종으로 볼 수 있다.
 
 ### 추상 팩토리 패턴
 
@@ -47,11 +48,8 @@ ConcreteProduct <.. ConcreteCreator
 ## 장단점
 
 * 장점
-  * 생성하는 역할과 생성된 객체를 사용하는 역할이 느슨하게 결합되어 변경에 유리하다.
-
-## 사용 방법
-
-
+  * 생성하는 역할과 생성된 객체를 사용하는 역할이 느슨하게 결합되어 변경에 유리하다. 즉, 단일 책임 원칙과 개방 폐쇄 원칙을 지킨다.
+*
 
 ## 예시
 

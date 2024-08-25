@@ -50,6 +50,8 @@
   * [옵저버 패턴](programming/design-patterns/observer.md)
   * [데코레이터 패턴](programming/design-patterns/decorator.md)
   * [팩토리 패턴](programming/design-patterns/factory.md)
+  * [싱글톤 패턴](programming/design-patterns/undefined.md)
+  * [커맨드 패턴](programming/design-patterns/undefined-1.md)
 
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
@@ -228,6 +230,7 @@
 * [Spring Core](spring/spring-core/README.md)
   * [Cron Expression](spring/spring-core/cron-expression.md)
   * [Bean](spring/spring-core/bean/README.md)
+    * [Lifecycle](spring/spring-core/bean/lifecycle.md)
     * [Aware](spring/spring-core/bean/aware.md)
 * [Spring MVC](spring/mvc.md)
 * [Spring Security](spring/security/README.md)

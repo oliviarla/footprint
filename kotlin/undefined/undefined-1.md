@@ -93,9 +93,9 @@ println(rectangle.isSquare)
 * 코틀린에서는 여러 클래스를 한 파일에 넣을 수 있고 디렉토리에 관계없이 패키지를 구성할 수 있다.
 * 하지만 자바에서는 반드시 패키지 구조와 일치하는 디렉토리에 클래스를 넣어주어야 한다.
 
-## enum
+## enum과 when
 
-* enum은 소프트 키워드로, enum class 와 같이 정의할 수 있으며 enum이라는 문자 자체는 변수명으로 사용이 가능하다.
+* enum은 **소프트 키워드**로, enum class로 정의해야 하며 **enum 이라는 문자 자체는 변수명으로 사용 가능**하다.
 * 프로퍼티와 메서드를 추가하는 경우 enum 상수 목록과 메서드 정의 사이에 반드시 세미콜론이 필요하다.
 
 ```kotlin
@@ -118,6 +118,72 @@ enum class Color(
 }
 ```
 
+* when을 사용해 enum타입에 따라 값을 매핑해 반환할 수 있다.
+
+```java
+fun getMnemonic(color: Color) =
+    when (color) {
+        Color.RED -> "Richard"
+        Color.ORANGE -> "Of"
+        Color.YELLOW -> "York"
+        Color.GREEN -> "Gave"
+        Color.BLUE -> "Battle"
+        Color.INDIGO -> "In"
+        Color.VIOLET -> "Vain"
+        Color.BLACK, Color.WHITE -> "Colorless"
+    }
+
+val string = getMnemonic(Color.Blue) // "Battle"
+```
+
+* enum 상수 값을 임포트하여 짧은 이름으로 사용 가능하다.
+
+```kotlin
+import ch02.colors.Color
+import ch02.colors.Color.*
+
+fun getWarmth(color: Color) = 
+    when (color) {
+        RED, ORANGE, YELLOW -> "Warm"
+        GREEN -> "neutral"
+        else -> "cold"
+    }
+```
+
+* when 식의 인자로 아무 객체나 사용할 수 있다. 아래는 코틀린에서 기본적으로 제공하는 setOf 함수를 사용해 두 Color 상수를 Set으로 만들어 매칭되는 Color를 반환하는 함수 예제이다.
+
+```kotlin
+fun mix(c1: Color, c2: Color) =
+    when (setOf(c1, c2)) {
+        setOf(RED, YELLOW) -> ORANGE
+        setOf(YELLOW, BLUE) -> GREEN
+        setOf(BLUE, VIOLET) -> INDIGO
+        else -> throw Exception("dirty color")
+    }
+mix(BLUE, YELLOW)
+```
+
+* when 식의 인자를 받지 않을 수도 있다. 이렇게 할 경우 앞서 setOf를 사용해 객체를 만들어 비교하는 것보다 성능, 메모리 관점에서 이득일 수 있다.
+
+```kotlin
+fun mix(c1: Color, c2: Color) =
+    when {
+        (c1 == RED && c2 == YELLOW) -> ORANGE
+        (c1 == BLUE && c2 == YELLOW) -> GREEN
+        else -> throw Exception("dirty color")
+    }
+```
+
+### 스마트캐스트
+
+* 타입 검사와 타입 캐스트를 조합한 것으로&#x20;
+
+
+
+
+
+
+
 
 
 
@@ -129,8 +195,6 @@ enum class Color(
 ## 제어 구조
 
 
-
-## 스마트 캐스트
 
 
 
