@@ -24,7 +24,7 @@ public class MacroCommand implements Command {
 }
 ```
 
-* execute 메서드를 가진 인터페이스/추상 클래스를 사용하여 어떤 작업으로 객체를 매개변수화한다는 점에서 전략 패턴과 유사하다고 생각할 수 있지만, 전략 패턴은 같은 목적을 가진 여러 알고리즘을 캡슐화한다는 데에 의의를 두지만 커맨드 패턴은 여러 다른 목적을 가진 요청까지도 캡슐화한다는 데에 의의를 둔다는 점에서 다르다.
+* execute 메서드를 가진 인터페이스/추상 클래스를 사용하여 어떤 작업으로 객체를 매개변수화한다는 점에서 전략 패턴과 유사하다고 생각할 수 있다. 하지만 전략 패턴은 같은 목적을 가진 여러 알고리즘을 캡슐화하여 여러 전략 중 하나를 사용하는 형태인 데에 반해 커맨드 패턴은 여러 다른 목적을 가진 요청들을 캡슐화하여 모두 클라이언트로부터 사용된다는 점에서 다르다.
 
 ## 장단점
 
@@ -48,5 +48,57 @@ receiver.setCommand(() -> curtains.open());
 
 ## 예시
 
+* spring boot cli에서는 커맨드 패턴을 사용해 요청된 명령에 대한 응답을 반환한다. CommandRunner는 Invoker 역할을 하며 Command들의 목록을 담게 된다.
 
+```java
+public static void main(String... args) {
+    // ...
+    CommandRunner runner = new CommandRunner("spring");
+    // ...
+    runner.addCommand(new ShellCommand());
+    runner.addCommand(new HintCommand(runner));
+    int exitCode = runner.runAndHandleErrors(args);
+}
+```
 
+```java
+public class CommandRunner implements Iterable<Command> {
+    private final List<Command> commands = new ArrayList<>();
+    // ...
+    public void addCommand(Command command) {
+    	Assert.notNull(command, "Command must not be null");
+    	this.commands.add(command);
+    }
+    
+    protected ExitStatus run(String... args) throws Exception {
+        // ...
+        Command command = findCommand(commandName);
+        if (command == null) {
+              throw new NoSuchCommandException(commandName);
+        }
+        beforeRun(command);
+        try {
+              return command.run(commandArguments);
+        } finally {
+              afterRun(command);
+        }
+    }
+    // ...
+}
+```
+
+```java
+public class HintCommand extends AbstractCommand {
+
+    private final CommandRunner commandRunner;
+
+    public HintCommand(CommandRunner commandRunner) {
+        super("hint", "Provides hints for shell auto-completion");
+        this.commandRunner = commandRunner;
+    }
+
+    @Override
+    public ExitStatus run(String... args) throws Exception {
+        // ...
+  }
+```
