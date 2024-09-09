@@ -52,6 +52,12 @@
   * [팩토리 패턴](programming/design-patterns/factory.md)
   * [싱글톤 패턴](programming/design-patterns/undefined.md)
   * [커맨드 패턴](programming/design-patterns/undefined-1.md)
+  * [어댑터 패턴](programming/design-patterns/undefined-2.md)
+  * [퍼사드 패턴](programming/design-patterns/undefined-3.md)
+  * [템플릿 메서드 패턴](programming/design-patterns/undefined-4.md)
+  * [반복자 패턴](programming/design-patterns/undefined-5.md)
+  * [컴포지트 패턴](programming/design-patterns/undefined-6.md)
+  * [상태 패턴](programming/design-patterns/undefined-7.md)
 
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
@@ -59,12 +65,12 @@
   * [Java 언어의 특징](java/undefined/java.md)
   * [JDK](java/undefined/jdk.md)
   * [JVM](java/undefined/jvm/README.md)
-    * [클래스 로더](java/undefined/jvm/undefined.md)
-    * [메모리 내부 구조](java/undefined/jvm/undefined-1.md)
-    * [GC](java/undefined/jvm/gc/README.md)
-      * [기본 동작](java/undefined/jvm/gc/undefined.md)
-      * [Heap 영역을 제외한 GC 처리 영역](java/undefined/jvm/gc/heap-gc.md)
-      * [(WIP) GC 알고리즘](java/undefined/jvm/gc/wip-gc.md)
+    * [메모리 관리](java/undefined/jvm/undefined.md)
+    * [Garbage Collector](java/undefined/jvm/garbage-collector/README.md)
+      * [기본 동작](java/undefined/jvm/garbage-collector/undefined.md)
+      * [Heap 영역을 제외한 GC 처리 영역](java/undefined/jvm/garbage-collector/heap-gc.md)
+      * [(WIP) GC 알고리즘](java/undefined/jvm/garbage-collector/wip-gc.md)
+    * [클래스 로더](java/undefined/jvm/undefined-1.md)
   * [자바 실행 방식](java/undefined/undefined.md)
   * [메모리 모델과 관리](java/undefined/undefined-1.md)
   * [바이트 코드 조작](java/undefined/undefined-2.md)
@@ -218,12 +224,15 @@
   * [다양한 ChannelHandler와 코덱](java/netty/https.md)
   * [웹소켓](java/netty/websocket.md)
   * [UDP 브로드캐스팅](java/netty/udp.md)
+* [자바 병렬 프로그래밍](java/undefined-1/README.md)
+  * [15장](java/undefined-1/15.md)
 
 ## 🪆 코틀린 <a href="#kotlin" id="kotlin"></a>
 
 * [코틀린 인 액션](kotlin/undefined/README.md)
   * [코틀린 언어의 특징](kotlin/undefined/undefined.md)
   * [코틀린 기초](kotlin/undefined/undefined-1.md)
+  * [함수 정의와 호출](kotlin/undefined/undefined-2.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
@@ -304,8 +313,9 @@
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)
-  * [카프카 설치](infra/kafka/practice.md)
+  * [카프카 설치 및 실습](infra/kafka/practice.md)
   * [Kafka Broker](infra/kafka/kafka-broker.md)
+  * [Topic, Partition, Record](infra/kafka/topic-partition-record.md)
   * [Producer/Consumer](infra/kafka/producer-consumer.md)
   * [Kafka Connect](infra/kafka/kafka-connect.md)
 

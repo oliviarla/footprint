@@ -176,27 +176,162 @@ fun mix(c1: Color, c2: Color) =
 
 ### 스마트캐스트
 
-* 타입 검사와 타입 캐스트를 조합한 것으로&#x20;
+* 타입 검사와 타입 캐스트를 조합한 것으로 `is` 를 사용해 타입을 검사하며, 이 때 컴파일러가 타입 캐스팅을 자동으로 수행해준다.
 
+```kotlin
+interface Expr
+class Num(val value: Int) : Expr
+class Sum(val left: Expr, val right: Expr) : Expr
+```
 
+```kotlin
+fun eval(e: Expr): Int {
+    if (e is Num) {
+        // 코틀린에서는 as를 이용하여 타입 변환을 할 수 있지만 여기서는 불필요하다.
+        // val n = e as Num
+        // return n.value
+        return e.value
+    }
+    if (e is Sum) {
+        return eval(e.right) + eval(e.left)
+    }
+}
+```
 
+* 클래스의 프로퍼티에 대해 스마트 캐스트를 사용한다면 프로퍼티는 반드시 `val` 이어야 하며  커스텀 접근자를 사용하면 안된다. 왜냐하면 해당 프로퍼티에 대한 접근이 항상 같은 값을 반환하지 않을 수 있기 때문이다.
 
+### if와 when
 
+* 코틀린의 if는 값을 만들어내기 때문에 아래와 같이 if 문을 본문으로 한 함수를 쉽게 사용할 수 있다. if문에 블록을 사용하는 경우, 블록의 마지막 식이 결과 값으로 반환된다.
 
+```kotlin
+fun eval(e: Expr) Int =
+    if (e is Num) {
+        e.value
+    } else if (e is Sum) {
+        eval(e.right) + eval(e.left)
+    } else {
+        throw IllegalArgumentException("Unknown Expression")
+    }
+```
 
+* if문의 블록에 식이 하나밖에 없다면 중괄호를 생략해도 된다. when을 사용하면 더욱 간략하게 표현할 수 있다.
 
+```kotlin
+fun eval(e: Expr): Int =
+    when(e) {
+        is Num -> e.value
+        is Sum -> evalu(e.right) + eval(e.left)
+        else -> throw IllegalArgumentException("Unknown expression")
+    }
+```
 
+* 식이 본문인 함수는 블록을 본문으로 가질 수 없다. 블록이 본문이고 반환 타입이 있는 함수는 내부에 반드시 return문이 있어야 한다.
 
+## 이터레이션
 
-## 프로퍼티
+### while 루프
 
+* while, do-while을 제공하며 문법은 자바와 다르지 않다.
 
+```kotlin
+while (조건) {
+    // ...
+}
 
-## 제어 구조
+do {
+    // ...
+} while(조건)
+```
 
+### 범위 표현
 
+* 코틀린에서는 범위를 나타내기 위해 `..` 연산자를 사용하며 닫힌 구간을 나타낸다. 즉, 마지막값도 범위에 포함된다.
 
+```kotlin
+for (i in 1..100) {
+    print(i)
+}
+```
 
+* 다음과 같이 `in` 연산자와 `downTo`, `step`을 사용하면 100부터 1까지 2씩 이동하며 이터레이션 할 수 있다.
+
+```kotlin
+for (i in 100 downTo 1 step 2) {
+    print(i) // 100\n 98\n ...
+}
+```
+
+* 자바와 같이 반만 닫힌 범위에 대해 이터레이션하려면 `until` 함수를 사용하면 된다.
+
+```kotlin
+for (x in 0 until size) { // for (x in 0..size-1) 과 동일하다.
+    print(x)
+}
+```
+
+* Map 타입에 대한 이터레이션은 아래와 같다.
+
+```kotlin
+val binaryReps = TreeMap<Char, String>()
+binaryReps['A'] = "Apple"
+binaryReps['B'] = "Banana"
+
+for ((letter, binary) in binaryReps) {
+    print("$letter = $binary")
+}
+```
+
+* in 연산자를 사용해 특정 값이 범위에 속하는지 검사할 수 있다. 범위 검사는 Comparable 인터페이스를 구현한 모든 클래스에 대해 가능하다.
+
+```kotlin
+fun isLetter(c: Char) = c in 'a'..'z' || c in 'A'..'Z'
+
+print(isLetter('q')) // true
+print(isLetter('3')) // false
+```
+
+* in 연산자를 통해 문자열이 범위 내에 존재하는지 확인할 수 있으며, 컬렉션에도 in 연산을 사용할 수 있다.
+
+```kotlin
+print("Kotlin" in "Java".."Scala") // true
+
+print("Kotlin" in setOf("Java", "Scala")) // false
+```
 
 ## 예외 처리
 
+* 코틀린의 throw, try는 식이기 때문에 다른 식에 포함될 수 있다.
+
+```kotlin
+val percentage =
+    if (number in 0..100)
+        number
+    else
+        throw IllegalArgumentException("number should between 0 and 100 : $number")
+```
+
+```kotlin
+fun method() {
+    val number = try {
+        Integer.parseInt(reader.readLine())
+    } catch (e: NumberFormatException {
+        return // 메서드를 종료한다.
+    }
+}
+```
+
+* try-catch-finally 절을 사용할 수 있다.
+
+```kotlin
+try {
+    val line = reader.readline()
+    return Integer.parseInt(line)
+} catch (e: NumberFormatException) { // unchecked exception이며, 예외를 바깥으로 전달하지 않고 내부에서 처리
+    return null
+} finally {
+    reader.close()
+}
+```
+
+* 자바에서는 Checked Exception을 던질 경우 반드시 메서드 시그니처에 `throws <예외타입>`을 명시해주어야 한다. 코틀린에서는 Checked Exception과 Unchecked Exception을 구분하지 않고 모두 Unchecked Exception으로 간주한다.
