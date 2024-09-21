@@ -278,13 +278,87 @@ println(list)
 
 ### 값의 쌍 다루기
 
+* 중위 호출(infix call) 방식은 인자가 하나뿐인 메서드나 확장 함수에서 사용할 수 있으며, 일반 메서드 이름을 수신 객체와 유일한 메서드 인자 사이에 넣어 사용하는 방식이다.
+* 아래 두 호출은 동일한 결과를 만든다. 아래와 같이 1, "one"을 to 메서드를 통해 Pair에 담은 후 다시 각각의 변수에 담는 것을 **구조 분해**라고 한다.
 
+```kotlin
+val (number, name) = 1.to("one")
+val (number, name) = 1 to "one"
+```
 
+* 아래와 같이 withIndex를 구조 분해 선언과 조합하여 컬렉션 원소의 인덱스와 값을 따로 변수에 담을 수 있다.
 
+```kotlin
+for ((index, element) in collection.withIndex()) {
+  println("$index: $element")
+}
+```
 
-###
+* 함수를 중위 호출에 사용될 수 있도록 하려면 선언 시 infix 변경자를 함수 선언 앞에 추가해야 한다.
+* 아래는 중위 호출이 가능한 확장 함수인 to 함수로, 타입과 상관 없이 임의의 순서쌍을 만들 수 있다.
 
+```kotlin
+infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
+```
 
+## 문자열과 정규식
 
+* 코틀린의 문자열은 자바의 문자열과 같으므로 변환이 필요 없다.
+* 코틀린은 문자열에 대한 다양한 확장 함수를 제공한다. 예를 들어 문자열을 분리하는 split 확장 함수들을 제공하여 다양한 조합의 파라미터를 받을 수도 있고, substringBeforeLast, substringAfterLast 확장 함수를 제공하여 가장 마지막에 나타난 문자의 앞 / 뒤 문자열을 얻을 수 있다.
+* 정규식을 파라미터로 받는 함수는 Regex 타입을 입력받는다.&#x20;
+* 아래는 `.` 또는 `-` 을 기준으로 문자열을 분리하도록 한 예제이다.
 
+```kotlin
+"12.345-6.A".split(".", "-") // [12, 345, 6, A]
 
+"12.345-6.A".split("\\.|-".toRegex()) // [12, 345, 6, A]
+```
+
+### 3중 따옴표 문자열
+
+* 코틀린에서 3중 따옴표 문자열을 사용하면 정규식에서 어떤 문자도 이스케이프할 필요가 없으며 줄바꿈이 들어있는 텍스트를 쉽게 문자열로 만들 수 있다.
+* 단, \n과 같은 특수 문자를 사용할 수 없다.
+* 아래는 정규식에서 `\\.` 대신 `\.`을 사용하는 예시이다.
+
+```kotlin
+val regex = """(.+)/(.+)\.(.+)""".toRegex()
+val matchResult = regex.matchEntire(path)
+```
+
+* 여러 줄 문자열을 표현할 때 들여쓰기와 줄바꿈을 사용했지만 `.`을 넣어두면, 실제 사용할 때 trimMargin 함수를 사용해 들여쓰기와 `.` 을 제거할 수 있다.
+
+```kotlin
+val kotlinLogo = """| //
+                   .|//
+                   .|/ \"""
+println(kotlinLogo.trimMargin("."))
+// | //
+// |//
+// |/ \
+```
+
+## 로컬 함수와 확장
+
+* 함수에서 추출한 함수를 원래 함수 내부에 중첩시킬 수 있다. 이를 통해 작게 나누어진 메서드 간의 관계 파악의 어려움이 없어 코드 이해가 편리해질 수 있다.
+* 로컬 함수는 자신이 속한 바깥 함수의 파라미터와 지역 변수를 사용할 수 있다.
+* 일반적으론 한 단계의 함수만 중첩시켜 깊이가 깊어지지 않도록 하는 것이 권고된다.
+* 아래는 사용자를 DB에 저장하기 전에 검증하는 과정을 로컬 함수로 분리한 것이다.
+
+```kotlin
+class User(val id: Int, val name: String, val address: String)
+
+fun saveUser(user: User) {
+
+    fun validate(value: String,
+                 fieldName: String) {
+        if (value.isEmpty()) {
+            throw IllegalArgumentException("Can't save user ${user.id}: empty $fieldName")
+        }
+    }
+
+    validate(user, user.name, "Name")
+    validate(user, user.address, "Address")
+
+    // Save user to the database
+}
+```

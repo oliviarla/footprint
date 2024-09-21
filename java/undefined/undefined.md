@@ -48,7 +48,7 @@
 * JVM에서는 클래스 로더가 로딩되어 **실행에 필요한 것을 JVM 내부에 저장**하고, 변환된 **바이트코드를 실행 엔진이 해석하고 실행**한다.
 * 자바 컴파일러는 JVM 요소가 아닌 JDK의 일부이다.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption><p>자바 컴파일러의 동작</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption><p>자바 컴파일러의 동작</p></figcaption></figure>
 
 ## 바이트코드와 코드캐시
 

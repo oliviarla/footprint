@@ -50,14 +50,14 @@
   * [옵저버 패턴](programming/design-patterns/observer.md)
   * [데코레이터 패턴](programming/design-patterns/decorator.md)
   * [팩토리 패턴](programming/design-patterns/factory.md)
-  * [싱글톤 패턴](programming/design-patterns/undefined.md)
-  * [커맨드 패턴](programming/design-patterns/undefined-1.md)
-  * [어댑터 패턴](programming/design-patterns/undefined-2.md)
-  * [퍼사드 패턴](programming/design-patterns/undefined-3.md)
-  * [템플릿 메서드 패턴](programming/design-patterns/undefined-4.md)
-  * [반복자 패턴](programming/design-patterns/undefined-5.md)
-  * [컴포지트 패턴](programming/design-patterns/undefined-6.md)
-  * [상태 패턴](programming/design-patterns/undefined-7.md)
+  * [싱글톤 패턴](programming/design-patterns/singleton.md)
+  * [커맨드 패턴](programming/design-patterns/command.md)
+  * [어댑터 패턴](programming/design-patterns/adapter.md)
+  * [퍼사드 패턴](programming/design-patterns/facade.md)
+  * [템플릿 메서드 패턴](programming/design-patterns/template-method.md)
+  * [반복자 패턴](programming/design-patterns/iterator.md)
+  * [컴포지트 패턴](programming/design-patterns/composite.md)
+  * [상태 패턴](programming/design-patterns/state.md)
 
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
@@ -229,10 +229,11 @@
 
 ## 🪆 코틀린 <a href="#kotlin" id="kotlin"></a>
 
-* [코틀린 인 액션](kotlin/undefined/README.md)
-  * [코틀린 언어의 특징](kotlin/undefined/undefined.md)
-  * [코틀린 기초](kotlin/undefined/undefined-1.md)
-  * [함수 정의와 호출](kotlin/undefined/undefined-2.md)
+* [코틀린 인 액션](kotlin/kotlin-in-action/README.md)
+  * [코틀린 언어의 특징](kotlin/kotlin-in-action/features.md)
+  * [코틀린 기초](kotlin/kotlin-in-action/basic.md)
+  * [함수 정의와 호출](kotlin/kotlin-in-action/function.md)
+  * [클래스, 객체, 인터페이스](kotlin/kotlin-in-action/class-instance-interface.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
 
@@ -316,7 +317,8 @@
   * [카프카 설치 및 실습](infra/kafka/practice.md)
   * [Kafka Broker](infra/kafka/kafka-broker.md)
   * [Topic, Partition, Record](infra/kafka/topic-partition-record.md)
-  * [Producer/Consumer](infra/kafka/producer-consumer.md)
+  * [Producer](infra/kafka/producer.md)
+  * [Consumer](infra/kafka/consumer.md)
   * [Kafka Connect](infra/kafka/kafka-connect.md)
 
 ## 🏔️ CS
@@ -339,7 +341,14 @@
 * [데이터베이스](cs/database/README.md)
   * [트랜잭션](cs/database/undefined.md)
 * [컴퓨터 구조](cs/computer-architecture/README.md)
-  * [레지스터](cs/computer-architecture/undefined.md)
+  * [개요](cs/computer-architecture/undefined.md)
+  * [Instruction Set Architecture](cs/computer-architecture/instruction-set-architecture.md)
+  * [Procedure Call & Return](cs/computer-architecture/procedure-call-and-return.md)
+  * [Linking](cs/computer-architecture/linking.md)
+  * [Pipeline](cs/computer-architecture/pipeline.md)
+  * [Memory Hierarchy](cs/computer-architecture/memory-hierarchy.md)
+  * [Virtual Memory](cs/computer-architecture/virtual-memory.md)
+  * [Interrupt / Exception, IO](cs/computer-architecture/interrupt-exception-io.md)
 * [자료 구조](cs/data-structure/README.md)
   * [Array](cs/data-structure/array.md)
   * [List](cs/data-structure/list.md)

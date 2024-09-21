@@ -13,7 +13,7 @@
 * 하지만 외부에서는 컨테이너 eth0의 IP에 접근할 수 없다. 즉, 도커로 MySQL을 띄우더라도 Spring Application에서는 접근하지 못하는 상황이 발생할 수 있는 것이다.
 * 이를 위해 실행중인 컨테이너마다 veth를 통해 외부 네트워크에 컨테이너 어플리케이션 주소를 노출시킨다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 네트워크 드라이버
 

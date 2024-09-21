@@ -1,4 +1,4 @@
-# Producer/Consumer
+# Producer
 
 ## 프로듀서
 
@@ -6,7 +6,7 @@
 
 * 브로커에 데이터를 전송할 때 내부적으로 파티셔너, 배치 생성 단계를 거친다.
 * 데이터를 보낼 때 파티션 번호를 직접 지정하거나 타임스탬프, 메시지 키 등을 설정할 수 있다.
-* 파티셔너에 의해 구분된 레코드는 데이터를 전송하기 전 어큐뮬레이터에 버퍼로 쌓은 후 한꺼번에 보낸다. 이를 통해 카프카의 프로듀서 처리량을 향상시킬 수 있다.
+* **Partitioner**에 의해 구분된 레코드는 데이터를 전송하기 전 **Accumulator**에 버퍼로 쌓은 후 한꺼번에 보낸다. 이를 통해 카프카의 프로듀서 처리량을 향상시킬 수 있다.
 * 압축 옵션을 지정하면 압축된 데이터를 전송한다. 네트워크 처리량에 이득을 볼 수 있지만 압축 시 CPU, 메모리 리소스를 사용하므로 사용 환경에 따라 적절히 사용해야 한다.
 
 ```mermaid
@@ -36,32 +36,40 @@ Accumulator --> Sender
 
 ### Kafka Client로 프로듀서 구현하기
 
-* 자바를 통해 프로듀서를 구현하기 위해서는 아래와 같이 Kafka Client의 클래스들을 사용할 수 있다.
-  * 프로퍼티에 카프카 클러스터의 주소와 메시지 키와 값을 직렬화하는 클래스를 선언한다.
-    * StringSerializer는 String 객체를 직렬화해주는 클래스이다.
-  * KafkaProducer 객체를 생성하면 send 메서드를 이용해 메시지를 전송할 수 있다. 이 때 메시지는 바로 전송되는 것이 아니라 프로듀서 내부에 가지고 있다가 배치 형태로 묶어 브로커에 전송한다.&#x20;
-  * 메시지는 ProducerRecord 클래스에 담아야 전송 가능하다.
-  * flush 메서드를 호출하면 프로듀서 내부 버퍼에 있던 배치를 브로커에 전송한다.
-  * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
+*   자바를 통해 프로듀서를 구현하기 위해서는 Kafka Client의 클래스들을 사용할 수 있다.
 
-```java
-Properties configs = new Properties();
-configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    * `Properties` 객체에 카프카 클러스터의 주소와 메시지 키와 값을 직렬화하는 클래스를 선언한다.
+      * StringSerializer는 String 객체를 직렬화해주는 클래스이다.
+    * `KafkaProducer` 객체를 생성하고 메시지는 `ProducerRecord` 타입으로 작성한 후 send 메서드를 호출하면 메시지를 전송할 수 있다.
 
-KafkaProducer<String, String> producer = new KafkaProducer<String, String>(configs);
+    ```java
+    Properties configs = new Properties();
+    configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-String messageKey = "key1";
-String messageValue = "testMessage";
-ProducerRecord<String, String> record = new ProducerRecord(TOPIC_NAME, messageKey, messageValue);
-producer.send(record);
-producer.flush();
-producer.close();
-```
+    KafkaProducer<String, String> producer = new KafkaProducer<String, String>(configs);
 
-* send 메서드의 결과로는 `Future<RecordMetadata>` 타입이 반환되는데, 만약 레코드가 정상적으로 적재되었다면 파티션 번호와 오프셋 번호가 담겨 반환된다.
-* 혹은 send 메서드에 Callback 객체를 담아 응답이 왔을 때 콜백이 호출되도록 할 수 있다.
+    String messageKey = "key1";
+    String messageValue = "testMessage";
+    ProducerRecord<String, String> record = new ProducerRecord(TOPIC_NAME, messageKey, messageValue);
+    producer.send(record);
+    producer.flush();
+    producer.close();
+    ```
+
+    * send 메서드에서는 내부적으로 `Serialization`, `Partitioning`, `Compression` 작업이 이루어지고 최종적으로 Accumulator의 마지막 배치에 레코드가 저장된다.
+    * flush 메서드를 호출하면 프로듀서 내부 버퍼에 있던 배치를 바로 브로커에 전송한다.
+    * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
+    * Accumulator에는 Partition마다 Deque를 가지고 있으며 Deque 내부에는 batch를 통해 레코드들을 묶어놓는다.
+
+    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+
+    * Sender는 브로커 별로 레코드를 전송하는 역할을 하는데, 브로커의 파티션마다 보내야 할 batch 데이터를 가져와 `Ready List`에 저장해둔 후 한꺼번에 보낸다. 이 때 한 번의 요청이 처리할 수 있는 최대 용량까지만 batch 데이터를 담을 수 있다.
+
+    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+* Accumulator에 레코드가 충분히 차면 배치 형태로 묶어 Sender에 전달한다. Sender는 이 데이터를 브로커에 전송한다.
+* send 메서드의 결과로는 `Future<RecordMetadata>` 타입이 반환되는데, 만약 레코드가 정상적으로 적재되었다면 파티션 번호와 오프셋 번호가 담겨 반환된다. 혹은 send 메서드에 Callback 객체를 담아 응답이 왔을 때 콜백이 호출되도록 할 수 있다.
 
 ```java
 Future<RecordMetadata> f = producer.send(record);
@@ -146,30 +154,3 @@ KafkaProducer<String, String> producer = new KafkaProducer<String, String>(confi
 * transactional.id
   * 레코드 전송 시 트랜잭션 단위로 묶을지 여부를 설정한다. 프로듀서 고유의 트랜잭션 아이디를 설정하면 트랜잭션 프로듀서로 동작한다.
   * 기본값은 null이다.
-
-
-
-## 컨슈머
-
-### 개념
-
-
-
-
-
-### Kafka Client로 컨슈머 구현하기
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

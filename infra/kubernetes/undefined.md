@@ -37,4 +37,4 @@
     * 클러스터 내의 각 노드에 실행되는 에이전트
     * 컨테이너가 노드에서 잘 수행되고 있는지 확인하고 마스터 노드와 통신하는 역할을 한다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>마스터와 워커 노드의 구성도</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>마스터와 워커 노드의 구성도</p></figcaption></figure>

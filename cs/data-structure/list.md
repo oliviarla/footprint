@@ -54,7 +54,7 @@ int indexOfNumber1 = lst.indexOf("hello"); // index 반환, 탐색 실패 시 -1
 
 ## LinkedList
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 데이터가 컴퓨터 메모리 내부에 순차적으로 저장되지 않고, **주소 단위로 서로 연결**되는 선형 데이터 구조이다.
 * 삽입과 삭제는 단순히 Prev와 Next 값을 변경해주면 되기 때문에 O(1)의 시간 복잡도를 갖는다.
