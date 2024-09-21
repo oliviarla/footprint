@@ -13,7 +13,7 @@
 * 상속과 컴포지션을 통해 Decorator 추상 클래스는 Component 인터페이스를 구현하는 동시에 필드로 가지며, 필수 메서드와 부가 기능을 구현한다.
 * 상속하는 이유는 Component와 타입을 동일하게 맞추기 위함이고, 필드로 갖는 것은 행동을 상속받기 위함이다.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 

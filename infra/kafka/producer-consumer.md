@@ -1,8 +1,6 @@
 # Producer
 
-## 프로듀서
-
-### 개념
+## 개념
 
 * 브로커에 데이터를 전송할 때 내부적으로 파티셔너, 배치 생성 단계를 거친다.
 * 데이터를 보낼 때 파티션 번호를 직접 지정하거나 타임스탬프, 메시지 키 등을 설정할 수 있다.
@@ -34,7 +32,7 @@ Accumulator --> Sender
 
 ```
 
-### Kafka Client로 프로듀서 구현하기
+## Kafka Client로 프로듀서 구현하기
 
 *   자바를 통해 프로듀서를 구현하기 위해서는 Kafka Client의 클래스들을 사용할 수 있다.
 
@@ -63,11 +61,11 @@ Accumulator --> Sender
     * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
     * Accumulator에는 Partition마다 Deque를 가지고 있으며 Deque 내부에는 batch를 통해 레코드들을 묶어놓는다.
 
-    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
     * Sender는 브로커 별로 레코드를 전송하는 역할을 하는데, 브로커의 파티션마다 보내야 할 batch 데이터를 가져와 `Ready List`에 저장해둔 후 한꺼번에 보낸다. 이 때 한 번의 요청이 처리할 수 있는 최대 용량까지만 batch 데이터를 담을 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 * Accumulator에 레코드가 충분히 차면 배치 형태로 묶어 Sender에 전달한다. Sender는 이 데이터를 브로커에 전송한다.
 * send 메서드의 결과로는 `Future<RecordMetadata>` 타입이 반환되는데, 만약 레코드가 정상적으로 적재되었다면 파티션 번호와 오프셋 번호가 담겨 반환된다. 혹은 send 메서드에 Callback 객체를 담아 응답이 왔을 때 콜백이 호출되도록 할 수 있다.
 
@@ -80,16 +78,16 @@ RecordMetadata rm = f.get();
 producer.send(record, new ProducerCallback());
 ```
 
-### 파티셔너
+## 파티셔너
 
 * 메시지 키가 존재하는 경우 해시값과 파티션을 매칭해 전송하지만, 메시지 키가 존재하지 않는 경우 파티션에 최대한 동일하게 분배하는 파티셔너가 존재한다.
-* UniformStickyParrtitioner
+* UniformStickyPartitioner
   * 프로듀서 동작에 특화되어 높은 처리량과 낮은 리소스 사용률을 가진다.
   * 어큐뮬레이터에서 데이터가 배치로 모두 묶일 때까지 기다렸다가, 배치로 묶인 데이터를 모두 동일한 파티션에 전송한다.
 * RoundRobinPartitioner
   * 메시지가 들어오는대로 파티션을 라운드 로빈으로 순회하며 전송하므로 메시지가 배치로 묶이는 빈도가 낮다.
 
-#### 커스텀 파티셔너
+### 커스텀 파티셔너
 
 * 직접 파티셔너 인터페이스를 구현한 커스텀 파티셔너 클래스를 만들고 이를 KafkaProducer 생성 시 프로퍼티로 지정하면 커스텀 파티셔너를 사용할 수 있다.
 
@@ -118,15 +116,15 @@ configs.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
 KafkaProducer<String, String> producer = new KafkaProducer<String, String>(configs);
 ```
 
-### 주요 옵션
+## 주요 옵션
 
-#### 필수 옵션
+### 필수 옵션
 
 * bootstrap.servers
 * key.serializer
 * value.serializer
 
-#### 선택 옵션
+### 선택 옵션
 
 * acks
   * 프로듀서가 전송한 데이터가 브로커들에 정상적으로 저장되었는지 여부를 확인하기 위한 옵션이다.
