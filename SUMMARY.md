@@ -58,6 +58,7 @@
   * [반복자 패턴](programming/design-patterns/undefined-5.md)
   * [컴포지트 패턴](programming/design-patterns/undefined-6.md)
   * [상태 패턴](programming/design-patterns/undefined-7.md)
+  * [프록시 패턴](programming/design-patterns/proxy.md)
 
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
@@ -321,7 +322,6 @@
   * [Consumer](infra/kafka/consumer.md)
   * [Kafka Streams](infra/kafka/kafka-streams.md)
   * [Kafka Connect](infra/kafka/kafka-connect.md)
-  * [Page](infra/kafka/page.md)
 
 ## 🏔️ CS
 
