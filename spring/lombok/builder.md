@@ -71,7 +71,7 @@ public class Student {
   * Director : Builder를 사용해 객체를 생성하는 클래스
   * Product : Director가 Builder로 만들어낸 최종 결과물 클래스
 
-<figure><img src="../../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (172).png" alt=""><figcaption></figcaption></figure>
 
 #### 출처
 

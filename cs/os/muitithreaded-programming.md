@@ -54,7 +54,7 @@
   * 운영 체제가 충분한 개수의 커널 스레드를 생성하도록 허용한다.
 * 아래 그림은 간단한 예시이며, 옛날 자료라 Java가 Many to One으로 구성되어있지만, 현재 기준으로 One to One이 맞다.
 
-<figure><img src="../../.gitbook/assets/Untitled 8 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Untitled 8.png" alt=""><figcaption></figcaption></figure>
 
 #### Java VS Go
 

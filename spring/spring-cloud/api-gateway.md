@@ -119,7 +119,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
 
 * 네티 기반의 웹서버로 구현되어 있어 비동기 처리가 가능하다.
 
-<figure><img src="../../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (175).png" alt=""><figcaption></figcaption></figure>
 
 ### 예제
 

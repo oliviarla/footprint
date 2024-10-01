@@ -1,6 +1,6 @@
-# 메모리 내부 구조
+# 메모리 관리
 
-<figure><img src="../../../.gitbook/assets/image (15) (1) (1).png" alt=""><figcaption><p>JVM Memory Architecture</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (124).png" alt=""><figcaption><p>JVM Memory Architecture</p></figcaption></figure>
 
 ## stack
 

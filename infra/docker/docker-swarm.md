@@ -35,7 +35,7 @@
 * 도커 컨테이너를 구성하여 노드에 서비스를 구동하는 단위
 * 지정된 replica 개수에 따라 한 서비스에 대해 여러 태스크가 존재할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (58).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (170).png" alt=""><figcaption></figcaption></figure>
 
 ## 사용법
 

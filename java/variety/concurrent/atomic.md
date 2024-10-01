@@ -5,7 +5,7 @@
 1. CPU에서 작업을 처리하기 위해 데이터를 RAM으로부터 읽어 CPU Cache Memory에 복제해둔다.
 2. CPU에서 작업을 처리하여 새로 업데이트된 CPU Cache Memory 데이터를 메인 메모리(RAM)에 덮어씌운다. (곧바로 메인 메모리에 업데이트 하지는 않는다.)
 
-<figure><img src="../../../.gitbook/assets/image (59).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (171).png" alt=""><figcaption></figcaption></figure>
 
 이 때 멀티 스레드 방식을 위해 여러 CPU를 사용할 경우 RAM과 각각의 CPU Cache Memory 데이터 정합성이 맞지 않을 수 있다.
 
@@ -46,8 +46,6 @@ long result = al.getAndSet(100);
 // 기존 값이 예상하는 값과 동일하면 새로운 값으로 설정
 boolean updated = al.compareAndSet(100, 101);
 ```
-
-
 
 ### AtomicIntegerArray
 

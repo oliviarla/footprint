@@ -1,100 +1,60 @@
-# 어댑터 패턴
+# 플라이웨이트 패턴
 
 ## 접근
 
-* 어댑터(adaptor)는 서로 다른 국가마다 채택하는 플러그와 전원 소켓이 다를 때 플러그를 다른 전원 소켓 타입에도 꽂을 수 있도록 인터페이스를 바꿔주고 필요 시 전압도 변환해주는 역할을 한다.
-* 객체 지향에서 어댑터라는 개념을 도입하여 어떠한 인터페이스를 특정 클라이언트가 요구하는 형태로 적응시킬 수 있게 해줄 수 있다.
+* 동일한 클래스의 객체를 많이 만들어야 하는 상황에서 성능 상 이점을 취하기 위해 객체 하나로 여러 개의 가상 객체를 제공해야 한다.
+* 가상 객체들의 상태를 관리하는 객체를 만들고, 상태를 갖지 않는 객체 하나를 만든다. 객체에 대한 정보를 얻으려면 상태 관리 객체에 요청을 보내야 한다.
 
 ## 개념
 
-* **특정 클래스 인터페이스를 클라이언트에서 요구하는 다른 인터페이스로 변환**한다.
-* 인터페이스가 호환되지 않아 사용 불가능한 클래스를 사용할 수 있도록 해준다.
-* **클라이언트**는 타겟 인터페이스에 맞게 구현되어 있다. **어댑터**는 타겟 인터페이스를 구현하며 어댑티 인스턴스를 필드로 가진다. **어댑티** 인터페이스는 타겟 인터페이스와 다른 형태이다.
-  * 어댑터는 어댑티를 컴포지션 형태로 감싸는 형태이다.
+* 수많은 객체를 생성하여 각각 데이터를 유지하는 대신 여러 객체 간 공통 부분을 공유하여 메모리 용량을 줄일 수 있는 디자인 패턴이다.
+* 객체마다 일정하게 유지되는 데이터를 고유한 상태라고 하며, 계속 변화하는 데이터를 공유한 상태라고 한다.
+* 고유한 상태는 객체 내부에 저장하여 컨텍스트가 다른 곳에서도 재사용되도록 한다. 이 때 저장되는 객체를 **플라이웨이트**라고 부른다.
+* 플라이웨이트 팩토리 클래스는 기존 플라이웨이트 객체를 재사용할지 새로 객체를 만들지 결정한다.
+* 공유한 상태는 객체 내부에 저장하지 않고, **컨텍스트** 클래스에 포함해두고 상태에 의존하는 메서드들을 작성해 변화된 상태가 전달되도록 한다. 컨텍스트 클래스에는 고유한 상태인 플라이웨이트도 포함해둔다.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-* 특정 구현이 아닌 인터페이스에 연결하는 형태이므로 서로 다른 클래스로 변환시키는여러 어댑터를 쓸 수 있다.&#x20;
-* 클라이언트에서 타겟 인터페이스를 사용해 메서드를 호출하면 어댑터에 요청이 보내진다.
-* 만약 어댑티 클래스에서 타깃 인터페이스의 기능을 제공할 수 없다면 `UnsupportedOperationException` 을 반환할 수 있다.
-* 두 인터페이스를 모두 구현하는 다중 어댑터를 사용할 수도 있다. 혹은 하나의 어댑터 클래스에서 타깃 인터페이스를 구현하기 위해 2개 이상의 어댑티를 사용해야 하는 경우가 발생할 수 있다.
-* 여태껏 다룬 내용은 **객체 어댑터**에 대한 것이며, **클래스 어댑터**는 다중 상속이 가능한 언어일 때 사용 가능하며, 어댑터 클래스는 타깃과 어댑티를 모두 상속받아 구현된다.
-* 데코레이터 패턴은 책임과 행동을 추가하는 것에 의의를 둔다. 어댑터 패턴은 인터페이스를 변환하는 것에 의의를 둔다. 두 패턴 모두 **클라이언트 코드를 고치지 않고** 새로운 행동을 추가하거나 새로운 구현체를 사용할 수 있다는 공통점이 있다.
+
 
 ## 장단점
 
 * 장점
-  * 인터페이스 또는 데이터 변환 코드를 담당하므로 단일 책임 원칙을 지킨다.
-  * 클라이언트 코드가 클라이언트 인터페이스를 통해 어댑터 클래스를 사용하면 기존의 클라이언트 코드를 손상시키지 않고 새로운 유형의 어댑터들을 프로그램에 도입할 수 있으므로 개방 폐쇄 원칙을 지킨다.
+  * 실행 시 객체 개수를 줄여 메모리를 절약할 수 있다.
+  * 여러 가상 객체의 상태를 한 곳에 모아둘 수 있다.
 * 단점
-  * 새로운 인터페이스와 클래스들을 도입해야 하므로 코드의 복잡성이 증가한다. 코드의 나머지 부분과 호환되도록 서비스 클래스를 변경하는 것이 더 간단할 수 있다.
+  * 특정 객체만 다르게 행동하도록 구현할 수 없다.
 
 ## 사용 방법
 
-* 어댑터 클래스를 만들어 어댑티 객체를 필드로 두고, 타겟 인터페이스를 구현한다.
-* 클라이언트 코드에서는 어댑터 객체를 인터페이스 필드에 대입해 사용하면 된다.
+* 플라이웨이트를 만들어야 할 만큼 많이 생성되는 클래스의 필드를 고유한 상태와 공유한 상태로 구분한다.
+* 고유한 상태를 나타내는 필드들은 그대로 두고 변경할 수 없도록 한다.
+* 공유한 상태를 사용하는 메서드들을 확인하고, 이 데이터들을 외부로 분리할 것이기 때문에 메서드 매개변수로 받도록 수정한다.
+* 필요 시 플라이웨이트 풀을 관리하기 위한 팩토리 클래스를 생성한다.
+* 클라이언트는 플라이웨이트 객체들의 메서드들을 호출할 수 있도록 공유한 상태의 값들​(콘텍스트)​을 효율적으로 저장/계산해야 한다.
 
 ## 예시
 
-* Duck 인터페이스를 사용하는 클라이언트에게 Duck 대신 Turkey 객체를 넘겨주고자 한다면 아래와 같이 어댑터를 사용해야만 인터페이스가 동일해져 사용 가능해진다.
+* TreeManager
 
 ```java
-public interface Duck {
-    public void quack();
-    public void fly();
-}
+public class TreeManager {
+    int[][] treeArr;
 
-public interface Turkey {
-    public void gobble();
-    public void fly();
-}
-```
-
-```java
-public class TurkeyAdapter implements Duck {
-    Turkey turkey;
-    public TurkeyAdapter(Turkey turkey) {
-        this.turkey = turkey;
-    }
-    
-    public void quack() {
-        turkey.gobble();
-    }
-    
-    public void fly() {
-        for(int i=0; i<5; i++) {
-            turkey.fly();
+    public void displayTrees() {
+        for(int i=0;i<treeArr.length;i++) {
+            display(treeArr[i][0], treeArr[i][1], age);
         }
     }
 }
 ```
 
-* Spring의 HandlerAdapter도 대표적인 어댑터 패턴의 예시이다.
+* Tree
 
 ```java
-public interface HandlerAdapter {
-    boolean supports(Object handler);
-    
-    @Nullable
-    ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+public class Tree {
+    public void display(int x, int y, int age) {
+        System.out.println("위치 x: " + x + " y: " + y + " age: " + age);
+    }
 }
 ```
-
-```java
-public class SimpleControllerHandlerAdapter implements HandlerAdapter {
-
-    @Override
-    public boolean supports(Object handler) {
-      return (handler instanceof Controller);
-    }
-
-    @Override
-    @Nullable
-    public ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object handler)
-        throws Exception {
-
-      return ((Controller) handler).handleRequest(request, response);
-    }
-  }
-```
-

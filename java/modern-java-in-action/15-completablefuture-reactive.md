@@ -7,7 +7,7 @@
 
 > 병렬성은 여러 코어에서 나누어 처리하는 것이고, 동시성은 한 코어에서 여러 작업을 CPU가 쉬지않고 번갈아가며 수행하는 것이다.
 
-<figure><img src="../../.gitbook/assets/image (52).png" alt=""><figcaption><p><a href="https://seamless.tistory.com/42">https://seamless.tistory.com/42</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (164).png" alt=""><figcaption><p><a href="https://seamless.tistory.com/42">https://seamless.tistory.com/42</a></p></figcaption></figure>
 
 ## 🏝️ 자바 동시성의 진화 과정
 
@@ -72,16 +72,16 @@ sum = Arrays.stream(stats).parallel().sum();
 * 7장에서의 fork/join 방식에는 엄격한 포크/조인 방식과 여유로운 포크/조인 방식이 존재한다.
 * 엄격한 포크/조인: 태스크나 스레드가 메서드 호출 안에서 시작되면, 해당 메서드는 모든 작업이 끝난 후에야 결과를 반환한다. 스레드 생성과 `join()` 이 한 쌍처럼 중첩된 메서드 호출 내에 추가된다.
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption><p>엄격한 포크/조인</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (165).png" alt=""><figcaption><p>엄격한 포크/조인</p></figcaption></figure>
 
 * 여유로운 포크/조인: 시작된 태스크를 외부 호출에서 종료하도록 기다리는 방식도 비교적 안전하다. 사용자는 이 인터페이스를 일반 호출로 간주할 것이다.
 
-<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption><p>여유로운 포크/조인</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption><p>여유로운 포크/조인</p></figcaption></figure>
 
 * 15장에서는 사용자의 메서드 호출에 의해 스레드가 생성되고, 메서드를 벗어나서 계속 스레드에서 작업이 수행되는 동시성 형태에 초점을 맞춘다.
 * 즉 메서드가 반환된 후에도 별도 스레드에서 태스크를 계속 실행하는 메서드인 **비동기 메서드**를 다루게 된다.
 
-<figure><img src="../../.gitbook/assets/image (55).png" alt=""><figcaption><p>비동기 메서드</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (167).png" alt=""><figcaption><p>비동기 메서드</p></figcaption></figure>
 
 * 비동기 메서드의 위험성
   * 스레드 실행은 메서드를 호출한 다음의 코드와 동시에 실행되므로 데이터 경쟁 문제를 일으키지 않도록 주의해야 한다.
@@ -275,7 +275,7 @@ public static interface Subscriber<T> {
 
 * x라는 변수를 p 함수에 넣고, 그 결과를 q1, q2 함수에 적용해 반환된 값을 r 함수에 넣어 최종 결과를 얻는 태스크는 아래와 같이 표현할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (162).png" alt=""><figcaption></figcaption></figure>
 
 *   위 예시를 바로 자바로 구현하면 병렬성 활용과는 거리가 먼 코드가 된다.
 

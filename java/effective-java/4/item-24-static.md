@@ -78,6 +78,26 @@ public class Example {
 }
 ```
 
+* 아래는 내부 클래스를 사용 시 참조가 있다는 점을 간과하고 코드를 짜면 발생하는 문제에 대한 예시이다. ButtonState는 Serializable 구현체이지만 Button의 내부 클래스이므로 Button에 대한 참조를 갖게 되고, Button은 Serializable이 아니게 되므로 ButtonState를 직렬화할 때 오류가 발생한다.
+
+```java
+public class Button implements View {
+    @Override
+    public State getCurrentState() {
+        return new ButtonState();
+    }
+    
+    @Override
+    public void restoreState() {
+        // ...
+    }
+    
+    public class ButtonState implements State { // State는 Serializable을 상속받는 인터페이스
+        // ...
+    }
+}
+```
+
 ## **private 정적 멤버 클래스**
 
 * 바깥 클래스가 표현하는 객체의 구성요소를 나타낼 때 사용

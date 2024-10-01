@@ -6,7 +6,7 @@ description: 표준화된 통신용 규약으로, 네트워크 동작을 나누�
 
 * OSI 7계층을 한눈에 그림으로 나타내면 아래와 같다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (114).png" alt=""><figcaption></figcaption></figure>
 
 * 각 레이어의 프로토콜은 하위 레이어의 프로토콜이 제공하는 기능을 사용해 동작한다.
 * 데이터의 앞쪽에 붙는 것은 헤더이고, 뒤쪽에 붙는 것은 트레일러이다.
@@ -45,7 +45,7 @@ description: 표준화된 통신용 규약으로, 네트워크 동작을 나누�
     * 단말의 MAC 주소와 연결된 포트 데이터를 기반으로 통신 시 포트를 적절히 필터링하고 포워딩해준다.
     * 스위치의 적절한 필터링과 포워딩 덕분에 통신이 필요한  포트만 사용하고 네트워크 전체에 불필요한 처리가 감소하여 이더넷 기반 네트워크가 급증하는 계기가 되었다.
 
-    <figure><img src="../../.gitbook/assets/image (62).png" alt="" width="563"><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (174).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ### 3계층: 네트워크 계층
 

@@ -60,7 +60,7 @@
 * 대부분의 현대 프로세서는 메인 메모리에서 데이터를 레지스터로 옮겨와 처리한 후 해당 내용을 다시 메인 메모리에 저장하는 방식을 사용한다.
 * CPU내의 메모리 계층 최상위에 위치하며 가장 빠른 속도로 접근 가능한 메모리이다.
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption><p><a href="https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/">https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (152).png" alt=""><figcaption><p><a href="https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/">https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/</a></p></figcaption></figure>
 
 #### 32bit 컴퓨터가 RAM을 최대 4GB까지 밖에 사용하지 못하는 이유
 
@@ -84,7 +84,7 @@
 
 > static 영역인 10000000(16진수) 이전에는 항상 0xxxxxxx 값이므로 이를 이진수로 표현하면 맨 앞 4bit는 항상 0이다. 그리고 instruction은 4bytes이고 Memory Alignment 특성 상 항상 4의 배수부터 할당되므로 이진수의 맨 뒷자리 2bit도 항상 0일 것이다. 이진수로 나타내면 `0000(6*4 + 2 bit)00` 가 되기 때문에 총 32bit 데이터를 26bit로만으로도 구분이 가능하다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ### 데이터 크기
 
@@ -168,7 +168,7 @@
 * `funct`: function code, op코드에서 추가적으로 필요한 것들 명시한다. op를 0으로 두고 funct 값을 조정해 수행될 명령을 선택할 수 있다.
 * 아래를 보면 add 명령어를 사용할 때 10진수 값, 2진수 값을 알 수 있다. 이 때 2진수를 4자리씩 끊어 16진수로 표현할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt="" width="375"><figcaption></figcaption></figure>
 
 #### I-type
 

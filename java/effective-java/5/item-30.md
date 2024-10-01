@@ -2,7 +2,7 @@
 
 ## **제네릭 메서드**
 
-<figure><img src="../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (153).png" alt=""><figcaption></figcaption></figure>
 
 ```tsx
 public static <E> Set<E> union(Set<E> s1, Set<E> s2) {

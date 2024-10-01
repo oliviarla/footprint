@@ -13,7 +13,7 @@
       * **Symbol resolution**: 함수나 변수같은 symbol이 어떤 파일에 정의된 것인지 찾아 연결한다. 즉, definition과 reference를 연결해준다.
       * **Relocation**: 각각의 object 파일에서 코드는 코드끼리, 데이터는 데이터끼리 묶어 단일 text segment, data segment 등으로 만들어낸다. segment에 가상 메모리 주소를 할당하고
 
-      <figure><img src="../../.gitbook/assets/image (133).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (245).png" alt=""><figcaption></figcaption></figure>
   * dynamic linker를 사용하지 않고 static linker만 사용할 경우 컴파일 시점에 프로그램이 실행하기 위한 모든 코드, 데이터가 들어간다.
 * dynamic linker
   * 실행 중이거나 로딩될 때 linking을 수행한다.
@@ -52,7 +52,7 @@ gcc -O2 -g -o p main.c swap.c
 * 모든 object file 종류에 대해 ELF 포맷이 적용된다.
 *   아래와 같이 구성 요소가 나뉜다.
 
-    <figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
     * ELF header
       * 파일을 실행할 때, 커널이나 로더가 프로그램을 어떻게 메모리에 로드하고 실행할지 결정하는 데 사용된다.

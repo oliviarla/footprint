@@ -28,7 +28,7 @@ try {
 }
 ```
 
-<figure><img src="../../.gitbook/assets/image (51).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (163).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 여러 Future의 결과가 있을 때 의존성을 표현하기 어렵다. A의 계산이 끝나면 B에게 그 결과를 전달해 계산하고, B의 계산까지 끝나면 다른 질의의 결과와 조합하라는 요구사항이 있는 경우 Future로는 구현이 어렵다.
 *   CompletableFuture 클래스는 아래와 같은 기능을 제공한다.

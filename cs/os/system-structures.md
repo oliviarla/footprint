@@ -1,6 +1,6 @@
 # System Structures
 
-<figure><img src="../../.gitbook/assets/Untitled (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Untitled (6).png" alt="" width="375"><figcaption></figcaption></figure>
 
 ### 유저 모드
 

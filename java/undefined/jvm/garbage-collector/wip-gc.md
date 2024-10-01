@@ -55,7 +55,7 @@
 
     * 최대 힙 크기: `-Xmx<Number>`
 
-<figure><img src="../../../../.gitbook/assets/image (48).png" alt=""><figcaption><p>Serial GC vs Parallel GC</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (160).png" alt=""><figcaption><p>Serial GC vs Parallel GC</p></figcaption></figure>
 
 ## CMS GC
 
@@ -63,7 +63,7 @@
 * STW로 인해 응답하지 못하는 시간이 길어지지 않도록 하는 것이 이 GC 방식의 목표이기 때문에 애플리케이션 실행을 멈추지 않고 진행 가능한 Concurrent Mark, Concurrent Sweep 작업과 STW가 꼭 필요한 Initial Mark, Remark 작업으로 단계를 나누어 STW를 줄였다.
 * 하지만 다른 GC 방식보다 메모리와 CPU를 더 많이 사용하고, Compaction 단계가 기본적으로 제공되지 않는 단점이 존재하였고, 결국 G1GC에 의해 대체되어 JDK 14에서 아예 제거되었다.
 
-<figure><img src="../../../../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (161).png" alt=""><figcaption></figcaption></figure>
 
 ### 수행 과정
 
@@ -100,9 +100,9 @@
 
 * G1 GC에서 힙은 하나의 메모리 영역이다. 즉, 다른 GC가 eden, survivor, old 영역을 가지는 것과 다르게 하나의 메모리 영역만을 갖도록 한다. 아래 사진을 보면 바로 이해할 수 있을 것이다.
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>여러 영역을 가지는 CMS</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (76).png" alt="" width="375"><figcaption><p>여러 영역을 가지는 CMS</p></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>하나의 영역만 가지는 G1</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (75).png" alt="" width="375"><figcaption><p>하나의 영역만 가지는 G1</p></figcaption></figure>
 
 * G1은 위와 같이 하나의 메모리 영역(area)을 가지지만 이 안에서 여러 region으로 나뉜다.
 * 각 영역들은 가상 메모리의 연속 범위에 할당된다.
@@ -111,7 +111,7 @@
 * live 객체는 다른 영역으로 복사 또는 이동된다.
 * Humongous Region은 표준 영역 크기의 50% 이상인 객체가 있다면 이를 보관하는 공간이다. 인접 Region들의 집합으로 구성된다.
 
-<figure><img src="../../../../.gitbook/assets/image (46).png" alt="" width="168"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (158).png" alt="" width="168"><figcaption></figcaption></figure>
 
 ### Young GC
 
@@ -122,13 +122,13 @@
 * Eden과 Survivor의 크기는 다음 Young GC를 위해 계산하며, 크기를 측정할 때 도움울 준다.
 * 다음 이미지를 보면, 참조되지 않는 객체는 제거하고 Live 객체만 모아 새로운 Young Generation Region으로 이동하여 Young GC를 마친다.
 
-<figure><img src="../../../../.gitbook/assets/image (44).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (156).png" alt="" width="375"><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (43).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (155).png" alt="" width="375"><figcaption></figcaption></figure>
 
 ### Full GC
 
-<figure><img src="../../../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (157).png" alt=""><figcaption></figcaption></figure>
 
 * Initial Marking (STW)
   * Old Region의 객체에 대한 참조가 있는 Survivor Region(Root Region)이 있는지 확인하여 마킹한다.

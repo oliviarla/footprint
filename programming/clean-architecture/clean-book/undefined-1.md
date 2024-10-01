@@ -37,7 +37,7 @@
 * 모듈 혹은 계층에 대해 전용 코드베이스와 빌드 아티팩트로 분리된 JAR 파일 생성 가능
 * 각 모듈의 빌드 스크립트에서 아키텍처에서 허용하는 의존성만 지정해 각각 빌드하는 방식
 
-<figure><img src="../../../.gitbook/assets/Untitled (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Untitled (4).png" alt=""><figcaption></figcaption></figure>
 
 * 하나의 어댑터 모듈을 여러개로 쪼개 다른 서드파티 API와 관련된 세부사항이 서로 새어나가지 않도록 방지 가능
 * 애플리케이션 모듈을 입력, 출력 포트별로 나눌 수 있다.

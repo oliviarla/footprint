@@ -15,10 +15,10 @@
 
 ### ⚙️ Loading&#x20;
 
-* JVM이 필요로 하는 클래스 파일을 로드하는 과정이다.
+* JVM이 필요로 하는 클래스 파일을 FQCN(Fully Qualified Class Name)을 사용해 런타임에 로드하는 과정이다.
 * 메서드 영역에 Fully Qualified Class Name와 클래스/인터페이스/Enum 정보와 메서드, 변수를 저장한다.
 * 로딩이 끝나면 해당 클래스 타입의 **Class 객체를 생성해** **힙 영역에 저장**한다.
-* bootstrap -> platform -> system 순으로 클래스 로더에서 클래스를 찾고, 모든 클래스 로더로부터 클래스를 찾을 수 없으면 ClassNotFoundException이 발생한다.
+* bootstrap -> platform -> system 순으로 클래스 로더에서 클래스를 찾고, 모든 클래스 로더로부터 클래스를 찾을 수 없으면 NoClassDefFoundError 또는 ClassNotFoundException이 발생한다.
 
 ### ⚙️ Linking
 
@@ -42,7 +42,7 @@
 
 ## 종류
 
-<figure><img src="../../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (99).png" alt=""><figcaption></figcaption></figure>
 
 ### Bootstrap ClassLoader
 
@@ -76,17 +76,35 @@ ClassLoader bootstrapClassLoader = classLoader.getParent().getParent(); //null
 
 > FQCN: Fully Qualified Class Name
 
-* 최하위 클래스 로더부터 클래스를 찾고, loadClass 메서드를 통해 클래스로딩을 수행한다.
-* 로딩되지 않은 클래스는 바로 로딩하지 않고 상위 클래스 로더에 위임한 후 찾지 못하면 findClass 메서드를 호출해 클래스를 로딩한다.
+* JVM으로부터 클래스 로드 요청이 들어오면 최하위 클래스 로더부터 상위 클래스 로더로 이동하며 **loadClass 메서드**를 통해 FQCN에 맞는 클래스를 로드한다.
+
+```java
+public Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+```
+
+* **defineClass 메서드**를 통해 byte array를 클래스 객체로 변환한다. 유효하지 않은 데이터를 담고 있다면 ClassFormatError가 반환된다.
+
+```java
+protected final Class<?> defineClass(
+  String name, byte[] b, int off, int len) throws ClassFormatError {
+```
+
+* loadClass 메서드 내부에서 로딩되지 않은 클래스는 바로 로딩하지 않고 상위 클래스 로더에 위임한 후, 찾지 못하면 **findClass 메서드**를 호출해 클래스를 로딩한다. 커스텀 클래스로더를 만들 때 이 메서드를 오버라이드해야 한다.
+
+```java
+protected Class<?> findClass(String name) throws ClassNotFoundException {
+```
+
 * 최하위 클래스 로더까지 로딩을 실패하면 아래 두 예외가 발생하게 된다.
   * ClassNotFoundException: 런타임에 FQCN 에 해당하는 클래스가 존재하지 않을 때 발생, 일반적으로 클래스명을 사용해 리플렉션할 때 발생
   * NoClassDefFoundError: 클래스는 존재하지만 로드가 되지 않는 경우 발생, 일반적으로 static 블록 실행이나 static 변수 초기화 시 예외가 발생한 상황에서 에러 발생
 * 모든 객체는 Monitor를 하나씩 가지고 있어 wait() 등의 모니터 메서드를 사용할 수 있다.
+* 자식 클래스 로더에 의해 로드된 클래스는 부모 클래스 로더에 의해 로드된 클래스에 대한 가시성을 가진다. 하지만 반대로는 불가능하다.
 
 ## 클래스 로드 과정 직접 살펴보기
 
 * 인텔리제이의 jvm 옵션에 `-verbose:class` 옵션을 주면 클래스 로드 과정을 로그로 확인할 수 있다. 만약 VM options를 입력하는 창이 없다면 Modify options 버튼을 눌러 추가해주어야 한다.
 
-<figure><img src="../../../.gitbook/assets/image (131).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (243).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (132).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (244).png" alt=""><figcaption></figcaption></figure>
