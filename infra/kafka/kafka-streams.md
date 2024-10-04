@@ -17,7 +17,7 @@
   * 스트림 프로세서는 다른 프로세서가 반환한 데이터를 처리한다.
   * 싱크 프로세서는 데이터를 특정 카프카 토픽으로 저장한다.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt="" width="375"><figcaption></figcaption></figure>
 
 * 스트림
   * 노드와 노드를 이은 선을 지칭하며, 토픽의 데이터인 레코드를 의미한다.

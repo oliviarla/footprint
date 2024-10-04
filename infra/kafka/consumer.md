@@ -30,7 +30,7 @@
     * poll 메서드가 호출되었을 때 `auto.commit.interval.ms` 만큼 주기가 지났다면 해당 시점까지 읽은 레코드의 오프셋을 커밋한다.
     * 이 방식은 편리하지만 poll 메서드 호출 이후에 리밸런싱 또는 컨슈머 강제 종료 발생 시 컨슈머가 처리하는 데이터가 중복되거나 유실될 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (246).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (134).png" alt=""><figcaption></figcaption></figure>
 * 명시 오프셋 커밋
   * poll 메서드 호출 이후 반환받은 데이터의 처리가 완료되면 commitSync/commitAsync 메서드를 호출하여 가져온 레코드의 가장 마지막 오프셋을 기준으로 커밋을 수행하도록 한다.
   * commitSync의 경우 커밋 요청 및 응답에 시간이 오래 걸릴 수 있으며, commitAsync의 경우 커밋 요청이 실패했을 때 현재 처리 중인 데이터 순서를 보장하지 못해 데이터 중복 처리가 발생할 수 있다.

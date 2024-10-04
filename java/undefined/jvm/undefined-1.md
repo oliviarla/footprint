@@ -42,7 +42,7 @@
 
 ## 종류
 
-<figure><img src="../../../.gitbook/assets/image (99).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Bootstrap ClassLoader
 
@@ -105,6 +105,6 @@ protected Class<?> findClass(String name) throws ClassNotFoundException {
 
 * 인텔리제이의 jvm 옵션에 `-verbose:class` 옵션을 주면 클래스 로드 과정을 로그로 확인할 수 있다. 만약 VM options를 입력하는 창이 없다면 Modify options 버튼을 눌러 추가해주어야 한다.
 
-<figure><img src="../../../.gitbook/assets/image (243).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (131).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/image (244).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (132).png" alt=""><figcaption></figcaption></figure>

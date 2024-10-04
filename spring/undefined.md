@@ -7,7 +7,7 @@
 * 하지만 quantity 값에 무분별하게 접근하게 되어 race condition이 발생하게 된다.
 * 아래 표를 보면, `Thread-1`이 quantity에 접근하여 수량을 1 낮추고자 한다. 하지만 이 때 `Thread-2`도 quantity에 접근하여 수량을 1 낮추려고 하다보니, 결국 quantity 값이 3이 아닌 4가 되어버리는 현상이 발생하는 것이다.
 
-<figure><img src="../.gitbook/assets/image (173).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 
 * 이 문제를 테스트해보려면 아래 코드를 동작시키면 된다.
 

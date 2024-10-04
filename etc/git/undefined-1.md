@@ -115,3 +115,25 @@ git cherry-pick {commit hash}
 ```
 
 * 커밋 순서를 바꾸고 싶다면 git rebase -i HEAD^^ 로 들어가 순서 변경 가능
+
+## 다른 사람 레포지토리 커밋에 내용 덮어써서 커밋하기
+
+```bash
+git remote add <사용자명 등 식별할 수 있는 이름> <github 주소>
+git switch <커밋이 있는 브랜치명>
+git pull <사용자명 등 식별할 수 있는 이름> <브랜치 명>
+git commit -m "..." # 내가 한 작업을 커밋한다.
+git rebase -i HEAD^^ # 새로운 작업으로 추가한 커밋을 기존 커밋에 rebase한다.
+git push <사용자명 등 식별할 수 있는 이름> <브랜치 명> -f
+```
+
+* 예를 들어 oliviarla 사용자의 arcus-java-client 레포지토리에 있는 cleanup 브랜치의 `CLEANUP: tidy codes` 커밋에서 내가 직접 코드를 변경하고 싶다면 아래와 같이 사용하면 된다.
+
+```bash
+git remote add oliviarla https://github.com/oliviarla/arcus-java-client.git
+git switch -c cleanup
+git pull oliviarla cleanup
+git commit -m "my modification" # 내가 한 작업을 커밋한다.
+git rebase -i HEAD^^ # rebase하여 기존 커밋으로 합친다.
+git push oliviarla cleanup -f
+```

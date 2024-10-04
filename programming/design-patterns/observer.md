@@ -56,4 +56,4 @@ Observer <|.. ConcreteObserver
 * 날씨 정보에 대한 데이터를 담당하는 클래스가 **주제**가 된다. 따라서 옵저버들을 등록/제거하는 메서드와 옵저버들에게 이벤트를 알리는 메서드를 구현한다.
 * 계속해서 변경되는 날씨 데이터를 표현하는 화면 클래스들은 **옵저버**가 된다. **주제**로부터 갱신된 데이터를 받아 처리하기 위한 메서드를 구현한다.
 
-<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>

@@ -11,7 +11,7 @@ description: 후입선출을 따르는 자료 구조
 * 현실 세계에서는 설거지를 생각해보면 쉽게 이해할 수 있다. 아주 무겁게 쌓인 접시들을 닦아야 하는 상황에서는 가장 위에 있는 접시부터 하나씩 설거지를 해야 한다. 따라서 가장 마지막으로 올려둔 접시가 가장 처음 닦이게 되고, 가장 처음 놓은 접시는 가장 마지막에 닦이게 될 것이다.
 * 컴퓨터 세계에서는 함수의 호출 단계를 표현할 때 적합하다. 함수 내부에서 또다른 함수가 호출되는 과정이 반복해서 일어날 때, 보통은 스택에 함수 정보들을 쌓는다. 가장 최근에 호출된 함수가 종료됨에 따라 순차적으로 스택의 정보를 제거한다.
 
-<figure><img src="../../.gitbook/assets/image (148).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (36).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
 
 ## Stack in Java
 

@@ -8,12 +8,12 @@
 * CQRS란 Command Query Responsibility Segregation의 약자로 상태를 변경하는 명령을 위한 모델과 상태를 제공하는 조회를 위한 모델을 분리하는 패턴이다.
 * 도메인이 복잡할수록 명령 기능과 조회 기능이 다루는 데이터 범위에 차이가 나므로, 조회 모델을 별도로 만들어 다양한 성능 관련 기능을 모델에 적용할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (235).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (123).png" alt=""><figcaption></figcaption></figure>
 
 * 조회 모델은 대체로 데이터를 읽어와 조회하는 단순한 기능을 구현하므로 응용 서비스 영역을 구현할 필요가 없다.
 * 아래와 같이 상태 변경을 위한 명령 모델과 조회를 위한 조회 모델을 설계할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (236).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (124).png" alt=""><figcaption></figcaption></figure>
 
 * 메모리에 캐싱 하는 데이터는 DB에 보관된 데이터를 그대로 저장하기보다는 화면에 맞는 모양으로 변환한 데이터를 캐싱 할 때 성능에 더 유리하다. 즉 조회 전용 모델을 캐시하는 것이다.
 * 같은 개념의 도메인을 따로 두는 CQRS 패턴을 적용할 때 얻을 수 있는 장점은 명령 모델을 구현할 때 도메인 자체에 집중할 수 있다는 점이다.

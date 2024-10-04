@@ -17,7 +17,7 @@ description: 중복을 허용하지 않는 데이터 셋
       * 각 원소를 해싱하여 얻은 인덱스 위치에 원소가 저장된다.
       * 다음 그림처럼 여러 원소(Key)들을 Hash Table에 저장하는 방식이다.
 
-      <figure><img src="../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
   * Tree-Based Set
     * 자가 균형 이진 탐색 트리로 표현되는 Set이다.
     * 일반적으로 red-black tree를 사용한다.

@@ -15,7 +15,7 @@
 * 프로듀서, 컨슈머와 직접 통신하는 파티션을 리더라고 하고, 복제 데이터를 가지는 나머지 파티션들을 팔로워라고 부른다.
 * 팔로워 파티션들은 리더 파티션의 오프셋과 현재 자신이 가지는 오프셋을 비교하여 차이가 나는 경우 리더 파티션의 데이터를 가져와서 저장한다.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 컨트롤러
 

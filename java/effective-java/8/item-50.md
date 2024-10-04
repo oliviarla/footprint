@@ -93,7 +93,7 @@ public class item50 {
 }
 ```
 
-<figure><img src="../../../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 방어적 복사의 생략
 

@@ -97,7 +97,7 @@ try {
 * 부트스트랩에서 생성하는 모든 채널에 자동으로 소켓 옵션을 적용하여 커널에서 해당 옵션이 사용되도록 한다.
 * 애플리케이션에서 socket.send() 호출 시 커널의 시스템 함수를 호출해 애플리케이션에서 수신한 데이터를 데이터 송신용 커널 버퍼에 쌓아두었다가 인터넷으로 전송한다.
 
-<figure><img src="../../.gitbook/assets/image (64).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 이렇게 전달된 데이터는 데이터 수신용 커널 버퍼에 쌓이고, 애플리케이션에서 socket.read() 호출 시 데이터를 읽을 수 있다.
 * 네티는 JVM 기반으로 동작하므로 자바에서 설정할 수 있는 소켓 옵션을 모두 사용 가능하다.
@@ -205,7 +205,7 @@ graph LR
 * EventLoop를 최대한 재사용하여 스레드 생성 비용을 줄이는 것이 네티 애플리케이션 가이드에서 권장되고 있다.
 * 아래 그림과 같이 ServerChannel으로 생성된 자식 채널의 EventLoop를 클라이언트로써의 통신을 위해 생성한 Bootstrap과 채널에서 공유할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 아래는 EventLoop를 공유하는 예시 코드이다. ChannelInboundHandler에서 새로운 부트스트랩을 만들고 이벤트 루프는 기존의 이벤트 루프를 사용한다.
 

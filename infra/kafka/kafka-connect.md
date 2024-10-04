@@ -18,12 +18,19 @@
 * 커넥터 정의하는 파일을 작성하고 해당 파일을 참조하는 단일 커넥트를 실행하여 파이프라인을 생성할 수 있다.
 * 단일 애플리케이션으로 실행되므로 SPOF(Single Point of Failure) 지점이 될 수 있어 고가용성 구성이 불가능하다.
 * 주로 개발환경이나 중요도가 낮은 파이프라인 운영 시 사용한다.
-* connect-standalone.properties 설정파일을&#x20;
+* connect-standalone.properties 파일에 속성을 설정하여 실행시킬 수 있다.
+  * key.converter / value.converter : 데이터를 카프카에 저장하거나 카프카에서 가져올 때 사용하는 컨버터 지정
+  * key.converter.schemas.enable / value.converter.schemas.enable : 스키마 형태를 사용하는지 여부
+  * offset.storage.file.filename : 오프셋을 저장할 로컬 파일의 경로와 이름 지정
+  * offset.flush.intervals.ms : 태스크가 처리 완료한 오프셋을 커밋하는 주기 지정
+  * plugin.path : 플러그인 형태로 추가할 커넥터의 디렉토리 주소 지정
+*
 
 #### 분산 모드 커넥트
 
 * 두 대 이상의 서버에서 클러스터 형태로 실행되어 단일 모드보다 안전하게 운영할 수 있다.
 * 데이터 처리량 변화가 있다면 스케일 아웃할 수 있다.
+*
 
 
 
