@@ -342,6 +342,7 @@
   * [Consumer](infra/kafka/consumer.md)
   * [Kafka Streams](infra/kafka/kafka-streams.md)
   * [Kafka Connect](infra/kafka/kafka-connect.md)
+  * [MirrorMaker](infra/kafka/mirrormaker.md)
 
 ## 🏔️ CS
 

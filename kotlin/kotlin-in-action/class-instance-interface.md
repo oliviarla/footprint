@@ -408,7 +408,7 @@ CaseInsensitiveFileComparator.INSTANCE.compare(File("/User"), File("/user"));
 * 코틀린은 자바의 static 키워드를 지원하지 않는다. 대신 패키지 수준의 최상위 함수와 객체 선언을 제공하여 정적 메서드, 정적 필드의 역할을 대신한다.
 * 클래스의 인스턴스와 관계없이 호출할 수 있어야 하면서 클래스 내부 정보에 접근해야 하는 함수가 필요할 때에는 클래스에 중첩된 객체 선언의 멤버 함수로 정의해야 한다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 * 클래스에 중첩된 객체 선언의 멤버 함수란 아래와 같이 특정 내부 클래스에 만든 객체 선언에 속한 함수를 의미한다.
 
