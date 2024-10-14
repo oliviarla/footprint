@@ -248,12 +248,12 @@
   * [코틀린 기초](kotlin/undefined/undefined-1.md)
   * [함수 정의와 호출](kotlin/undefined/undefined-2.md)
   * [클래스, 객체, 인터페이스](kotlin/kotlin-in-action/class-instance-interface.md)
-  * [람다](kotlin/kotlin-in-action/undefined.md)
-  * [타입 시스템](kotlin/kotlin-in-action/undefined-1.md)
-  * [연산자 오버로딩과 기타 관례](kotlin/kotlin-in-action/undefined-2.md)
-  * [고차 함수](kotlin/kotlin-in-action/undefined-3.md)
-  * [제네릭스](kotlin/kotlin-in-action/undefined-4.md)
-  * [어노테이션과 리플렉션](kotlin/kotlin-in-action/undefined-5.md)
+  * [람다](kotlin/kotlin-in-action/lambda.md)
+  * [타입 시스템](kotlin/kotlin-in-action/type-system.md)
+  * [연산자 오버로딩과 기타 관례](kotlin/kotlin-in-action/operator-overloading-conventions.md)
+  * [고차 함수](kotlin/kotlin-in-action/higher-order-function.md)
+  * [제네릭스](kotlin/kotlin-in-action/generics.md)
+  * [어노테이션과 리플렉션](kotlin/kotlin-in-action/annotation-reflection.md)
   * [DSL 만들기](kotlin/kotlin-in-action/dsl.md)
 
 ## 🌸 스프링 <a href="#spring" id="spring"></a>
