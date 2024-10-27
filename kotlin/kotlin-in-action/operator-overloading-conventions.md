@@ -394,12 +394,47 @@ foo.p = newvalue // Delegate의 setValue 호출
 
 * 지연 초기화는 객체를 생성할 때 모두 초기화하지 않고 일부를 남겨두었다가 실제 값이 필요할 때 초기화하는 방법이다.
 * 초기화 과정에서 자원을 많이 사용하거나, 객체를 사용할 때 마다 반드시 초기화하지 않아도 되는 프로퍼티가 있는 경우 유용하다.
+* 아래와 같이 뒷받침하는 프로퍼티을 이용해 지연 초기화를 구현할 수 있다.
+  * emails라는 프로퍼티는 값을 저장하고, emails 프로퍼티는 읽기 연산만을 제공한다. \_emails는 널이 될 수 있지만 emails는 널이 될 수 없다.
+  * `person.emails`로 프로퍼티에 접근 시 사용자의 이메일을 로드하도록 한다.
+  * 이 구현은 thread-safe하지 않다.
 
+```kotlin
+class Person(val name: String) {
+    private var _emails: List<Email>? = null
 
+    val emails: List<Email>
+       get() {
+           if (_emails == null) {
+               _emails = loadEmails(this)
+           }
+           return _emails!!
+       }
+}
+```
 
+* 위임 프로퍼티를 사용해 뒷받침하는 프로퍼티와 값이 한 번만 초기화됨을 보장하는 getter 로직을 캡슐화할 수 있다.
+  * lazy 함수는 값을 초기화할 때 호출할 람다를 입력받은 후 getValue 메서드가 들어있는 객체를 반환한다.
+  * lazy 함수는 기본적으로 thread-safe하며 동기화에 사용할 락을 전달할 수도 있고 동기화를 하지 못하게 막을 수도 있다.
 
+```kotlin
+class Person(val name: String) {
+    val emails by lazy { loadEmails(this) }
+}
+```
 
+## 프로퍼티 값을 맵에 저장
 
+* 아래와 같이 위임 프로퍼티를 사용하면 `_attributes`라는 맵에 name 등의 속성이 저장되고, name 속성을 조회할 때 `_attributes` 맵에서 조회할 수 있다.
 
-
-
+```kotlin
+class Person {
+    private val _attributes = hashMapOf<String, String>()
+    
+    fun setAttribute(attrName: String, value: String) {
+        _attributes[attrName] = value
+    }
+    
+    value name: String by _attributes
+}
+```

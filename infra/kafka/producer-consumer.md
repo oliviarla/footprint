@@ -61,7 +61,7 @@ Accumulator --> Sender
     * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
     * Accumulator에는 Partition마다 Deque를 가지고 있으며 Deque 내부에는 batch를 통해 레코드들을 묶어놓는다.
 
-    <figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * Sender는 브로커 별로 레코드를 전송하는 역할을 하는데, 브로커의 파티션마다 보내야 할 batch 데이터를 가져와 `Ready List`에 저장해둔 후 한꺼번에 보낸다. 이 때 한 번의 요청이 처리할 수 있는 최대 용량까지만 batch 데이터를 담을 수 있다.
 
@@ -170,9 +170,69 @@ KafkaProducer<String, String> producer = new KafkaProducer<String, String>(confi
 ## 트랜잭션 프로듀서
 
 * 다수의 파티션에 데이터를 저장할 경우 모든 데이터에 대해 동일한 원자성을 만족시키기 위해 사용된다.
-*
+* enable.idempotence를 true로 설정하고 transactional.id를 임의의 String 값으로 정의한다. 컨슈머의 isolation.level을 read\_committed로 설정한다.
+* 트랜잭션 프로듀서와 컨슈머는 트랜잭션으로 처리 완료된 데이터만 읽고 쓰게 된다.
+* 트랜잭션 프로듀서는 트랜잭션의 시작과 끝을 트랜잭션 레코드를 한 개 더 보낸다. 트랜잭션이 끝난 상태를 표시하는 정보를 가지며, 레코드이기 때문에 오프셋 한 개를 차지한다.
+* 아래 그림에서 commit 이라는 레코드가 트랜잭션 레코드이다.
 
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p><a href="https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html">https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html</a></p></figcaption></figure>
 
+* 트랜잭션 컨슈머는 파티션에 저장된 트랜잭션 레코드를 확인하면 트랜잭션이 완료되었다고 간주하고 데이터를 읽는다. 만약 트랜잭션 레코드가 존재하지 않으면 아직 트랜잭션이 완료되지 않았다고 판단하고 데이터를 가져가지 않는다.
 
+## 스프링 카프카 프로듀서
 
+* 기본 카프카 템플릿을 아래와 같이 사용할 수 있다.
+  * KafkaTemplate 객체를 직접 빈으로 등록하지 않아도 스프링 카프카에서 application.yml 속성을 반영한 기본적인 KafkaTempalte을 주입해준다.
+  * send 메서드를 통해 토픽에 데이터를 보낸다.
+
+```java
+private static String TOPIC_NAME = "test";
+@Autowired
+private KafkaTemplate<Integer, String> template;
+
+public void run() {
+    for (int i = 0; i < 10; i++) {
+        template.send(TOPIC_NAME, "test" + i);
+    }
+}
+```
+
+* 직접 프로듀서 팩토리를 이용해 카프카 템플릿을 생성해 사용할 수도 있다. 여러 클러스터에 데이터를 전송하고자 한다면 KafkaTemplate 객체를 여러 개 만들어 사용해야 한다.
+
+```java
+@Configuration
+public class KafkaTemplateConfiguration {
+
+    @Bean
+    public KafkaTemplate<String, String> customKafkaTemplate() {
+
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-kafka:9092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+
+        ProducerFactory<String, String> pf = new DefaultKafkaProducerFactory<>(props);
+
+        return new KafkaTemplate<>(pf);
+    }
+}
+```
+
+* 아래와 같이 ListenableFuture를 통해 작업이 완료되었을 때 실행할 콜백을 등록할 수도 있다.
+
+```java
+ListenableFuture<SendResult<String, String>> future = customKafkaTemplate.send(TOPIC_NAME, "test");
+future.addCallback(new KafkaSendCallback<String, String>() {
+    @Override
+    public void onSuccess(SendResult<String, String> result) {
+        // ...
+    }
+
+    @Override
+    public void onFailure(KafkaProducerException ex) {
+        // ...
+    }
+});
+```
 

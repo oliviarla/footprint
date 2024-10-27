@@ -104,7 +104,7 @@ public class SafeByteToMessageDecoder extends ByteToMessageDecoder {
 * 인코더 클래스의 경우 ChannelOutboundHandlerAdapter를 상속받은 추상 클래스인 MessageToMessageEncoder를 상속받아 encode 메서드를 구현하는 템플릿 메서드 패턴으로 구현된다. 이를 통해 다양한 종류의 인코더/디코더를 제공할 수 있다.
 * 아래와 같이 write 이벤트가 발생할 경우 ChannelOutboundHandler를 구현한 인코더에서 메시지를 바이트나 다른 메시지로 변환해주게 된다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
 ### MessageToByteEncoder
 

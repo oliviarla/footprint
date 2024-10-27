@@ -17,7 +17,7 @@
 
 * MIPS에서는 각 Register의 역할을 정의해두고 있다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### factorial 예제
 

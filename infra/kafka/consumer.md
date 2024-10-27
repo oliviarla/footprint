@@ -249,8 +249,215 @@ admin.close();
   * read\_uncommited: 커밋 여부에 상관없이 레코드를 읽기
   * 기본값은 read\_commited이다.
 
+## 멀티 스레드 컨슈머
+
+* 1개의 파티션에 1개의 컨슈머가 할당되어 처리되므로, n개의 파팃견이 있다면 동일 컨슈머 그룹으로 묶인 n개의 스레드를 운영할 수 있다.
+* 즉, n개 스레드를 가진 하나의 프로세스 혹은 1개 스레드를 가진 n개의 프로세스를 운영해야 한다.
+* 하나의 프로세스에 여러 스레드를 가지도록 할 때 하나의 컨슈머 스레드에서 OOM같은 예외 상황이 발생하면 프로세스가 종료되므로 다른 스레드들도 종료된다.
+
+### 멀티 워커 스레드 전략
+
+* 1개의 컨슈머 스레드와 n개의 데이터 처리를 담당하는 워커 스레드를 실행하는 방법이다.
+* 브로커로부터 전달받은 레코드들을 병렬로 처리하면 1개 컨슈머 스레드로 받은 데이터를 더 빠르게 처리할 수 있다.
+
+#### 사용 방법
+
+* Runnable 인터페이스를 구현한 ConsumerWorker 클래스는 컨슈머의 poll 메서드를 통해 받은 레코드들을 병렬로 처리할 수 있도록 한다.
+  * newCachedThreadPool은 필요한 만큼 스레드 풀을 늘려 실행하는 방식으로, 짧은 시간의 생명 주기를 가진 스레드를 사용할 때 유용하다.
+
+```java
+public class ConsumerWorker implements Runnable {
+
+    private final static Logger logger = LoggerFactory.getLogger(ConsumerWorker.class);
+    private String recordValue;
+
+    ConsumerWorker(String recordValue) {
+        this.recordValue = recordValue;
+    }
+
+    @Override
+    public void run() {
+        // record를 처리하는 로직이 들어간다.
+        logger.info("thread:{}\trecord:{}", Thread.currentThread().getName(), recordValue);
+    }
+}
+```
+
+```java
+KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);
+consumer.subscribe(Arrays.asList(TOPIC_NAME));
+ExecutorService executorService = Executors.newCachedThreadPool();
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
+    for (ConsumerRecord<String, String> record : records) {
+        ConsumerWorker worker = new ConsumerWorker(record.value());
+        executorService.execute(worker);
+    }
+}
+```
+
+#### 한계
+
+* 스레드들에서 데이터 처리가 끝나지 않더라도 다음 poll 메서드를 호출하므로 완전히 데이터 처리가 끝나지 않더라도 커밋하게 된다. 따라서 리밸런싱, 컨슈머 장애 발생 시 데이터가 유실될 수 있다.
+* 레코드별로 스레드 생성은 순차로 진행되지만 각 스레드가 레코드를 처리 완료하는 순서는 변할 수 있어 레코드 처리의 역전 현상이 발생할 수 있다. 따라서 서버 리소스 모니터링이나 IoT서비스 센서 데이터 수집 파이프라인 등 데이터 역전 현상이 발생하더라도 빠른 처리 속도만 있으면 되는 경우에 사용해야 한다.
+
+### 컨슈머 멀티 스레드 전략
+
+* poll 메서드를 호출하는 스레드를 여러 개 띄우는 방법이다.
+* 컨슈머 스레드를 늘려 운영하면 각 스레드에 파티션이 할당된다.
+* 구독하려는 토픽의 파티션 개수만큼만 컨슈머 스레드를 운영해야 한다. 만약 컨슈머 스레드가 파티션 개수보다 많으면 파티션에 할당되지 못한 컨슈머 스레드는 데이터 처리를 하지 않게 된다.
+* Runnable 인터페이스를 구현한 ConsumerWorker 클래스를 필요한 만큼 생성해 병렬로 컨슈머 스레드가 돌아가도록 한다.
+  * KafkaConsumer 클래스는 thread-safe하지 않으므로 스레드별로 KafkaConsumer 클래스를 생성해 사용해야 한다.
+  * newCachedThreadPool을 통해 스레드 풀을 구성해 내부 작업이 완료되면 스레드를 종료하도록 한다.
+
+```java
+public class ConsumerWorker implements Runnable {
+
+    private final static Logger logger = LoggerFactory.getLogger(ConsumerWorker.class);
+
+    private final Properties prop;
+    private final String topic;
+    private final String threadName;
+    private KafkaConsumer<String, String> consumer;
+
+    ConsumerWorker(Properties prop, String topic, int number) {
+        this.prop = prop;
+        this.topic = topic;
+        this.threadName = "consumer-thread-" + number;
+    }
+
+    @Override
+    public void run() {
+        consumer = new KafkaConsumer<>(prop);
+        consumer.subscribe(Arrays.asList(topic));
+        try {
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
+                for (ConsumerRecord<String, String> record : records) {
+                    logger.info("{}", record);
+                }
+                consumer.commitSync();
+            }
+        } catch (WakeupException e) {
+            System.out.println(threadName + " trigger WakeupException");
+        } finally {
+            consumer.commitSync();
+            consumer.close();
+        }
+    }
+
+    public void shutdown() {
+        consumer.wakeup();
+    }
+}
+```
+
+```java
+int CONSUMER_COUNT = 3;
+Properties configs = new Properties();
+configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+configs.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+configs.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
+ExecutorService executorService = Executors.newCachedThreadPool();
+for (int i = 0; i < CONSUMER_COUNT; i++) {
+    ConsumerWorker worker = new ConsumerWorker(configs, TOPIC_NAME, i);
+    workerThreads.add(worker);
+    executorService.execute(worker);
+}
+```
+
+## 컨슈머 랙
+
+* 컨슈머 랙은 토픽의 최신 오프셋과 컨슈머 오프셋 간의 차이를 의미한다.
+* 컨슈머가 정상 동작하는지 여부를 확인하는 지표 중 하나이다.
+* 아래와 같이 프로듀서가 가장 최근에 추가한 레코드와 컨슈머가 가장 최근에 읽은 레코드 간의 차이를 LAG이라고 한다.
+
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p><a href="https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str">https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str</a></p></figcaption></figure>
+
+* 컨슈머 그룹과 토픽, 파티션 별로 컨슈머 랙이 존재하게 된다.
+* 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 많으면 컨슈머 랙은 늘어나게 된다. 반대로 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 적으면 컨슈머 랙은 줄어들게 된다.
+* 컨슈머 랙이 0이면 지연이 없는 상태임을 의미한다.
+* 컨슈머 랙을 모니터링하여 컨슈머의 장애를 확인하고 파티션 개수를 정하는 데에 참고할 수 있다.
+* 만약 컨슈머 랙이 늘어난다면 지연을 줄이기 위해 일시적으로 파티션, 컨슈머 개수를 늘려 병렬 처리량을 늘려야 한다.
+
+### 컨슈머 랙 확인 방법
+
+#### 카프카 명령어 사용
+
+* 아래와 같은 명령어를 사용해 특정 컨슈머 그룹의 상태를 확인할 수 있다.
+* 이 방식으로는 지표를 지속적으로 기록하고 모니터링하기 어렵다.
+
+```bash
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group my-group --describe
+```
+
+#### 컨슈머 애플리케이션의 metrics 메서드 사용
+
+* 컨슈머에 메트릭 정보 조회 요청을 보내기 위해 metrics 메서드를 호출하고 이를 로깅할 수 있다.
+* 컨슈머 애플리케이션이 비정상적으로 종료된 상황이라면 컨슈머 랙을 더이상 모니터링할 수 없고, 컨슈머 애플리케이션을 분산해 운영할 경우 모든 애플리케이션에 호출 로직을 추가해주어야 하는 등의 단점이 있다.
+
+```java
+for (Map.Entry<MetricName, ? extends Metric> entry: kafkaConsumer.metrics().entrySet()) {    
+    if ("records-lag-max".equals(entry.getKey().name()) |
+        "records-lag".equals(entry.getKey().name()) |
+        "records-lag-avg".equals(entry.getKey().name())) {
+        Metric metric = entry.getValue();
+        logger.info("{}:{}", entry.getKey().name(), metric.metricValue());
+    }
+}
+```
+
+#### 외부 모니터링 툴 사용
+
+* 데이터독 등 카프카 클러스터 종합 모니터링 툴을 사용하면 카프카 운영에 필요한 다양한 지표를 모니터링할 수 있다.
+* 외부 모니터링 툴을 이용하면 카프카 클러스터에 연결된 모든 컨슈머와 토픽들의 랙 정보를 한 번에 모니터링할 수 있다.
+* 컨슈머 랙이 임계치에 도달할 때 마다 알람을 보내는 것은 무의미하다. 일시적으로 프로듀서가 데이터를 많이 보내면 임계치가 넘어갈 수 있지만 컨슈머 또는 파티션에 문제가 발생했다고 간주하기는 어렵기 때문이다.
+* 컨슈머 랙과 파티션의 오프셋을 슬라이딩 윈도우 방식으로 계산하여 파티션과 컨슈머의 상태를 표현하면 문제가 발생한 부분을 감지할 수 있다.
+* 링크드인이 제공하는 카프카 모니터링 툴인 버로우에서는 슬라이딩 윈도우 방식을 통해 최신 오프셋 증가량에 비해 컨슈머 오프셋 증가량이 미미하면 컨슈머를 WARNING 상태로 표현하고, 컨슈머 오프셋이 아예 증가하지 않는다면 파티션을 STALLED 상태로 표현하고 컨슈머는 ERROR 상태로 표현한다.
+
+### 컨슈머 랙 모니터링 아키텍처
+
+* 버로우, 텔레그래프, 엘라스틱서치, 그라파나를 이용해 컨슈머 랙 모니터링 아키텍처를 구성할 수 있다.
+* 텔레그래프는 버로우를 통해 컨슈머 랙을 조회하고 엘라스틱서치에 저장한다. 그라파나는 엘라스틱서치의 데이터를 시각화하고 조건에 따라 알림을 보낼 수 있다.
+
+## 컨슈머 배포 프로세스
+
+* 컨슈머 애플리케이션 운영 시 로직 변경으로 인해 배포를 해야한다면 중단 배포, 무중단 배포 중 하나를 사용하면 된다.
+
+### 중단 배포
+
+* 컨슈머 애플리케이션을 완전히 종료 후 다시 배포하는 방식이다.
+* 기존 컨슈머 애플리케이션이 종료된 후 신규 컨슈머 애플리케이션이 배포되기 전 사이에 컨슈머 랙이 늘어날 수 있으므로 파이프라인을 운영하는 서비스가 오래 중단되지 않도록 조심해야 한다.
+* 신규 애플리케이션의 실행 전후를 명확히 특정 오프셋 지점으로 나눌 수 있다. 이를 통해 새로 배포한 애플리케이션에 이슈가 생겨도 롤백하고 데이터를 재처리할 수 있다.
+
+### 무중단 배포
+
+* 컨슈머가 중단되면 안되는 애플리케이션에서 유용하며, 배포를 위해 신규 서버를 발급받아야 한다.
+* 블루/그린 배포
+  * 기존 컨슈머 애플리케이션을 종료하지 않고 신규 컨슈머 애플리케이션을 실행시킨 후 트래픽을 전환하는 방식이다.
+  * 파티션 개수와 컨슈머 개수를 동일하게 운영하고 있다면, 신규 컨슈머 애플리케이션을 배포하고 동일 컨슈머그룹으로 파티션을 구독하도록 하여 idle 상태로 두고, 모든 준비가 완료되면 기존 애플리케이션을 중단하여 리밸런싱되도록 하면 된다.
+  * 리밸런스가 한 번만 발생하므로 많은 수의 파티션을 운영하는 경우에도 빠르게 배포를 수행할 수 있다.
+* 롤링 배포
+  * 신규 컨슈머 하나를 실행하고 기존 컨슈머 하나를 종료시키는 작업을 반복해서 실행하고 모니터링하여 적은 장비로도 효과적으로 무중단 배포를 할 수 있는 방법이다.
+  * 파티션 개수가 컨슈머 애플리케이션을 띄우는 장비 개수보다 같거나 커야한다.
+  * 파티션 개수가 많아질수록 리밸런스 시간이 길어진다. 따라서 파티션 개수가 많지 않은 경우에 유용하다.
+* 카나리 배포
+  * 여러 파티션 중 일부 파티션에 신규 컨슈머를 배정해 일부 데이터만 신규 컨슈머가 처리하도록 하고, 문제가 없다면 전체적으로 신규 컨슈머를 블루그린 혹은 롤링 방식으로 배포하는 방법이다.
+
+## 스프링 카프카 컨슈머
+
+*
+
+
+
+
+
+
+
 **출처**
 
-아파치 카프카 애플리케이션 프로그래밍
-
-[https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd](https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd)
+* 아파치 카프카 애플리케이션 프로그래밍
+* [https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd](https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd)ㅎ

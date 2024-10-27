@@ -52,7 +52,7 @@ gcc -O2 -g -o p main.c swap.c
 * 모든 object file 종류에 대해 ELF 포맷이 적용된다.
 *   아래와 같이 구성 요소가 나뉜다.
 
-    <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * ELF header
       * 파일을 실행할 때, 커널이나 로더가 프로그램을 어떻게 메모리에 로드하고 실행할지 결정하는 데 사용된다.

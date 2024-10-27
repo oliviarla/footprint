@@ -11,7 +11,7 @@
 * Supplier: 인수를 받지 않고 값을 반환하는 함수
 * Consumer: 인수를 하나 받고 반환값은 없는 함수
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 기본 타입인 int, long, double마다 변형된 인터페이스가 존재한다. ex) Predicate -> IntPredicate, DoublePredicate, ..
 * Function 인터페이스의 경우 입력과 결과의 타입이 항상 다르므로 기본 타입 -> 기본타입의 경우 6개의 변형이 있고, 객체 참조 -> 기본타입의 경우 3개의 변형이 있다.

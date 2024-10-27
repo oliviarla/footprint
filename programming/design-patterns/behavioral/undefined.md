@@ -10,12 +10,12 @@
 * 핸들러란 특정 행동들을 독립적으로 실행할 수 있는 객체를 의미한다.
 * 각 핸들러는 요청을 받으면 **요청을 처리할지 아니면 체인의 다음 핸들러로 전달할지**를 결정한다.
 
-<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 모든 구상 핸들러에 공통적인 핸들러 인터페이스를 선언하고, 필요하다면 BaseHandler를 생성해 다음 핸들러의 참조를 저장하도록 한다. 핸들러 인터페이스의 구현체에는 요청을 확인한 후 처리할 지 다음 핸들러에 넘길 지 등 세부 로직이 담긴다.
 * 클라이언트는 체인을 구성하여 필요한 요청을 보내면 된다.
 
-<figure><img src="../../../.gitbook/assets/image (4).png" alt="" width="285"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1).png" alt="" width="285"><figcaption></figcaption></figure>
 
 * 컴포지트 패턴은 컴포넌트의 체인에 의해 트리의 루트 노드까지 도달할 수 있다는 점에서 책임 연쇄 패턴과 다르다.
 * 데코레이터 패턴과 유사하게 실행을 일련의 객체들을 통해 재귀적인 합성에 의존하지만, 책임 연쇄 패턴의 핸들러들은 독립적으로 임의의 작업을 실행할 수 있고 데코레이터는 객체의 행동을 확장하며 흐름을 중단할 수 없다는 점에서 다르다.
