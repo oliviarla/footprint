@@ -10,7 +10,7 @@
 * 예를 들어 모양과 색깔을 나타내야 할 때 Shape라는 공통 클래스를 두고 Rectangle, Triangle이 이를 구현할 수 있다. 만약 빨강, 파랑색을 나타내려면 RedRectangle, BlueRectangle, RedTriangle, BlueTriangle 처럼 클래스를 증식시킬 수도 있지만, Shape을 추상 클래스로 만들고 Color 인터페이스를 컴포지트하는 형태로 만들면 더 유연한 설계가 된다.
 * 아래 다이어그램에서 Abstraction이 Implementation이라는 인터페이스를 필드로 갖는 것을 **브리지**라고 한다.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 

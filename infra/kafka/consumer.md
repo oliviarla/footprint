@@ -375,7 +375,7 @@ for (int i = 0; i < CONSUMER_COUNT; i++) {
 * 컨슈머가 정상 동작하는지 여부를 확인하는 지표 중 하나이다.
 * 아래와 같이 프로듀서가 가장 최근에 추가한 레코드와 컨슈머가 가장 최근에 읽은 레코드 간의 차이를 LAG이라고 한다.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p><a href="https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str">https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p><a href="https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str">https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str</a></p></figcaption></figure>
 
 * 컨슈머 그룹과 토픽, 파티션 별로 컨슈머 랙이 존재하게 된다.
 * 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 많으면 컨슈머 랙은 늘어나게 된다. 반대로 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 적으면 컨슈머 랙은 줄어들게 된다.
@@ -449,9 +449,84 @@ for (Map.Entry<MetricName, ? extends Metric> entry: kafkaConsumer.metrics().entr
 
 ## 스프링 카프카 컨슈머
 
-*
+* 스프링 카프카 컨슈머에는 2개의 타입과 7개의 커밋 종류가 있다.
+* 레코드 리스너
+  * 1개의 레코드를 처리한다.
+* 배치 리스너
+  * 카프카 클라이언트에서 제공하는 poll 메서드처럼 한 번에 여러 레코드를 처리한다.
+* 이외에도 각 리스너로부터 파생된 형태들이 존재한다. 매뉴얼 커밋을 사용할 경우 Acknowledging이 붙은 리스너를 사용하고, KafkaConsumer 객체에 직접 접근해 사용할 경우 ConsumerAware가 붙은 리스너를 사용하면 된다.
+  * 레코드 리스너 파생
+    * AcknowledgingMessageListener
+    * ConsumerAwareMessageListener
+    * AcknowledgingConsumerAwareMessageListener
+  * 배치 리스너 파생
+    * BatchAcknowledgingMessageListener
+    * BatchConsumerAwareMessageListener
+    * BatchAcknowledgingConsumerAwareMessageListener
+* 커밋의 종류는 다음과 같으며, 스프링 카프카에서는 AckMode라는 속성으로 원하는 커밋 방식을 지정할 수 있다.
+  * RECORD
+    * 레코드 단위로 프로세싱 후 커밋
+  * BATCH (기본값)
+    * poll 메서드로 호출된 레코드가 모두 처리된 후 커밋
+  * TIME
+    * 특정 시간 이후 커밋
+    * AckTime 옵션을 같이 지정해야 한다.
+  * COUNT
+    * 특정 개수만큼 레코드가 처리된 후 커밋
+    * AckCount 옵션을 같이 지정해야 한다.
+  * COUNT\_TIME
+    * TIME, COUNT 중 하나라도 조건이 맞으면 커밋
+  * MANUAL
+    * Acknowldegement.acknowledge 메서드가 호출되면 다음 poll 메서드 호출 시 커밋한다.
+    * 리스너를 AcknowledgingMessageListener 혹은 BatchAcknowledgingMessageListener로 두어야 한다.
+  * MANUAL\_IMMEDIATE
+    * Acknowldegement.acknowledge 메서드가 호출되면 즉시 커밋한다.
+    * 리스너를 AcknowledgingMessageListener 혹은 BatchAcknowledgingMessageListener로 두어야 한다.
 
+### 리스너 생성하기
 
+* 리스너를 사용하려면, 기본 리스너 컨테이너를 사용하거나 컨테이너 팩토리로 직접 리스너 컨테이너를 생성해 사용해야 한다.
+* 다음은 레코드 리스너를 활용한 예제이다.&#x20;
+  *
+
+```java
+@KafkaListener(topics = "test",
+    groupId = "test-group-00")
+public void recordListener(ConsumerRecord<String,String> record) {
+logger.info(record.toString());
+}
+
+@KafkaListener(topics = "test",
+    groupId = "test-group-01")
+public void singleTopicListener(String messageValue) {
+logger.info(messageValue);
+}
+
+@KafkaListener(topics = "test",
+    groupId = "test-group-02", properties = {
+    "max.poll.interval.ms:60000",
+    "auto.offset.reset:earliest"
+})
+public void singleTopicWithPropertiesListener(String messageValue) {
+logger.info(messageValue);
+}
+
+@KafkaListener(topics = "test",
+    groupId = "test-group-03",
+    concurrency = "3")
+public void concurrentTopicListener(String messageValue) {
+logger.info(messageValue);
+}
+
+@KafkaListener(topicPartitions = {
+            @TopicPartition(topic = "test01", partitions = {"0", "1"}),
+            @TopicPartition(topic = "test02", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "3"))
+    },
+    groupId = "test-group-04")
+public void listenSpecificPartition(ConsumerRecord<String, String> record) {
+logger.info(record.toString());
+}
+```
 
 
 

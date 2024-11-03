@@ -30,7 +30,7 @@ description: 채널에서 발생한 이벤트가 이동하는 채널 파이프�
 
 ### 구조
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 네티의 채널, 이벤트, 이벤트 핸들러는 전기의 흐름과 비슷하다.
 * 채널은 일반적인 소켓 프로그래밍에서 말하는 소켓과 같다. (발전소)
@@ -61,7 +61,7 @@ b.group(bossGroup, workerGroup)
 
 * 채널 파이프라인이 초기화되는 순서를 그림으로 살펴보면 아래와 같다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 먼저 클라이언트 연결에 대응되는 소켓 채널 객체를 생성하고, 빈 채널 파이프라인 객체를 생성해 소켓 채널에 할당한다.
 * 소켓 채널에 등록된 ChannelInitializer 구현체의 initChannel 메서드를 호출한다.
@@ -79,7 +79,7 @@ b.group(bossGroup, workerGroup)
 * 상대방이 어떤 동작을 취했을 때 소켓 채널에서 발생하는 이벤트
 * 채널 활성화, 데이터 수신 등의 이벤트가 이에 해당한다.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 * 인바운드 이벤트를 채널 파이프라인에 보내면, 이벤트 핸들러 중 ChannelInboundHandler 인터페이스를 구현한 인바운드 이벤트 핸들러들이 메서드를 수행한다.
 

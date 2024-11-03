@@ -334,6 +334,8 @@
   * [ReplicationSet](infra/kubernetes/replicationset.md)
   * [Network](infra/kubernetes/network.md)
   * [ConfigMap & Secret](infra/kubernetes/configmap-and-secret.md)
+  * [Volume, Mount, Claim](infra/kubernetes/volume-mount-claim.md)
+  * [Controller](infra/kubernetes/controller.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)

@@ -14,7 +14,7 @@ description: 인접한 메모리에 원소들을 일렬로 저장하는 데이�
 * 삽입과 삭제의 경우 O(N)의 시간 복잡도를 갖는다.
 * 원소에 접근할 때는 O(1)의 시간 복잡도를 갖는다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 자바의 배열
 

@@ -36,7 +36,7 @@
 
 ## 사용 방법
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt="" width="248"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt="" width="248"><figcaption></figcaption></figure>
 
 * 외부에 노출되는 생성자가 없도록 모두 private 접근자로 둔다.
 * getInstance 정적 메서드에서 객체를 한 번만 생성하고, 생성된 객체를 필드에 저장해두어 재활용할 수 있도록 한다.
