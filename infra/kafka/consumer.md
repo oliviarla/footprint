@@ -486,53 +486,164 @@ for (Map.Entry<MetricName, ? extends Metric> entry: kafkaConsumer.metrics().entr
 ### 리스너 생성하기
 
 * 리스너를 사용하려면, 기본 리스너 컨테이너를 사용하거나 컨테이너 팩토리로 직접 리스너 컨테이너를 생성해 사용해야 한다.
-* 다음은 레코드 리스너를 활용한 예제이다.&#x20;
-  *
+* 다음은 **레코드 리스너**를 활용한 예제이다.
+  * application.properties에 spring.kafka.listener.type을 RECORD로 지정해주어야 한다.
+  * topics, groupId를 지정하여 레코드를 리스너 내부에서 처리할 수 있다.
 
 ```java
+// 레코드를 파라미터로 받는 가장 기본적인 리스너
 @KafkaListener(topics = "test",
     groupId = "test-group-00")
 public void recordListener(ConsumerRecord<String,String> record) {
-logger.info(record.toString());
+    logger.info(record.toString());
 }
 
+// 메시지 값을 파라미터로 받는 리스너
 @KafkaListener(topics = "test",
     groupId = "test-group-01")
 public void singleTopicListener(String messageValue) {
-logger.info(messageValue);
+    logger.info(messageValue);
 }
 
+// properties 속성으로 카프카 컨슈머 옵션 값을 부여 가능
 @KafkaListener(topics = "test",
     groupId = "test-group-02", properties = {
     "max.poll.interval.ms:60000",
     "auto.offset.reset:earliest"
 })
 public void singleTopicWithPropertiesListener(String messageValue) {
-logger.info(messageValue);
+    logger.info(messageValue);
 }
 
+// concurrency 속성으로 지정한 스레드 수 만큼 컨슈머 스레드를 만들어 병렬 처리 지원
 @KafkaListener(topics = "test",
     groupId = "test-group-03",
     concurrency = "3")
 public void concurrentTopicListener(String messageValue) {
-logger.info(messageValue);
+    logger.info(messageValue);
 }
 
+// 특정 토픽의 특정 파티션, 특정 파티션의 오프셋을 지정해 구독 가능
 @KafkaListener(topicPartitions = {
             @TopicPartition(topic = "test01", partitions = {"0", "1"}),
             @TopicPartition(topic = "test02", partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "3"))
     },
     groupId = "test-group-04")
 public void listenSpecificPartition(ConsumerRecord<String, String> record) {
-logger.info(record.toString());
+    logger.info(record.toString());
 }
 ```
 
+* 다음은 **배치 리스너**를 활용한 예제이다.
+  * application.properties에 spring.kafka.listener.type을 BATCH로 지정해주어야 한다.
+  * 레코드 리스너와 달리 레코드를 List 혹은 ConsumerRecords를 통해 가져온다.
 
+```java
+@KafkaListener(topics = "test",
+        groupId = "test-group-01")
+public void batchListener(ConsumerRecords<String, String> records) {
+    records.forEach(record -> logger.info(record.toString()));
+}
 
+@KafkaListener(topics = "test",
+        groupId = "test-group-02")
+public void batchListener(List<String> list) {
+    list.forEach(recordValue -> logger.info(recordValue));
+}
 
+@KafkaListener(topics = "test",
+        groupId = "test-group-03",
+        concurrency = "3")
+public void concurrentBatchListener(ConsumerRecords<String, String> records) {
+    records.forEach(record -> logger.info(record.toString()));
+}
+```
+
+* 다음은 **BatchAcknowledgingConsumerAwareMessageListener** 사용 예제이다.
+  * application.properties에 spring.kafka.listener.type을 BATCH로 지정한다.
+  * ack-mode를 기본으로 둘 경우 리스너가 자동으로 커밋을 하기 때문에, 직접 커밋하는 코드를 두기 위해 spring.kafka.listener.ack-mode를 MANUAL\_IMMEDIATE로 지정한다.
+
+```java
+// 커밋을 수행하기 위해 Acknowledgement 객체를 인자로 받아 사용한다.
+@KafkaListener(topics = "test", groupId = "test-group-01")
+public void commitListener(ConsumerRecords<String, String> records, Acknowledgment ack) {
+    records.forEach(record -> logger.info(record.toString()));
+    ack.acknowledge();
+}
+
+// 동기 커밋, 비동기 커밋을 비롯한 컨슈머 메서드를 사용하기 위해 Consumer 객체를 인자로 받아 사용한다.
+@KafkaListener(topics = "test", groupId = "test-group-02")
+public void consumerCommitListener(ConsumerRecords<String, String> records, Consumer<String, String> consumer) {
+    records.forEach(record -> logger.info(record.toString()));
+    consumer.commitSync();
+}
+```
+
+### 커스텀 리스너 컨테이너
+
+* 서로 다른 설정을 가진 2개 이상의 리스너를 구현하거나 리밸런스 리스너를 구현하기 위해서는 커스텀 리스너 컨테이너를 구현해야 한다.
+* KafkaListenerContainerFactory 객체를 생성해 빈으로 등록해주어야 한다.
+
+```java
+@Configuration
+public class ListenerContainerConfiguration {
+
+    @Bean
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> customContainerFactory() {
+
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-kafka:9092");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+
+        // 리스너 컨테이너 팩토리 생성 시 컨슈머 기본 옵션을 설정하기 위한 객체
+        DefaultKafkaConsumerFactory cf = new DefaultKafkaConsumerFactory<>(props);
+        
+        // 리스너 컨테이너를 만들기 위해 직접적으로 사용되는 객체 / 이를 통해 2개 이상의 컨슈머 리스너를 만들 수 있다
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        
+        // 리밸런스 리스너 선언을 위해 setConsumerRebalanceListener 메서드 호출
+        factory.getContainerProperties().setConsumerRebalanceListener(new ConsumerAwareRebalanceListener() {
+            @Override
+            public void onPartitionsRevokedBeforeCommit(Consumer<?, ?> consumer, Collection<TopicPartition> partitions) {
+
+            }
+
+            @Override
+            public void onPartitionsRevokedAfterCommit(Consumer<?, ?> consumer, Collection<TopicPartition> partitions) {
+
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+
+            }
+
+            @Override
+            public void onPartitionsLost(Collection<TopicPartition> partitions) {
+
+            }
+        });
+        factory.setBatchListener(false);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.RECORD);
+        factory.setConsumerFactory(cf);
+        return factory;
+    }
+}
+```
+
+* 리스너 메서드에 빈으로 등록한 containerFactory 이름을 지정해준다.
+
+```java
+@KafkaListener(topics = "test",
+    groupId = "test-group",
+    containerFactory = "customContainerFactory")
+public void customListener(String data) {
+    logger.info(data);
+}
+```
 
 **출처**
 
 * 아파치 카프카 애플리케이션 프로그래밍
-* [https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd](https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd)ㅎ
+* [https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd](https://medium.com/apache-kafka-from-zero-to-hero/apache-kafka-guide-36-consumer-offset-commit-strategies-41ef6bf34fcd)
