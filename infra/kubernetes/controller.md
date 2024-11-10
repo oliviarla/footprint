@@ -301,3 +301,10 @@ spec:
 </strong></code></pre>
 
 ## 쿠버네티스 객체 간 오너십
+
+* 컨트롤러 리소스는 레이블 셀렉터를 통해 자신의 관리 대상 리소스를 결정한다. 이렇게 쿠버네티스 객체 간에는 위계를 형성할 수 있다.
+* 아래 명령을 통해 파드에서 관리 주체 리소스 정보를 확인할 수 있다.
+
+```
+kubectl get po -o custom-columns=NAME:'{.metadata.name}',OWNER:'{.metadata.ownerReferences[0].name}',OWNER_KIND:'{.metadata.ownerReferences[0].kind}'
+```

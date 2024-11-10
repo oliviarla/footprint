@@ -280,37 +280,117 @@ feedAll(cats) // 성공
 
 ### 반공변성
 
-* T 타입의 값을 소비하기만 한다면 in 키워드를 붙여야 한다.
+* T 타입에 in 키워드를 붙여야 한다.
 * 타입 B가 타입 A의 하위 타입일 때 Consumer\<A>가 Consumer\<B>의 하위 타입이면 Consumer\<T> 클래스는 타입 인자 T에 대해 반공변이다.
 * 예를 들어 Consumer\<Animal>은 Consumer\<Cat>의 하위 타입이다.
 
 <figure><img src="../../.gitbook/assets/image (156).png" alt=""><figcaption></figcaption></figure>
 
+* 즉, Cat 타입을 검증하기 위해 Animal 타입을 검증하는 클래스를 그대로 사용할 수 있다는 의미이다.
+* 클래스나 인터페이스의 각 파라미터마다 공변/반공변이 적용될 수 있다.
+* 아래는 P 타입은 in 위치, R 타입은 out 위치에서만 사용되도록 정의한 함수 인터페이스이다.
 
+```kotlin
+interface Function<in P, out R> {
+    operator fun invoke(p: P): R
+}
+```
 
+* 다음 예시는 공변과 반공변이 함께 있는 경우를 다룬다. Cat을 입력받아 Number를 반환하는 람다에 Animal을 입력받아 Int를 반환하는 함수를 넣을 수 있다. 즉, 상위 타입인 Animal을 입력받고 하위 타입인 Int를 반환하는 함수가 enumerateCats 함수 인자로 입력된다.
 
+```kotlin
+fun enumerateCats(f: (Cat) -> Number) {...}
+fun Animal.getIndex(): Int = ...
 
-
-
-
+>> enumerateCats(Animal::getIndex)
+```
 
 ### 사용 지점 변성
 
+* 클래스를 선언하면서 변성을 지정하는 **선언 지점 변성 방식**을 사용하면 해당 클래스를 사용하는 모든 장소에 변성 지정자가 영향을 끼치므로 편리하다.
+* 자바에서는 제네릭 타입을 사용할 때 마다 해당 타입 파라미터를 어떤 타입으로 대치할 수 있는지 명시해야 하며 이를 **사용 지점 변성**이라고 부른다.
+* 코틀린에서는 기본적으로 선언 지점 변성 방식을 사용하지만, 사용 지점 변성 방식도 제공한다.
+* MutableList 같은 상당 수의 인터페이스는 타입 파라미터로 지정된 타입을 소비하는 동시에 생산할 수 있으므로 일반적으로 공변적이지도 반공변적이지도 않다.
+* 원본 컬렉션을 복제하는 함수의 경우 원본 컬렉션의 원소를 읽어 새로운 컬렉션에 원소를 쓰게 된다. 이 때 원본 컬렉션의 원소 타입이 새로운 컬렉션의 원소 타입의 하위 타입이어도 동작하도록 아래와 같이 제네릭 타입 두 개를 두어 사용할 수 있다.
 
+```kotlin
+fun <T: R, R> copyData(source: MutableList<T>, destination: MutableList<R>) {
+    for (item in source) {
+        destination.add(item)
+    }
+}
+```
 
+* 위 함수를 out 변성 변경자를 사용해 하나의 제네릭 타입으로도 표현할 수 있다.
 
+```kotlin
+fun <T copyData(source: MutableList<out T>, destination: MutableList<R>) {
+    for (item in source) {
+        destination.add(item)
+    }
+}
+```
+
+* in이나 out 변경자를 붙이면 **타입 프로젝션**이 일어난다. 즉, 원래 타입을 그대로 가져오는 것이 아니라 out이라면 T 타입을 반환하는 메서드만 호출할 수 있는 타입이 되고, in 이라면 T 타입을 인자로 받는 메서드만 호출할 수 있는 타입이 된다.
 
 ### 스타 프로젝션
 
+* 제네릭 타입 인자 정보가 없음을 표현할 때 사용한다.
+* 예를 들어 원소 타입이 정해지지 않은 리스트는 `List<*>` 로 표현한다.
+* 그렇다고 `MutableList<*>`가 `MutableList<Any?>`와 같은 것은 아니다. 스타 프로젝션은 구체적인 한 타입을 저장함을 나타내는 것이므로 아무 원소나 다 담을 수 없다.
+* 스타 프로젝션은 자바의 와일드 카드 `<?>`와 대응된다.
+* 타입 파라미터를 시그니처에서 언급하지 않거나, 데이터를 읽지만 타입에 관심이 없거나, 타입 인자 정보가 중요하지 않을 때 스타 프로젝션을 사용할 수 있다.
 
+```kotlin
+fun printFirst(list: List<*>) {
+    if (list.isNotEmpty()) {
+        println(list.first()) // first()는 Any? 타입을 반환한다.
+    }
+}
+```
 
+* 위 함수를 제네릭을 사용해 나타내면 아래와 같으며, 제네릭 정보를 알 필요 없을 때 위와 같이 작성하면 된다.
 
+```kotlin
+fun <T> printFirst(list: List<T>) {
+    if (list.isNotEmpty()) {
+        println(list.first()) // first()는 T 타입을 반환한다.
+    }
+}
+```
 
+* **제네릭 타입**을 키로 하고 **제네릭 타입을 사용하는 클래스**를 값으로 하는 맵은 아래와 같이 구현해야 한다.
+  * 사용자가 항상 같은 제네릭 타입에 대한 키-값을 입력하도록 하고, 값을 반환 할 때에는 스타 프로젝션 대신 구체적인 제네릭 타입을 지정해 반환해주어야 한다.
+  * `FieldValidator<*>` 타입의 객체를 반환받으면 실제로 String, Int에 대한 검증이 불가능하다. 왜냐하면 해당 타입이 어떤 타입을 검증하는지 컴파일러가 모르기 때문이다. 따라서 Validators 클래스에서 구체적인 타입으로 캐스팅 후 반환해주어야 한다.
 
+```kotlin
+interface FieldValidator<in T> {
+    fun validate(input: T): Boolean
+}
 
+object DefaultStringValidator : FieldValidator<String> {
+    override fun validate(input: String) = input.isNotEmpty()
+}
 
+object DefaultIntValidator : FieldValidator<Int> {
+    override fun validate(input: Int) = input >= 0
+}
 
+object Validators {
+    private val validators =
+            mutableMapOf<KClass<*>, FieldValidator<*>>()
 
+    // validator 추가
+    fun <T: Any> registerValidator(
+            kClass: KClass<T>, fieldValidator: FieldValidator<T>) {
+        validators[kClass] = fieldValidator
+    }
 
-
-
+    // 원하는 타입에 맞는 validator 조회
+    @Suppress("UNCHECKED_CAST")
+    operator fun <T: Any> get(kClass: KClass<T>): FieldValidator<T> =
+        validators[kClass] as? FieldValidator<T>
+                ?: throw IllegalArgumentException(
+                "No validator for ${kClass.simpleName}")
+}
+```

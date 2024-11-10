@@ -336,6 +336,8 @@
   * [ConfigMap & Secret](infra/kubernetes/configmap-and-secret.md)
   * [Volume, Mount, Claim](infra/kubernetes/volume-mount-claim.md)
   * [Controller](infra/kubernetes/controller.md)
+  * [Multi Container Pod](infra/kubernetes/multi-container-pod.md)
+  * [StatefulSet & Job](infra/kubernetes/statefulset-and-job.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)
