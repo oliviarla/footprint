@@ -241,7 +241,7 @@
 * [자바 병렬 프로그래밍](java/undefined-1/README.md)
   * [15장](java/undefined-1/15.md)
 
-## 🪆 코틀린 <a href="#kotlin" id="kotlin"></a>
+## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
 
 * [코틀린 인 액션](kotlin/undefined/README.md)
   * [코틀린 언어의 특징](kotlin/undefined/undefined.md)
