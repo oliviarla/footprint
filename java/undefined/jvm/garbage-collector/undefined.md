@@ -34,7 +34,7 @@
 * 아래 그림과 같이 힙 영역을 **객체의 오래된 정도를 기준으로** 영역을 나누어, 가장 최신의 객체는 `Young Generation`, 오래된 객체는 `Old Generation`, 프로그램이 죽을 때까지 사용되는 객체는 `Permenent Generation`에 담을 수 있다.
 * 오래된 객체는 앞으로도 계속해서 참조될 확률이 높기 때문에 GC 빈도를 줄이고, 새로운 객체를 담는 영역은 비교적 자주 GC 작업을 하여 GC에 영향받는 메모리 영역을 대폭 줄일 수 있다.
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **young generation**
 

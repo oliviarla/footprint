@@ -100,7 +100,7 @@
 
 * G1 GC에서 힙은 하나의 메모리 영역이다. 즉, 다른 GC가 eden, survivor, old 영역을 가지는 것과 다르게 하나의 메모리 영역만을 갖도록 한다. 아래 사진을 보면 바로 이해할 수 있을 것이다.
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>여러 영역을 가지는 CMS</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>여러 영역을 가지는 CMS</p></figcaption></figure>
 
 <figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>하나의 영역만 가지는 G1</p></figcaption></figure>
 

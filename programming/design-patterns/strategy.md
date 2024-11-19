@@ -15,7 +15,7 @@
 * **컨텍스트**란 전략을 참조하며 원하는 기능을 제공하기 위해 전략에 알고리즘 수행을 위임한다.
 * 클라이언트는 컨텍스트를 생성할 때 원하는 전략 구현체를 전달한다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 
@@ -36,7 +36,7 @@
 * 이 구현 방식은 Context와 Strategy를 실행 전에 원하는 모양으로 조립해두고 Context를 실행하는 **선 조립, 후 실행** 방식이다.
 * 이로 인해 Context를 실행할 때 마다 Strategy 클래스를 변경하기 어렵다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Context 클래스
 

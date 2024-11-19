@@ -338,6 +338,8 @@
   * [Controller](infra/kubernetes/controller.md)
   * [Multi Container Pod](infra/kubernetes/multi-container-pod.md)
   * [StatefulSet & Job](infra/kubernetes/statefulset-and-job.md)
+  * [Rollout & Rollback](infra/kubernetes/rollout-and-rollback.md)
+  * [Helm](infra/kubernetes/helm.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)

@@ -12,7 +12,7 @@
   * 관리하던 컨테이너가 종료되면 대체 컨테이너를 생성한다.
 * 아래 그림처럼 디플로이먼트는 레플리카셋을 관리하고, 레플리카셋은 파드를 관리한다.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 레플리카셋의 YAML 정의 예시이다. replicas 필드를 통해 파드 수를 지정할 수 있다.
 

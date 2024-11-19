@@ -10,7 +10,7 @@
 * 핸들러란 특정 행동들을 독립적으로 실행할 수 있는 객체를 의미한다.
 * 각 핸들러는 요청을 받으면 **요청을 처리할지 아니면 체인의 다음 핸들러로 전달할지**를 결정한다.
 
-<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 모든 구상 핸들러에 공통적인 핸들러 인터페이스를 선언하고, 필요하다면 BaseHandler를 생성해 다음 핸들러의 참조를 저장하도록 한다. 핸들러 인터페이스의 구현체에는 요청을 확인한 후 처리할 지 다음 핸들러에 넘길 지 등 세부 로직이 담긴다.
 * 클라이언트는 체인을 구성하여 필요한 요청을 보내면 된다.

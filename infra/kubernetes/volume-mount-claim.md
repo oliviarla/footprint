@@ -338,7 +338,7 @@ kubectl exec deploy/sleep -- mkdir -p /node-root/volumes/pv01
 
 * 전체적인 구성은 아래 그림과 같다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt="" width="336"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt="" width="336"><figcaption></figcaption></figure>
 
 ## 스토리지 유형과 동적 볼륨 프로비저닝
 
