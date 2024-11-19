@@ -86,20 +86,53 @@ metadata:
 * 차트 간 의존 관계는 유연해야 한다.
 * 상위 차트가 하위 차트를 필요로 해야 하며, 하위 차트는 독립적으로 사용 가능해야 한다.
 * 하위 차트는 일반적으로 활용될 수 있도록 템플릿 변수를 사용해야 한다.
+* 상위 차트의 정의에서 하위 차트를 의존 차트 목록에 추가해야 한다. 그리고 하위 차트의 설정값을 상위 차트 정의에서 지정해야 한다.
+* 다음은 proxy, vweb 차트에 의존하는 pi 차트 정의와 pi 차트의 값 정의 예제이다.
 
+```yaml
+apiVersion: v2
+name: pi
+description: A Pi calculator
+type: application
+version: 0.1.0
+dependencies: 
+  - name: vweb
+    version: 2.0.0
+    repository: https://kiamol.net
+    condition: vweb.enabled
+  - name: proxy
+    version: 0.1.0
+    repository: file://../proxy
+    condition: proxy.enabled
+```
 
+```yaml
+# number of app Pods to run
+replicaCount: 2
+# type of the app Service:
+serviceType: LoadBalancer
+# settings for vweb
+vweb:
+   # whether to deploy vweb
+   enabled: false    
+# settings for the reverse proxy
+proxy:
+  # whether to deploy the proxy
+  enabled: false
+  # name of the app Service to proxy
+  upstreamToProxy: "{{ .Release.Name }}-web"
+  # port of the proxy Service
+  servicePort: 8030
+  # number of proxy Pods to run
+  replicaCount: 2
+```
+
+* 상위 차트는 지정된 버전의 하위 차트와 함께 패키징된다. 버전 수정 없이 차트를 업데이트하면 의존 관계에서 최신 상태를 받아볼 수 없게 되므로 항상 업데이트 시 버전 수정이 필요하다.
 
 ## 헬름으로 설치한 릴리즈의 업그레이드와 롤백
 
-
-
-
-
-
-
-
-
-
-
-
-
+* 쿠버네티스 정의에 따라 전략이 결정된다.
+* 클러스터에 애플리케이션을 한 세트 더 설치해 문제가 없는지 테스트해볼 수 있다.
+* `--atomic` 플래그를 제공하여 helm upgrade 시 원자적으로 롤백해주는 기능을 제공한다. 따라서 모든 리소스의 업데이트가 끝나기를 기다렸다가 만약 실패한 리소스가 있다면 다른 리소스들을 이전 상태로 되돌린다.
+* `helm history <헬름 프로세스 이름>` 명령을 통해 설치 히스토리를 자세히 확인할 수 있다.
+* `helm rollback <헬름 프로세스 이름> --revision <리비전 번호>` 명령을 이용해 특정 리비전으로 롤백할 수 있다.
