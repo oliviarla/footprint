@@ -340,6 +340,8 @@
   * [StatefulSet & Job](infra/kubernetes/statefulset-and-job.md)
   * [Rollout & Rollback](infra/kubernetes/rollout-and-rollback.md)
   * [Helm](infra/kubernetes/helm.md)
+  * [개발 워크플로우와 CI/CD](infra/kubernetes/ci-cd.md)
+  * [자기수복형 애플리케이션](infra/kubernetes/undefined-1.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)
