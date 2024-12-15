@@ -11,7 +11,7 @@
 * 복합 객체 구조를 생성할 때 많이 쓰인다.
 * 아래와 같이 Builder 인터페이스를 구현하여 다양한 생성 단계를 가진 빌더 객체를 만들 수 있다. 각 빌더 객체로부터 얻은 결과 객체는 같은 클래스 계층구조 또는 인터페이스에 속할 필요가 없다. 디렉터 클래스를 생성하면 빌더 객체로 객체를 생성하는 방법을 캡슐화할 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt="" width="360"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt="" width="360"><figcaption></figcaption></figure>
 
 * 아래와 같이 점층적 생성자로 인해 코드가 복잡해질 경우 빌더 패턴을 사용해 클라이언트가 필요한 단계들만 설정해 객체를 생성하도록 하면 된다.
 

@@ -61,7 +61,7 @@ public class Test {
 ## **로 타입을 사용하는 경우**
 
 * 클래스 리터럴은 로 타입을 사용해야 한다. 예를 들어 List.class, String\[].class, int.class는 허용되지만, List\<String>.class, List\<?>.class는 사용 불가
-* instanceof 연산자는 비한정적 와일드카드 타입 외에 매개변수화 타입에는 적용할 수 없다. **런타임(Runtime)**에 제네릭 타입 정보가 지워지기 때문이다. 로 타입이든 비한정적 와일드카드 타입이든 instanceof는 똑같이 동작하므로, 코드가 간결하도록 로 타입을 사용하도록 하자.
+* instanceof 연산자는 비한정적 와일드카드 타입 외에 매개변수화 타입에는 적용할 수 없다. **런타임(Runtime)**&#xC5D0; 제네릭 타입 정보가 지워지기 때문이다. 로 타입이든 비한정적 와일드카드 타입이든 instanceof는 똑같이 동작하므로, 코드가 간결하도록 로 타입을 사용하도록 하자.
 
 ```jsx
 if( o instanceof Set) {

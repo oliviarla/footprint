@@ -198,11 +198,11 @@ spec:
 * maxSurge 값으로 업데이트 동안 생기는 **잉여 파드의 최대 수**를 지정할 수 있다. 즉, 새 레플리카 셋에서 동시에 새로 시작되는 파드의 수를 지정해 스케일링 속도를 조절할 수 있다.
 * 예를 들어 replicas가 3이고 maxSurge는 1, maxUnavailable은 0으로 설정하면 디플로이먼트는 최대 네 개의 레플리카를 동시에 가질 수 있다. 따라서 새로운 레플리카 셋의 파드가 하나 먼저 만들어진 후 기존 레플리카 셋의 파드를 제거하게 된다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 * maxSurge가 1, maxUnavailable이 1이면 기존 파드가 하나 삭제되는 동시에 새로운 파드가 2개 생성된다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 다음 두 값을 통해 롤아웃 속도를 조절할 수 있다.
   * minReadySeconds로 지정된 값의 시간동안 오류로 종료되는 컨테이너가 없어야 파드가 안정적이라고 판정한다. 이를 통해 신규 파드 상태가 안정적인지 확인할 수 있는 시간 여유를 둘 수 있다.

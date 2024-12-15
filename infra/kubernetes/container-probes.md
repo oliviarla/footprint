@@ -1,4 +1,4 @@
-# 자기수복형 애플리케이션
+# Container Probes
 
 ## 컨테이너 프로브
 
@@ -106,43 +106,3 @@ spec:
 * 헬름 차트에서는 `--atomic` 옵션을 통해 작업이 실패할 경우 자동으로 애플리케이션을 롤백해주는데, 프로브의 상태 체크도 작업 실패로 간주한다.
 * 헬름 업그레이드 전에 수행할 잡을 설정하여 해당 잡에 테스트나 검증하는 내용을 작성하고 실패 시 업그레이드를 실패하도록 할 수도 있다.
 * 헬름 차트에서는 kubectl에서 계속 파드를 재시작하거나 CrashLoopBackOff 상태가 되어버리는 것과 달리 자동으로 애플리케이션을 롤백시켜준다.
-
-## 리소스 사용량 제한
-
-* 파드 정의에서 컨테이너가 사용 가능한 리소스 총량을 제한할 수 있다. 이를 통해 노드의 CPU, 메모리의 사용량을 특정 파드가 전부 사용해버리지 않도록 할 수 있다.
-* 리소스 제한은 컨테이너 수준에서 지정되지만, 파드 정의에 포함되는 내용이므로 kubectl apply로 배치하면 파드가 새 파드로 대체된다.
-
-<pre class="language-yaml"><code class="lang-yaml">apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: memory-allocator
-  labels:
-    kiamol: ch12
-spec:
-  selector:
-    matchLabels:
-      app: memory-allocator
-  template:
-    metadata:
-      labels:
-        app: memory-allocator
-    spec:
-      containers:
-        - name: api
-          image: kiamol/ch12-memory-allocator
-<strong>          resources:
-</strong><strong>            limits:
-</strong><strong>              memory: 50Mi
-</strong></code></pre>
-
-* 리소스쿼터 객체를 통해 네임스페이스의 리소스 사용량을 제한할 수 있다.
-
-<pre class="language-yaml"><code class="lang-yaml">apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: memory-quota
-  namespace: kiamol-ch12-memory
-spec:
-<strong>  hard:
-</strong><strong>    limits.memory: 150Mi
-</strong></code></pre>
