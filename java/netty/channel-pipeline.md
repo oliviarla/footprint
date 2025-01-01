@@ -30,7 +30,7 @@ description: 채널에서 발생한 이벤트가 이동하는 채널 파이프�
 
 ### 구조
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 네티의 채널, 이벤트, 이벤트 핸들러는 전기의 흐름과 비슷하다.
 * 채널은 일반적인 소켓 프로그래밍에서 말하는 소켓과 같다. (발전소)

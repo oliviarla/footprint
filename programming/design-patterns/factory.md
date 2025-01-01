@@ -40,24 +40,57 @@ ConcreteProduct <.. ConcreteCreator
 
 ### 추상 팩토리 패턴
 
-* 구현 클래스에 의존하지 않고도 서로 연관되거나 의존적인 객체로 이뤄진 **제품군**을 생산하는 인터페이스를 제공한다. 서브 클래스에서 구현 클래스를 생성한다.
+* 구현 클래스에 의존하지 않고도 서로 연관되거나 의존적인 객체로 이뤄진 **제품군**을 생산하는 인터페이스를 제공한다.&#x20;
+* 팩토리 인터페이스를 구현한 클래스에서 서로 연관되는 클래스들을 생성한다.
 * 클라이언트에서 추상 인터페이스로 Product를 공급받을 수 있으며 구체적인 Product가 어떤지는 몰라도 된다.
 * 추상 팩토리를 사용하려면 클라이언트에서 추상 팩토리 인스턴스를 만든 후 메서드를 호출해야 한다.
 
 <figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
 
+* 추상 팩토리는 팩토리 메서드 패턴 혹은 싱글톤 패턴을 이용해 구현된다.&#x20;
+
 ## 장단점
 
 * 장점
   * 생성하는 역할과 생성된 객체를 사용하는 역할이 느슨하게 결합되어 변경에 유리하다. 즉, 단일 책임 원칙과 개방 폐쇄 원칙을 지킨다.
+  * 여러 제품군 중 하나를 선택해 시스템을 설정해야 하고 한 번 구성한 제품을 다른 것으로 대체해야 할 때 유용하다.
+  *
 * 단점
   * 패턴을 구현하기 위해 팩토리 클래스들을 도입해야 하므로 코드가 복잡해질 수 있다.
 
 ## 예시
 
+* button, checkbox를 OS 마다 다른 형태로 제공해야 할 때 아래와 같이 추상 팩토리를 정의하고 이를 구현하는 여러 클래스들을 제공할 수 있다.
 
+```java
+public interface GUIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
+}
 
+public class MacOSFactory implements GUIFactory {
 
+    @Override
+    public Button createButton() {
+        return new MacOSButton();
+    }
 
+    @Override
+    public Checkbox createCheckbox() {
+        return new MacOSCheckbox();
+    }
+}
 
+public class WindowsFactory implements GUIFactory {
 
+    @Override
+    public Button createButton() {
+        return new WindowsButton();
+    }
+
+    @Override
+    public Checkbox createCheckbox() {
+        return new WindowsCheckbox();
+    }
+}
+```
