@@ -307,7 +307,7 @@ roleRef:
 
 * 하나의 네임스페이스에 존재하는 모든 서비스 계정을 한 그룹으로 삼아 롤 바인딩을 할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ```yaml
 apiVersion: v1
