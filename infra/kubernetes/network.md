@@ -1,4 +1,4 @@
-# Network
+# Network
 
 ## 쿠버네티스 내부 네트워크 트래픽 라우팅
 
@@ -139,7 +139,7 @@ spec:
   type: NodePort
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra">https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra">https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra</a></p></figcaption></figure>
 
 ## 쿠버네티스 클러스터 외부로 트래픽 전달하기
 

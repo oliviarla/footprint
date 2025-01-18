@@ -214,7 +214,7 @@
   * [16장: CompletableFuture](java/modern-java-in-action/16-completablefuture.md)
   * [17장: 리액티브 프로그래밍](java/modern-java-in-action/17.md)
   * [18장: 함수형 프로그래밍](java/modern-java-in-action/18.md)
-  * [19장: 함수형 프로그래밍 기법](java/modern-java-in-action/19.md)
+  * [19장: 함수형 프로그래밍 기법](java/modern-java-in-action/19.md)
   * [20장: 스칼라 언어 살펴보기](java/modern-java-in-action/20.md)
 * [자바의 이모저모](java/variety/README.md)
   * [Javax](java/variety/javax.md)
@@ -321,6 +321,8 @@
 
 ## 📽️ 인프라 <a href="#infra" id="infra"></a>
 
+* [리눅스](infra/undefined/README.md)
+  * [주요 명령어 모음](infra/undefined/undefined.md)
 * [Docker](infra/docker/README.md)
   * [Docker](infra/docker/docker.md)
   * [Docker Compose](infra/docker/docker-compose.md)
@@ -332,7 +334,7 @@
   * [Pod](infra/kubernetes/pod.md)
   * [Configuration](infra/kubernetes/configuration.md)
   * [ReplicationSet](infra/kubernetes/replicationset.md)
-  * [Network](infra/kubernetes/network.md)
+  * [Network](infra/kubernetes/network.md)
   * [ConfigMap & Secret](infra/kubernetes/configmap-and-secret.md)
   * [Volume, Mount, Claim](infra/kubernetes/volume-mount-claim.md)
   * [Controller](infra/kubernetes/controller.md)
@@ -349,6 +351,7 @@
   * [Multi Node/Architecture Cluster](infra/kubernetes/multi-node-architecture-cluster.md)
   * [Workload & Pod management](infra/kubernetes/workload-and-pod-management.md)
   * [CRD & Operator](infra/kubernetes/crd-and-operator.md)
+  * [Serverless Function](infra/kubernetes/serverless-function.md)
   * [K8S Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 * [Kafka](infra/kafka/README.md)
   * [카프카 개요](infra/kafka/intro.md)

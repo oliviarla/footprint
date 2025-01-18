@@ -27,4 +27,4 @@ map.merge(2, 1, Integer::sum);
 * 한정적 인스턴스 메서드 참조: 수신 객체(참조 대상 인스턴스)를 특정한다.
 * 비한정적 인스턴스 메서드 참조: 수신 객체를 특정하지 않는다.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
