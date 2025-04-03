@@ -12,7 +12,7 @@
   * 관리하던 컨테이너가 종료되면 대체 컨테이너를 생성한다.
 * 아래 그림처럼 디플로이먼트는 레플리카셋을 관리하고, 레플리카셋은 파드를 관리한다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 레플리카셋의 YAML 정의 예시이다. replicas 필드를 통해 파드 수를 지정할 수 있다.
 
@@ -95,7 +95,7 @@ spec:
 * 디플로이먼트는 레플리카셋 위에 유용한 관리 계층을 추가한다. 컨트롤러 리소스로는 디플로이먼트를 먼저 고려해야 한다.
 * 디플로이먼트는 여러 레플리카셋을 관리할 수 있다. 레플리카셋 버전업을 하고자 한다면, 기존 레플리카셋의 파드 수를 0으로 줄이고 새로운 레플리카셋의 파드 수를 늘리면 된다.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 디플로이먼트에 스케일링을 적용하려면 레플리카셋과 마찬가지로 replicas 필드를 둘 수 있다. 생략 시 기본값 1이 사용된다.
 

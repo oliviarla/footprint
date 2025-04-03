@@ -73,6 +73,18 @@
     * [플라이웨이트 패턴](programming/design-patterns/structural/undefined-1.md)
   * [복합 패턴](programming/design-patterns/undefined.md)
 
+***
+
+* [시스템 설계](system-architecture/README.md)
+  * [1. 사용자 수에 따른 규모 확장성](system-architecture/1..md)
+  * [2. 개략적 규모 추정](system-architecture/2..md)
+  * [3. 시스템 설계 접근법](system-architecture/3..md)
+  * [4. 처리율 제한 장치](system-architecture/4..md)
+  * [5. 안정 해시](system-architecture/5..md)
+  * [6. 키-값 저장소](system-architecture/6..md)
+  * [7. 유일한 ID 생성기](system-architecture/7.-id.md)
+  * [8. URL 단축기](system-architecture/8.-url.md)
+
 ## 🏝️ 자바 <a href="#java" id="java"></a>
 
 * [자바의 내부 속으로](java/undefined/README.md)
@@ -238,8 +250,9 @@
   * [다양한 ChannelHandler와 코덱](java/netty/https.md)
   * [웹소켓](java/netty/websocket.md)
   * [UDP 브로드캐스팅](java/netty/udp.md)
-* [자바 병렬 프로그래밍](java/undefined-1/README.md)
-  * [15장](java/undefined-1/15.md)
+* [자바 병렬 프로그래밍](java/concurrency/README.md)
+  * [2장: 스레드 안전성](java/concurrency/2.md)
+  * [15장: 단일 연산 변수와 논블로킹 동기화](java/concurrency/15.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
 

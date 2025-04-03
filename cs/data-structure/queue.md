@@ -11,7 +11,7 @@ description: 선입선출을 기반으로 한 선형 자료구조
 * 큐는 기본적으로 배열 혹은 리스트를 사용해 구현되며, 배열 양 끝의 값만 접근이 가능하다.
 * 큐의 가장 앞부분을 보통 head라고 부르며, 뒷부분은 보통 tail, rear라고 부른다.
 
-<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33) (1).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
 
 ## Deque
 

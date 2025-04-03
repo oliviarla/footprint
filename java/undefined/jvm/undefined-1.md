@@ -9,7 +9,7 @@
   * Linking 과정은 내부적으로 `Verification(검증) -> Preparation(준비) -> Resolution(해석)` 로 다시 나뉜다.
   * 반드시 로딩, 검증, 준비, 초기화 순서대로 진행되어야 한다. 하지만 시작 시점을 기준으로 하기 때문에 각 단계를 병렬로 수행할 수는 있다. 해석 단계는 초기화 후에 시작할 수 있다.&#x20;
 * 클래스 로더는 계층 구조를 가진다. 이를 통해 특정 클래스나 리소스를 찾는 요청이 들어왔을 때 위임 모델을 사용하여 부모 클래스에게 먼저 요청을 전달해보고 만약 처리하지 못했다면 현재 클래스 로더에서 처리한다.
-* 모든 [`Class`](https://cr.openjdk.org/\~mr/jigsaw/spec/api/java/lang/Class.html) 클래스의 객체에는 해당 객체를 정의한 클래스 로더에 대한 참조가 포함되어 있다.
+* 모든 [`Class`](https://cr.openjdk.org/~mr/jigsaw/spec/api/java/lang/Class.html) 클래스의 객체에는 해당 객체를 정의한 클래스 로더에 대한 참조가 포함되어 있다.
 
 ## 동작 과정
 
@@ -42,7 +42,7 @@
 
 ## 종류
 
-<figure><img src="../../../.gitbook/assets/image (8) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Bootstrap ClassLoader
 

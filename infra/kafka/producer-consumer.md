@@ -61,11 +61,11 @@ Accumulator --> Sender
     * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
     * Accumulator에는 Partition마다 Deque를 가지고 있으며 Deque 내부에는 batch를 통해 레코드들을 묶어놓는다.
 
-    <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * Sender는 브로커 별로 레코드를 전송하는 역할을 하는데, 브로커의 파티션마다 보내야 할 batch 데이터를 가져와 `Ready List`에 저장해둔 후 한꺼번에 보낸다. 이 때 한 번의 요청이 처리할 수 있는 최대 용량까지만 batch 데이터를 담을 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * Accumulator에 레코드가 충분히 차면 배치 형태로 묶어 Sender에 전달한다. Sender는 이 데이터를 브로커에 전송한다.
 * send 메서드의 결과로는 `Future<RecordMetadata>` 타입이 반환되는데, 만약 레코드가 정상적으로 적재되었다면 파티션 번호와 오프셋 번호가 담겨 반환된다. 혹은 send 메서드에 Callback 객체를 담아 응답이 왔을 때 콜백이 호출되도록 할 수 있다.
 
@@ -130,7 +130,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<String, String>(confi
   * 프로듀서가 전송한 데이터가 브로커들에 정상적으로 저장되었는지 여부를 확인하기 위한 옵션이다.
   * 기본값은 1이며, 리더 파티션에 데이터가 저장되면 성공으로 판단한다. 복제 개수를 2 이상으로 운영할 경우 리더 파티션에 적재된 데이터가 팔로워 파티션에는 동기화되지 않은 상황에서 리더 파티션에 장애가 나면 데이터가 유실될 수 있다. 리더 파티션으로부터 응답값을 받을 때 까지 기다리므로 acks를 0으로 설정하는 것에 비해 느리다.
   * 0으로 설정하면 프로듀서가 리더 파티션으로 데이터를 전송한 후 바로 성공했다고 판단한다. 따라서 리더 파티션에 데이터가 몇 번째 오프셋으로 저장되었는지 확인할 수 없다. 또한 데이터 전송의 실패 여부도 알 수 없기 때문에 retries 옵션값을 주어도 무의미해진다. 데이터가 일부 유실되더라도 전송 속도만 빠르면 될 경우 유용하다.
-  * \-1로 설정하면 토픽의 min.insync.replicas 개 만큼의 팔로워 파티션에 데이터가 저장되었음을 확인해야 성공으로 판단한다. 일부 브로커에 장애가 발생해도 안전하게 데이터를 전송하고 저장할 수 있다.
+  * -1로 설정하면 토픽의 min.insync.replicas 개 만큼의 팔로워 파티션에 데이터가 저장되었음을 확인해야 성공으로 판단한다. 일부 브로커에 장애가 발생해도 안전하게 데이터를 전송하고 저장할 수 있다.
   * all로 설정하면 ISR에 포함된 파티션들(리더 파티션도 포함) 중 min.insync.replicas 개 만큼의 파티션에 데이터가 적재되었음을 보장한다. min.insync.replicas를 1로 두면 acks를 1로 둔 것과 동일한데, 이는 리더 파티션이 ISR에 포함되어 있고 가장 먼저 적재가 완료되기 때문이다. min.insync.replicas를 2 이상으로 두면 브로커가 동시에 여러 개 중단될 가능성이 거의 없으므로 데이터가 유실되지 않을 것이다.
   * min.insync.replicas 개수보다 실제 브로커 개수가 항상 커야 한다. 만약 그렇지 않으면 NotEnoughRepilcasException 등의 예외가 발생하여 토픽으로 데이터를 보낼 수 없게 된다. 또한 브로커 개수와 동일한 숫자로 설정하면 버전 업그레이드 등으로 인해 롤링 다운 타임이 발생할 때 예외가 발생하므로, 브로커 개수 미만으로 설정해야 한다.
   * 3대 이상의 브로커를 클러스터 형태로 운영할 경우 토픽의 복제 개수는 3, min.insync.replicas는 2, acks는 all로 설정하는 것이 좋다.
@@ -175,7 +175,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<String, String>(confi
 * 트랜잭션 프로듀서는 트랜잭션의 시작과 끝을 트랜잭션 레코드를 한 개 더 보낸다. 트랜잭션이 끝난 상태를 표시하는 정보를 가지며, 레코드이기 때문에 오프셋 한 개를 차지한다.
 * 아래 그림에서 commit 이라는 레코드가 트랜잭션 레코드이다.
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p><a href="https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html">https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p><a href="https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html">https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html</a></p></figcaption></figure>
 
 * 트랜잭션 컨슈머는 파티션에 저장된 트랜잭션 레코드를 확인하면 트랜잭션이 완료되었다고 간주하고 데이터를 읽는다. 만약 트랜잭션 레코드가 존재하지 않으면 아직 트랜잭션이 완료되지 않았다고 판단하고 데이터를 가져가지 않는다.
 

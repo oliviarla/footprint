@@ -6,7 +6,7 @@
 
 ## 로그인 처리 방법
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 그림에 적힌 번호대로 어떤 작업이 이루어지는지 확인해보자.
 

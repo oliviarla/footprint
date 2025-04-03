@@ -48,7 +48,7 @@
 * JVM에서는 클래스 로더가 로딩되어 **실행에 필요한 것을 JVM 내부에 저장**하고, 변환된 **바이트코드를 실행 엔진이 해석하고 실행**한다.
 * 자바 컴파일러는 JVM 요소가 아닌 JDK의 일부이다.
 
-<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>자바 컴파일러의 동작</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>자바 컴파일러의 동작</p></figcaption></figure>
 
 ## 바이트코드와 코드캐시
 
@@ -85,7 +85,7 @@
 
 *   Just In Time 컴파일러라는 뜻으로, 바이트코드(컴파일된 자바 코드)를 하드웨어의 기계어로 바로 변환해준다.
 
-    <figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (9) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * hot code인지 확인한 후 JIT 컴파일러로 가거나 Interpreter로 간다.
 * C1과 C2 컴파일러 모드로 구성되어 있다.
   * Java 7 버전 이후에는 두 모드를 혼합하여 C1 모드로 웜업 후 C2로 전환 (7 이전 버전에선 하나만 골라야 함)&#x20;

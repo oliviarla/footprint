@@ -23,9 +23,9 @@
 * translation과 linking 과정을 수행해주는 도구이다.
 * preprocessor, compiler, assembler, linker를 사용한다.
 * gcc는 GNU C Compiler의 약자로, c언어의 컴파일러이다.
-  * \-O2 는 최적화 수준을 지정하는 옵션이다. 성능을 개선하기 위해 코드의 불필요한 부분을 제거하거나 반복을 줄이는 등의 최적화가 이뤄진다.
-  * \-g는 디버깅 정보를 포함하도록 하는 옵션이다. 컴파일된 바이너리 파일에 디버깅을 위한 추가 정보가 포함되며, `gdb`와 같은 디버거를 통해 소스 코드 수준에서 디버깅이 가능하다.
-  * \-o는 object 파일의 이름을 지정하는 옵션이다.
+  * -O2 는 최적화 수준을 지정하는 옵션이다. 성능을 개선하기 위해 코드의 불필요한 부분을 제거하거나 반복을 줄이는 등의 최적화가 이뤄진다.
+  * -g는 디버깅 정보를 포함하도록 하는 옵션이다. 컴파일된 바이너리 파일에 디버깅을 위한 추가 정보가 포함되며, `gdb`와 같은 디버거를 통해 소스 코드 수준에서 디버깅이 가능하다.
+  * -o는 object 파일의 이름을 지정하는 옵션이다.
   * 맨 마지막에는 컴파일할 소스 파일을 지정해야 한다.
 
 ```
@@ -52,7 +52,7 @@ gcc -O2 -g -o p main.c swap.c
 * 모든 object file 종류에 대해 ELF 포맷이 적용된다.
 *   아래와 같이 구성 요소가 나뉜다.
 
-    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * ELF header
       * 파일을 실행할 때, 커널이나 로더가 프로그램을 어떻게 메모리에 로드하고 실행할지 결정하는 데 사용된다.
