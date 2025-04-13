@@ -73,4 +73,4 @@ java -jar <jar 이름>
 
 * 코틀린 컴파일러로 생성한 코드는 코틀린 런타임 라이브러리를 통해 실행할 수 있으므로 코틀린으로 컴파일한 애플리케이션을 배포하기 위해서는 런타임 라이브러리도 함께 배포되어야 한다.
 
-<figure><img src="../../.gitbook/assets/image (17) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

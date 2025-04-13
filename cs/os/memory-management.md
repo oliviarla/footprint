@@ -8,7 +8,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
 
 ## Swap
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 메인 메모리에 원하는 데이터가 없다면 하드 디스크의 데이터 접근해 메모리로 올려두고(swap in), 메모리에서 사용하지 않을 것 같은 데이터는 하드디스크에 저장한다. (swap out)
 * 어떤 프로세스를 swap in, swap out 할지는 CPU 스케줄러에 의해 결정된다.
@@ -54,7 +54,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
   * page table의 크기가 클수록 frame 찾을 때 많은 시간이 소요된다.
   * TLB가 paging이 가지는 오버헤드를 줄일 수 있지만 context switch가 자주 발생하면 프로세스마다 TLB가 다르기 때문에 TLB를 fresh out(교체)하는 비용 이 많이 들 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (23) (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
 
 

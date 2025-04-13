@@ -8,7 +8,7 @@
 * 토픽의 데이터인 레코드를 병렬로 처리할 수 있도록 하기 위해 데이터를 파티션 단위로 나눈다.
 * 파티션은 큐와 비슷한 FIFO 구조이며 파티션의 데이터는 컨슈머가 소비하게 된다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 적정 파티션 개수
 
@@ -59,7 +59,7 @@
 * 리더 파티션은 replica.lag.time.max.ms 속성값으로 입력된 주기마다 팔로워 파티션이 데이터를 복제한 상태인지 확인한다. 만약 이 때 데이터가 복제되지 않은 상태라면 팔로워 파티션에 문제가 생겼다고 판단하고 ISR 그룹에서 제외한다.
 * 아래 그림과 같이 토픽의 파티션들이 브로커에 나뉘어 있고, 같은 오프셋을 가지고 있다면 하나의 ISR 그룹으로 묶이게 된다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt="" width="450"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="450"><figcaption></figcaption></figure>
 
 * ISR로 묶인 파티션들 중 팔로워는 리더의 데이터를 그대로 담고 있으므로 만약 새로운 리더가 필요할 때 선출될 자격이 있다. 반면 ISR에 속하지 못한 팔로워는 데이터 유실 가능성이 크므로 새로운 리더로 선출될 수 없다.
 * 만약 ISR 그룹에 팔로워 파티션이 없다면 리더 파티션이 재구동될 때 까지 기다려야 한다. 따라서 서비스가 중단될 수 있다.

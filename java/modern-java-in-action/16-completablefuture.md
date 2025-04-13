@@ -197,7 +197,7 @@ public List<String> findPrices(String product) {
 ```java
 private final Executor executor = Executors.newFixedThreadPool(Math.min(shops.size(), 100),
     new ThreadFactory() {
-  public Thread new Thread(Runnable r) {
+  public Thread newThread(Runnable r) {
     Thread t = new Thread(r);
     t.setDeamon(true);
     return t;

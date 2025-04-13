@@ -51,6 +51,6 @@ kubeadm join <control plain ip addr> --token <join token> --discovery-token-ca-c
 * 쿠버네티스 클러스터에서 서로 다른 아키텍처의 애플리케이션을 실행하려면 각 아키텍처에 맞는 노드가 있어야한다.
 * 다음과 같은 클러스터처럼 ARM CPU 리눅스, AMD CPU 리눅스, 윈도우 노드들을 갖도록 구성할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 컨트롤플레인은 리눅스 전용이지만 kubelet, kube-proxy는 크로스 플랫폼을 지원한다.

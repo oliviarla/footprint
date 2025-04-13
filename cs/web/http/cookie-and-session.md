@@ -26,7 +26,7 @@
 * 매 요청마다 서버는 캐시, DB, 메모리 등에서 클라이언트로부터 받은 세션 아이디로 세션이 존재하는지 확인해야 하므로 token 방식에 비해 리소스가 든다.
 * 이 때 사용되는 쿠키의 종류는 session cookie이며, 서버가 종료되거나 유효기간이 만료되거나 클라이언트 브라우저가 종료되면 제거된다.
 
-<figure><img src="../../../.gitbook/assets/image (24) (1).png" alt=""><figcaption><p><a href="https://drsggg.tistory.com/388">https://drsggg.tistory.com/388</a></p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (24) (1) (1).png" alt=""><figcaption><p><a href="https://drsggg.tistory.com/388">https://drsggg.tistory.com/388</a></p></figcaption></figure>
 
 ### HttpSession
 
