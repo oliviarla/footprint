@@ -43,7 +43,7 @@
 
     * 인터넷에 특화된 네트워크 구조
 
-    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 분류
 
@@ -93,11 +93,11 @@
 * 가정집에서 사용하는 공유기는 2계층 스위치 + 3계층 라우터 + 4계층 NAT과 간단한 방화벽 기능을 모아둔 장비이다.
 * 모뎀은 근거리/원거리 통신 기술을 변환해주는 장비이다. 기가 인터넷의 경우 대부분 FTTH 모뎀을 사용한다.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 데이터센터 네트워크
 
 * 빠르고 안정적인 대용량 서비스를 제공하기 위해 이중화 기술과 고속 이더넷 기술이 사용된다.
 * 일반 서버들은 TOR(Top of Rack) 스위치와 연결되고, TOR 스위치들은 Spine 스위치와 연결된다.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
