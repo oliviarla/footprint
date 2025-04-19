@@ -84,7 +84,7 @@
 
 > static 영역인 10000000(16진수) 이전에는 항상 0xxxxxxx 값이므로 이를 이진수로 표현하면 맨 앞 4bit는 항상 0이다. 그리고 instruction은 4bytes이고 Memory Alignment 특성 상 항상 4의 배수부터 할당되므로 이진수의 맨 뒷자리 2bit도 항상 0일 것이다. 이진수로 나타내면 `0000(6*4 + 2 bit)00` 가 되기 때문에 총 32bit 데이터를 26bit로만으로도 구분이 가능하다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 데이터 크기
 
@@ -168,7 +168,7 @@
 * `funct`: function code, op코드에서 추가적으로 필요한 것들 명시한다. op를 0으로 두고 funct 값을 조정해 수행될 명령을 선택할 수 있다.
 * 아래를 보면 add 명령어를 사용할 때 10진수 값, 2진수 값을 알 수 있다. 이 때 2진수를 4자리씩 끊어 16진수로 표현할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
 #### I-type
 

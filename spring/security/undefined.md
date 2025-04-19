@@ -44,4 +44,4 @@ httpSecurity
 * 커스텀 LogoutSuccessHandler가 등록되면, 해당 LogoutSuccessHandler만 동작하게 된다.
 * 커스텀 LogoutHandler가 등록되면, 기존 LogoutHandler와 함께 커스텀 LogoutHandler도 동작하게 된다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

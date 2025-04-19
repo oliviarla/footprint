@@ -10,7 +10,7 @@ description: Key와 Value 형태로 이뤄진 데이터 구조
 * 하나의 Key는 하나의 Value와 매핑된다.
 * 맵의 구현 방식으로 여러 종류가 있다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## HashMap
 

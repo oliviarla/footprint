@@ -118,7 +118,7 @@ spec:
 * 외부 로드밸런서를 두지 않으므로 트래픽이 바로 클러스터 노드에 들어가게 된다.
 * 트래픽이 클러스터에 들어온 후에는 어느 노드가 요청을 받더라도 대상 파드로 요청이 들어간다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 서비스에서 설정된 포트가 모든 노드에서 개방되어 있어야 한다. 따라서 로드밸런서 서비스만큼 유연하지 않고, 다중 노드 클러스터에서 로드밸런싱 효과를 얻을 수 없다.
 * 또한 클러스터 환경에 따른 동작방식이 다 다르기 때문에 일관성이 없어 실제 사용할 일이 별로 없다.
@@ -139,7 +139,7 @@ spec:
   type: NodePort
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra">https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra">https://www.youtube.com/watch?app=desktop&#x26;v=RQbc_Yjb9ls&#x26;ab_channel=AntonPutra</a></p></figcaption></figure>
 
 ## 쿠버네티스 클러스터 외부로 트래픽 전달하기
 
@@ -213,7 +213,7 @@ kubectl get endpoints <엔드포인트 이름>
 
 * 헤드리스 서비스를 사용할 때 DNS 조회 결과가 엔트포인트의 IP 주소가 아닌 ClusterIP 주소를 가리킨다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 쿠버네티스 서비스를 --all 을 사용해 지우면 kubernetes API까지 삭제하게 되므로, 서비스를 명시적으로 지정해 삭제해야 한다.
 

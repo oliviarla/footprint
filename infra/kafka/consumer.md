@@ -375,7 +375,7 @@ for (int i = 0; i < CONSUMER_COUNT; i++) {
 * 컨슈머가 정상 동작하는지 여부를 확인하는 지표 중 하나이다.
 * 아래와 같이 프로듀서가 가장 최근에 추가한 레코드와 컨슈머가 가장 최근에 읽은 레코드 간의 차이를 LAG이라고 한다.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption><p><a href="https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str">https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str">https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.0/html/deploying_and_upgrading_amq_streams_on_openshift/assembly-metrics-setup-str</a></p></figcaption></figure>
 
 * 컨슈머 그룹과 토픽, 파티션 별로 컨슈머 랙이 존재하게 된다.
 * 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 많으면 컨슈머 랙은 늘어나게 된다. 반대로 프로듀서가 보내는 데이터 양이 컨슈머 데이터 처리량보다 적으면 컨슈머 랙은 줄어들게 된다.

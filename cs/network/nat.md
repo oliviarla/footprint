@@ -13,7 +13,7 @@
 
 * IPv4 주소를 장비마다 할당할 경우 IP가 고갈되는 문제가 발생한다. 따라서 NAT을 이용해 외부에 공개해야 하는 서비스의 경우 공인 IP를 사용하고 외부에 공개할 필요가 없는 일반 사용자 PC나 종단 장비에는 사설 IP를 사용하도록 할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 외부와 통신할 때 내부 IP를 다른 IP로 변환해 통신하면 외부에 사내 IP 주소 체계를 숨길 수 있다.
 * 내부 네트워크에서 외부로 나가는 방향 통신은 허용하고, 외부에서 내부로 들어오는 통신을 방어하여 보안을 강화할 수 있다.

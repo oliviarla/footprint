@@ -276,6 +276,114 @@ ss [option] [filter]
 | -w \<filename>     | tcpdump의 결과를 화면에 출력하지 않고 파일명으로 저장                                   |
 | -r \<filename>     | 파일로 저장한 tcpdump 파일을 화면에 출력                                          |
 
+## iptables로 방화벽 확인
+
+### iptables 소개
+
+* netfilter라는 리눅스 커널 모듈로 실제 필터링이 이뤄진다. iptables를 비롯해 비슷한 역할을 하는 firewalld, UFW는 모두 netfilter를 사용한 사용자 단 애플리케이션일 뿐이다.
+
+> CentOS 7 이후 버전은 firewalld가 활성화되어있어 firewalld 서비스를 비활성화하고 iptables를 설치해야 한다.
+
+* **서버에서 허용하거나 차단할 IP, 서비스 포트에 대한 정책**을 정의한다.
+* 서버 기준의 트래픽 구간(INPUT, OUTPUT, FORWARD)별로 **정책 그룹**을 만들어 관리된다.
+* **체인**이란 개별 정책의 방향성에 따라 구분한 그룹이고, 체인을 역할별로 구분한 그룹을 **테이블**이라 한다.
+* Filter 테이블, NAT 테이블, Mangle 테이블, Raw 테이블, Security 테이블이 존재한다.
+  *
+
+### Filter 테이블
+
+* 리눅스의 호스트 방화벽은 **Filter 테이블을 통해 트래픽을 제어**한다.
+* Filter 테이블 구조는 다음과 같다.
+
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+
+* Filter 테이블
+  * iptables에서 패킷을 허용하거나 차단하는 역할을 선언하는 영역
+* INPUT,OUTPUT,FORWARD 체인
+  * 호스트 기준으로 호스트로 들어오거나(INPUT), 호스트에서 나가거나(OUTPUT), 호스트를 통과할(FORWARD) 때 사용되는 정책들의 그룹
+  * 패킷의 방향성에 따라 각 체인에 정의된 정책이 적용된다.
+* Match
+  * 제어하려는 패킷의 상태 또는 정보 값의 정의
+  * 정책에 대한 조건
+  * 상단의 정책이 하단보다 먼저 적용되는 탑다운 방식으로 적용된다. 따라서 **어느 위치에 정책을 설정하는지가 중요**하다.
+* Target
+  * 패킷이 iptables에 정의한 정책과 일치할 때 어떤 행동을 취할 지에 대한 정의이다.
+  * 기본적으로 ACCEPT(허용), REJECT(차단하면서 응답 메시지 전송), DROP(폐기)이 많이 사용된다.
+  * syslog에 로깅를 하기 위한 LOG, NAT을 위한 SNAT, DNAT 등 다양한 타깃 설정이 가능하다.
+  * Match(조건)와 일치하는 패킷을 허용할 지, 차단할 지에 대한 패킷 처리 방식
+
+### 방화벽 관리
+
+> 명령어를 사용해 방화벽 정책을 변경하는 경우 재시작 시 정책이 초기화된다. 영구적으로 정책을 적용하려면 /etc/sysconfig/iptables 내용을 변경해야 한다.
+
+* 방화벽 정책 확인
+  *   체인별로 정의된 정책을 확인할 수 있다.
+
+      ```
+      iptables -L
+      ```
+  *   체인별로 정의된 정책을 줄 번호와 함께 확인할 수 있다.
+
+      ```
+      iptables -L --line-number
+      ```
+  *   실제 정의된 정책을 확인할 수 있다.
+
+      ```
+      iptables -S
+      ```
+  *   정책이 이미 존재하는지 확인할 수 있다.
+
+      ```
+      iptables -C INPUT -p tcp --dport 21 -j ACCEPT
+      ```
+* 정책 추가
+  *   -A 옵션과 함께 체인, 대상 프로토콜과 인터페이스, 서비스 포트 등을 명시한 정책을 정의한다. 정책은 맨 마지막 줄에 삽입된다.
+
+      ```
+      iptables -A <chain> -p <protocol> --dport <port> -j <policy>
+      ```
+  *   다음 예제는 TCP 80 포트를 열어 웹 서비스를 제공하기 위한 정책을 추가하는 명령이다.
+
+      ```
+      iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+      ```
+  *   -I 옵션과 함께 체인, 대상 프로토콜과 인터페이스, 서비스 포트 등을 명시한 정책을 원하는 줄 번호 위치에 정의한다.
+
+      ```
+      iptables -I <chain> <line number> -p <protocol> --dport <port> -j <policy>
+      ```
+* 정책 제거
+  *   -D 옵션과 함께 체인, 대상 프로토콜과 인터페이스, 서비스 포트 등을 명시한 정책을 입력한다.
+
+      ```
+      iptables -D <chain> -p <protocol> --dport <port> -j <policy>
+      ```
+  *   -F 옵션으로 iptables의 모든 정책을 제거할 수 있다.
+
+      ```
+      iptables -F
+      ```
+
+### 방화벽 로그 확인
+
+* 기본적으로 iptables 정책에 의해 차단되거나 허용된 내용은 `/var/log/messages` 에 남게 된다.
+* 해당 로그 파일은 여러 리눅스 로그들이 혼재되어 있으므로, rsyslog.conf 파일을 작성 후 서비스를 시작하여 별도 로그 파일에 로깅할 수 있다.
+* ```
+  echo 'kern.* /var/log/iptables.log' >> /etc/rsyslog.conf
+
+  systemctl restart rsyslog.service
+
+  iptables -I INPUT -j LOG --log-level 4 log-prefix '## iptables-log ##'
+
+  tail -f /var/log/iptables.log
+  ```
+*   iptables 정책마다 통과하는 패킷과 바이트 수를 확인할 수 있다.
+
+    ```
+    iptables -L -v
+    ```
+
 **출처**
 
 * 알라딘 eBook \<IT 엔지니어를 위한 네트워크 입문>

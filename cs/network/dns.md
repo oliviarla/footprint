@@ -195,7 +195,7 @@ Domain. IN TXT "v=spf1 ip4:x.x.x.x -all"
           * CNAME으로부터 얻은 도메인 이름은 GSLB가 관리하므로, GSLB 도메인 이름에 대한 질의를 GSLB 서버에 보낸다.
           * GSLB에서 최종적으로 IP를 응답한다.
 
-        <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
     *   위임(Delegation) 사용 (NS 레코드 사용)
 
         * 실제 도메인과 동일한 도메인 레코드를 사용하며 도메인 전체를 위임한다.
@@ -206,7 +206,7 @@ Domain. IN TXT "v=spf1 ip4:x.x.x.x -all"
           * NS으로부터 얻은 도메인 이름은 NS 값에 명시된 도메인 서버가 관리하므로, 도메인 이름에 대한 질의를 GSLB 서버에 보낸다.
           * GSLB에서 최종적으로 IP를 응답한다.
 
-        <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 분산 방식
 
