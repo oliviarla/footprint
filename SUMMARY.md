@@ -378,6 +378,18 @@
   * [Kafka Connect](infra/kafka/kafka-connect.md)
   * [MirrorMaker](infra/kafka/mirrormaker.md)
 
+***
+
+* [AWS](aws/README.md)
+  * [AWS Console / CLI / SDK](aws/aws-console-cli-sdk.md)
+  * [IAM](aws/iam.md)
+  * [EC2](aws/ec2.md)
+  * [ELB / ASG](aws/elb-asg.md)
+  * [RDS / Aurora / ElastiCache](aws/rds-aurora-elasticache.md)
+  * [Route 53](aws/route-53.md)
+  * [VPC](aws/vpc.md)
+  * [S3](aws/s3.md)
+
 ## 🏔️ CS
 
 * [운영 체제](cs/os/README.md)

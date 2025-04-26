@@ -22,7 +22,7 @@ description: 선입선출을 기반으로 한 선형 자료구조
 
 ## Queue in Java
 
-<figure><img src="../../.gitbook/assets/image (38).png" alt=""><figcaption><p>Java에서 제공하는 Queue 클래스 구조 (geeksforgeeks)</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (38) (1).png" alt=""><figcaption><p>Java에서 제공하는 Queue 클래스 구조 (geeksforgeeks)</p></figcaption></figure>
 
 ### LinkedList
 
@@ -61,7 +61,7 @@ String result = q.element();
 * Stack이나 Queue로 사용할 수 있다.
   * Stack 클래스나 LinkedList 클래스를 Queue로 사용할 때 보다 빠른 성능을 보인다.
 
-<figure><img src="../../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (34) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 기본 생성자 사용 시, 초기 배열 크기는 16이다.
 * LinkedList에 원소를 추가하는 방식과 다르게, ArrayDeque는 원소 추가 시 배열이 꽉 찼더라도 자체적으로 크기를 늘리기 때문에 ~~이론상 무한대로~~ 추가가 가능하다.
