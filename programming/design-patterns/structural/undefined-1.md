@@ -13,7 +13,7 @@
 * 플라이웨이트 팩토리 클래스는 기존 플라이웨이트 객체를 재사용할지 새로 객체를 만들지 결정한다.
 * 공유한 상태는 객체 내부에 저장하지 않고, **컨텍스트** 클래스에 포함해두고 상태에 의존하는 메서드들을 작성해 변화된 상태가 전달되도록 한다. 컨텍스트 클래스에는 고유한 상태인 플라이웨이트도 포함해둔다.
 
-<figure><img src="../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 
 

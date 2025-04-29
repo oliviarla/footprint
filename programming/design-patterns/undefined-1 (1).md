@@ -36,7 +36,7 @@ public class MacroCommand implements Command {
 
 ## 사용 방법
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 클라이언트는 커맨드 객체를 생성해 인보커에 전달한다.
 * 커맨드 객체에서는 리시버 객체에게 요청을 보내 작업을 수행하도록 한다.

@@ -27,16 +27,16 @@
   * Host to Host 통신 보호
     *   두 호스트 간에 직접 VPN 터널을 연동한다.
 
-        <figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
   * Network to Network 통신 보호
     *   특정 네트워크를 가진 두 종단을 연결하는 경우 사용된다.
 
-        <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
   * Host to Network 통신 보호
     * 사이트를 우회하거나 특정 국가에서만 접근 가능한 사이트를 사용할 때 자주 사용된다.
     *   공중 네트워크에서 해커의 공격을 원천 방어할 수 있어 유용하다.
 
-        <figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 암호화 기법
 

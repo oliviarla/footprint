@@ -295,7 +295,7 @@ ss [option] [filter]
 * 리눅스의 호스트 방화벽은 **Filter 테이블을 통해 트래픽을 제어**한다.
 * Filter 테이블 구조는 다음과 같다.
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Filter 테이블
   * iptables에서 패킷을 허용하거나 차단하는 역할을 선언하는 영역

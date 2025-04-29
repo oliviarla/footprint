@@ -14,7 +14,7 @@
 
 * 호스트가 DHCP 서버로부터 IP를 할당 받는 과정은 다음과 같다.
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. **DHCP Discover**\
    DHCP 클라이언트는 DHCP 서버를 찾기 위해 DHCP Discover 메시지를 브로드캐스트로 전송한다. 이 때 서비스 포트의 출발지는 UDP 68번(bootpc), 목적지는 UDP 67번(bootps)를 사용한다. IP를 할당받는 과정이므로 패킷을 정상적으로 주고받을 수 없어 TCP 대신 UDP를 사용한다.

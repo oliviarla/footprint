@@ -13,7 +13,7 @@
 
 * IPv4 주소를 장비마다 할당할 경우 IP가 고갈되는 문제가 발생한다. 따라서 NAT을 이용해 외부에 공개해야 하는 서비스의 경우 공인 IP를 사용하고 외부에 공개할 필요가 없는 일반 사용자 PC나 종단 장비에는 사설 IP를 사용하도록 할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 외부와 통신할 때 내부 IP를 다른 IP로 변환해 통신하면 외부에 사내 IP 주소 체계를 숨길 수 있다.
 * 내부 네트워크에서 외부로 나가는 방향 통신은 허용하고, 외부에서 내부로 들어오는 통신을 방어하여 보안을 강화할 수 있다.
@@ -30,20 +30,20 @@
 * NAT이 정상적으로 수행되려면 역 NAT과정이 함께 수행되어야 한다.
 * 아래 예시의 경우 내부 IP인 10.10.10.10을 외부와 통신할 때 11.11.11.11로 변경해준다. 반대로 11.11.11.11로 요청이 들어왔다면 내부 IP인 10.10.10.10으로 변경해준다.
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## PAT 동작 방식
 
 * 출발지에 있는 다수의 사용자가 동일한 공인 IP로 변환되어야 한다. 따라서 주소 변환 시 출발지의 IP와 포트가 변경된다. 다수의 사용자는 동일한 IP를 갖지만 서로 다른 포트로 구분될 수 있다.
 * 변경된 정보는 NAT 테이블에 저장된다.
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 * IP 주소 뿐만 아니라 서비스포트까지 함께 변경하는 형태로 NAT 테이블을 관리한다.
 * 서비스 포트가 동시에 모두 사용중이거나 재사용 불가능한 경우 PAT이 동작하지 않으므로, 공인 IP 주소를 하나만 두는 게 아니라 풀(Pool)로 구성해야 한다.
 * PAT IP가 출발지인 경우 NAT 테이블이 생성되고 응답에 대해 NAT 테이블을 참조할 수 있지만, PAT IP가 목적지인 경우 해당 IP가 어떤 IP에 바인딩되는지 NAT 테이블에 없으므로 알 수 없다.
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## SNAT/DNAT
 
@@ -56,7 +56,7 @@
   * 여러 랜선으로 연결된 사설 네트워크 단말에서 인터넷으로 요청을 보낼 때 PAT을 사용해 IP가 변환된다. 동일한 와이파이에 연결한 여러 단말에서 [https://whatismyipaddress.com/](https://whatismyipaddress.com/) 등 공인 IP Address를 쉽게 확인할 수 있는 사이트에 접근해보면 동일한 공인 IP가 나올 것이다.
 * 사설 네트워크를 쓰는 경우에도, 동일한 대역폭을 사용하는 두 네트워크 간의 통신을 원활히 하기 위해 SNAT을 사용할 수 있다. 이 때에는 공인 네트워크 IP로 변환하지 않아도 된다.
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### D(destination)NAT
 
@@ -64,7 +64,7 @@
 * 로드밸런서의 Virtual IP에 사용자가 요청을 보내면, 로드밸런서에서는 요청을 서버의 실제 IP로 DNAT하여 내보낸다.
 * 대외망과의 네트워크 구성에서 대외망에 NAT 장비를 두어 대외사의 IP를 특정 IP대역으로 변환한다. 따라서 사내에서는 어떤 대외사에 요청을 보내든 별도의 라우팅 설정이 필요없다.
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 동적/정적 NAT
 
@@ -80,4 +80,4 @@
 * 출발지와 목적지가 미리 정의되지 않으므로 다수의 IP로 구성된 풀(pool) 또는 범위(range)에서 하나를 사용하게 된다.
 * 이 때 NAT 테이블은 특정 시간동안만 유지되어 일정 시간 동안 통신이 없으면 다시 사라지므로(timeout), 서비스 흐름을 고려해 적용해야 한다.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1).png" alt=""><figcaption></figcaption></figure>

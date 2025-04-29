@@ -14,4 +14,4 @@
 * 4계층의 데이터가 가질 수 있는 최대 데이터 크기이다.
 * 일반적인 이더넷에서는 1,460바이트로 사용한다.
 
-<figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>

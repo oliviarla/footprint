@@ -13,7 +13,7 @@
 * 상속과 컴포지션을 통해 Decorator 추상 클래스는 Component 인터페이스를 구현하는 동시에 필드로 가지며, 필수 메서드와 부가 기능을 구현한다.
 * 상속하는 이유는 Component와 타입을 동일하게 맞추기 위함이고, 필드로 갖는 것은 행동을 상속받기 위함이다.
 
-<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 
@@ -38,7 +38,7 @@
 * I/O에는 다양한 방식이 존재하며, 이를 지원하기 위해 자바에서는 데코레이터 패턴을 사용한다.
 * InputStream은 추상 데코레이터 클래스 역할을 하며, 데코레이터에 감싸이는 컴포넌트 역할을 하는 클래스들이 존재한다. 그리고 데코레이터 클래스들이 존재한다. 이 때 데코레이터에서는 입력받은 데이터를 원하는 형태로 가공하도록 한다.
 
-<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8) (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### Lettuce의 ChannelWriter
 

@@ -4,7 +4,7 @@
 
 * 인메모리 캐시에 데이터를 저장하고 조회할 때 여러가지 전략을 사용해 효율적이고 고성능의 기능을 구현할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (18) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 읽기
 

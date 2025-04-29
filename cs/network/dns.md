@@ -27,7 +27,7 @@
 * 최대 128계층까지 구성 가능하며 각 계층마다 최대 63바이트까지 사용할 수 있다. 구분자 `.`를 포함한 전체 도메인 이름 길이는 255바이트까지 사용 가능하다.
 * 알파벳, 숫자, `-` 만 사용 가능하다.
 
-<figure><img src="../../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (19) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 루트 도메인은 도메인을 구성하는 최상위 영역이다. DNS 서버에 도메인에 해당하는 데이터가 없다면 루트 DNS 서버에 조회 요청을 보낸다.
 * 최상위 도메인인 TLD는 다음과 같은 유형으로 분리된다.
@@ -62,7 +62,7 @@
   * 재귀적 쿼리 : 쿼리를 보낸 클라이언트에 서버가 최종 결괏값을 반환하는 서버 중심 쿼리, 클라이언트와 로컬 DNS 간의 쿼리를 의미한다.
   * 반복적 쿼리: 최종 값을 받을 때 까지 클라이언트에서 쿼리를 계속 진행하는 방식, 로컬 DNS 서버와 상위 DNS 구간의 쿼리를 의미한다.
 
-<figure><img src="../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (20) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 마스터 / 슬레이브
 
@@ -195,7 +195,7 @@ Domain. IN TXT "v=spf1 ip4:x.x.x.x -all"
           * CNAME으로부터 얻은 도메인 이름은 GSLB가 관리하므로, GSLB 도메인 이름에 대한 질의를 GSLB 서버에 보낸다.
           * GSLB에서 최종적으로 IP를 응답한다.
 
-        <figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
     *   위임(Delegation) 사용 (NS 레코드 사용)
 
         * 실제 도메인과 동일한 도메인 레코드를 사용하며 도메인 전체를 위임한다.
@@ -206,7 +206,7 @@ Domain. IN TXT "v=spf1 ip4:x.x.x.x -all"
           * NS으로부터 얻은 도메인 이름은 NS 값에 명시된 도메인 서버가 관리하므로, 도메인 이름에 대한 질의를 GSLB 서버에 보낸다.
           * GSLB에서 최종적으로 IP를 응답한다.
 
-        <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 분산 방식
 

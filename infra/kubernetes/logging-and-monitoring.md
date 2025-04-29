@@ -6,7 +6,7 @@
 
 * 각 파드의 컨테이너들로부터 발생한 로그 파일들을 중앙화된 시스템 형태로 관리하기 위해 아래와 같은 파이프라인을 구성할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 컨테이너 로그는 컨테이너가 실행중인 노드에 파일 형태로 저장된다. 로그 파일의 이름에는 네임스페이스, 파드, 컨테이너 이름이 포함된다.
 * 컨테이너가 저장한 로그 파일을 로그 수집기(ex. fluentd)가 수집하여 중앙화된 로그 저장소(ex. elastic search)에 전달하면, 운영자는 로그 저장소의 여러 확장 프로그램(ex. kibana)을 이용해 로그 검색 및 필터링 기능을 이용할 수 있다.

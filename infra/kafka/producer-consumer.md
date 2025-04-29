@@ -61,11 +61,11 @@ Accumulator --> Sender
     * close 메서드를 호출하여 producer 객체의 리소스를 안전하게 종료한다.
     * Accumulator에는 Partition마다 Deque를 가지고 있으며 Deque 내부에는 batch를 통해 레코드들을 묶어놓는다.
 
-    <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     * Sender는 브로커 별로 레코드를 전송하는 역할을 하는데, 브로커의 파티션마다 보내야 할 batch 데이터를 가져와 `Ready List`에 저장해둔 후 한꺼번에 보낸다. 이 때 한 번의 요청이 처리할 수 있는 최대 용량까지만 batch 데이터를 담을 수 있다.
 
-    <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * Accumulator에 레코드가 충분히 차면 배치 형태로 묶어 Sender에 전달한다. Sender는 이 데이터를 브로커에 전송한다.
 * send 메서드의 결과로는 `Future<RecordMetadata>` 타입이 반환되는데, 만약 레코드가 정상적으로 적재되었다면 파티션 번호와 오프셋 번호가 담겨 반환된다. 혹은 send 메서드에 Callback 객체를 담아 응답이 왔을 때 콜백이 호출되도록 할 수 있다.
 
@@ -175,7 +175,7 @@ KafkaProducer<String, String> producer = new KafkaProducer<String, String>(confi
 * 트랜잭션 프로듀서는 트랜잭션의 시작과 끝을 트랜잭션 레코드를 한 개 더 보낸다. 트랜잭션이 끝난 상태를 표시하는 정보를 가지며, 레코드이기 때문에 오프셋 한 개를 차지한다.
 * 아래 그림에서 commit 이라는 레코드가 트랜잭션 레코드이다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption><p><a href="https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html">https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption><p><a href="https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html">https://gunju-ko.github.io/kafka/2018/03/31/Kafka-Transaction.html</a></p></figcaption></figure>
 
 * 트랜잭션 컨슈머는 파티션에 저장된 트랜잭션 레코드를 확인하면 트랜잭션이 완료되었다고 간주하고 데이터를 읽는다. 만약 트랜잭션 레코드가 존재하지 않으면 아직 트랜잭션이 완료되지 않았다고 판단하고 데이터를 가져가지 않는다.
 

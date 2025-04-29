@@ -43,7 +43,7 @@
 
     * 인터넷에 특화된 네트워크 구조
 
-    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 분류
 
@@ -79,7 +79,7 @@
     * 고속 연결은 대부분 광케이블 기반 이더넷을 사용하며, 가입자와 통신사업자 간 접속 기술으로 이더넷을 많이 사용한다. 통신사업자 내부에서는 또다른 고속 통신 기술을 사용한다.
   *   전용 회선을 이더넷으로 구성 시 LLCF(Link Loss Carry Forward)를 설정하지 않으면 전용 회선이 한 사이트에서 다운되더라도 반대쪽에서는 살아있는 것으로 인식한다. 따라서 한쪽 링크가 다운되면 이를 감지해 반대쪽 링크도 다운시키는 LLCF 기능을 활성화해야 한다.
 
-      <figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 인터넷 전용 회선
   * 인터넷 연결 회선에 대해 통신 대역폭을 보장해준다.
   * 다른 가입자와 경쟁하지 않고 통신사업자와 가입자 간의 연결 품질을 보장한다.
@@ -93,11 +93,11 @@
 * 가정집에서 사용하는 공유기는 2계층 스위치 + 3계층 라우터 + 4계층 NAT과 간단한 방화벽 기능을 모아둔 장비이다.
 * 모뎀은 근거리/원거리 통신 기술을 변환해주는 장비이다. 기가 인터넷의 경우 대부분 FTTH 모뎀을 사용한다.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 데이터센터 네트워크
 
 * 빠르고 안정적인 대용량 서비스를 제공하기 위해 이중화 기술과 고속 이더넷 기술이 사용된다.
 * 일반 서버들은 TOR(Top of Rack) 스위치와 연결되고, TOR 스위치들은 Spine 스위치와 연결된다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

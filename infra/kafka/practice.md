@@ -131,7 +131,7 @@ services:
 
 * 8080 포트에 브라우저로 접근하면 WebUi 서비스에 접근할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 토픽 생성
 
@@ -160,7 +160,7 @@ services:
 ./kafka-topics.sh --bootstrap-server localhost:9092 --list
 ```
 
-<figure><img src="../../.gitbook/assets/image (14) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 자세한 내용을 조회하려면 `--describe --topic <토픽이름>` 을 인자로 주면 된다.
 
@@ -168,7 +168,7 @@ services:
 ./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic hello.kafka
 ```
 
-<figure><img src="../../.gitbook/assets/image (15) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 토픽 옵션 수정
 
@@ -178,7 +178,7 @@ services:
 ./kafka-topics.sh --bootstrap-server localhost:9092 --topic hello.kafka --alter --partitions 4
 ```
 
-<figure><img src="../../.gitbook/assets/image (17) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 토픽 삭제를 위한 리텐션 기간 변경을 위해서는 아래 명령어를 수행하면 된다.
 
@@ -186,7 +186,7 @@ services:
 ./kafka-configs.sh --bootstrap-server localhost:9092 --entity-type topics --entity-name hello.kafka --alter --add-config retention.ms=86400000
 ```
 
-<figure><img src="../../.gitbook/assets/image (18) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 토픽에 데이터 넣기
 
@@ -242,7 +242,7 @@ $ ./kafka-console-producer.sh --bootstrap-server localhost:9092 --topic hello.ka
 ./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group hello-group --describe
 ```
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 간편 테스트
 
