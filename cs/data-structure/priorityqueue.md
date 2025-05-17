@@ -13,7 +13,7 @@ description: 우선순위 순서로 꺼낼 수 있는 큐
 
 ## PriorityQueue in Java
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (39) (1).png" alt=""><figcaption><p>geeksforgeeks</p></figcaption></figure>
 
 ### PriorityQueue
 

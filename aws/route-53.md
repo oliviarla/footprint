@@ -120,7 +120,7 @@
   * 복잡한 라우팅 의사 결정 트리를 UI를 통해 설정할 수 있는 툴이다.
   * 트래픽 플로우 정책 단위로 저장 가능하며 버전 관리, 호스팅 영역 적용 등의 기능을 제공한다.
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 ### IP
 

@@ -51,7 +51,7 @@
 * 고정 호스트 이름이 부여된다.
 * 실제 요청을 보낸 클라이언트의 IP는 X-Forwarded-For 헤더에 삽입된다. Port는 X-Forwarded-Port, 프로토콜은 X-Forwarded-Proto에 삽입된다.
 
-<figure><img src="../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (35) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 컨테이너와 ECS를 사용해 동일 EC2 인스턴스 상의 여러 애플리케이션에 부하를 분산한다.
 * HTTP/2와 WebSocket을 지원한다.
@@ -62,7 +62,7 @@
 * URL 경로, hostname, query string, header 등을 기준으로 하여 **서로 다른 대상 그룹에 라우팅**할 수 있다.
   *   마이크로서비스나 컨테이너 기반 애플리케이션을 사용할 경우 URL 경로를 기반으로 처리할 대상 그룹을 지정할 수 있다.
 
-      <figure><img src="../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (34) (2).png" alt=""><figcaption></figcaption></figure>
 * 고정된 HTTP 응답을 반환할 수 있다.
 * 리스너 규칙의 우선순위를 지정할 수 있다.
 * 포트매핑 기능이 있어 ECS 인스턴스의 동적 포트로 리다이렉트할 수 있다.
@@ -80,7 +80,7 @@
 * 기본적으로 가용 영역 당 하나의 고정 IP를 AWS로부터 부여받는다. 혹은 각 가용 영역에 Elastic IP를 할당할 수 있다.
 * 따라서 일부 IP로만 네트워크 로드밸런서에 접근 가능하게 된다.
 
-<figure><img src="../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (36) (2).png" alt=""><figcaption></figcaption></figure>
 
 > **대상(target) 그룹**
 >
@@ -98,7 +98,7 @@
 * 배포 및 확장, AWS의 타사 네트워크 가상 어플라이언스의 플릿 관리에 사용된다.
 * 모든 트래픽이 방화벽을 통과하게 하거나 침입 탐지 및 방지 시스템에 사용한다.
 
-<figure><img src="../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (37) (2).png" alt=""><figcaption></figcaption></figure>
 
 * IDPS나 심층 패킷 분석 시스템 또는 일부 페이로드를 네트워크 수준에서 수정하는 기능을 제공할 수 있다.
 * 트래픽이 애플리케이션에 도달하기 전에 EC2 인스턴스와 같은 타사 가상 어플라이언스를 배포했고 트래픽의 애플리케이션에 도달 전에 트래픽을 통과하기 위해 사용된다.

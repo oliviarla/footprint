@@ -83,7 +83,7 @@
 * DHCP 릴레이 에이전트는 DHCP 클라이언트와 같은 L2 네트워크 내에 존재해야 하며, DHCP 서버의 IP 주소가 등록되어 있어야 한다.
 * 브로드캐스트로 전달된 DHCP 패킷을 릴레이 에이전트가 수신하면, 이를 DHCP 서버 혹은 클라이언트로 유니캐스트하여 보낸다.
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 동작 방식
 

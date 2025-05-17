@@ -54,7 +54,7 @@ CPU활용을 높이기 위해 메모리를 효율적으로 관리하는 방법�
   * page table의 크기가 클수록 frame 찾을 때 많은 시간이 소요된다.
   * TLB가 paging이 가지는 오버헤드를 줄일 수 있지만 context switch가 자주 발생하면 프로세스마다 TLB가 다르기 때문에 TLB를 fresh out(교체)하는 비용 이 많이 들 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (23) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (23) (1) (1) (1).png" alt="" width="375"><figcaption></figcaption></figure>
 
 
 

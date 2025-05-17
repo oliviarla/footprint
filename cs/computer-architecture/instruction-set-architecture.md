@@ -60,7 +60,7 @@
 * 대부분의 현대 프로세서는 메인 메모리에서 데이터를 레지스터로 옮겨와 처리한 후 해당 내용을 다시 메인 메모리에 저장하는 방식을 사용한다.
 * CPU내의 메모리 계층 최상위에 위치하며 가장 빠른 속도로 접근 가능한 메모리이다.
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption><p><a href="https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/">https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (40) (1).png" alt=""><figcaption><p><a href="https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/">https://leechangyo.github.io/cs/2020/05/19/20.-what-are-CPU-Registers/</a></p></figcaption></figure>
 
 #### 32bit 컴퓨터가 RAM을 최대 4GB까지 밖에 사용하지 못하는 이유
 

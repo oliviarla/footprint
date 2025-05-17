@@ -68,4 +68,4 @@
     * 과도한 예외 처리로 공격 패킷 탐지가 정상적으로 되지 않았음
     * 공격 데이터베이스가 업데이트되기 전에 ‘제로 데이 공격(Zero-Day Attack)' 발생
 
-<figure><img src="../../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
