@@ -96,7 +96,7 @@
 
 ### VPC
 
-<figure><img src="../.gitbook/assets/image.png" alt="" width="303"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5).png" alt="" width="303"><figcaption></figcaption></figure>
 
 * 일반적으로 Lambda 함수는 VPC 외부에서 실행된다. 하지만 VPC에서 Lambda 함수를 시작할 수도 있다.
 * VPC ID를 정의해야 하며, Lambda 함수를 시작하려는 서브넷을 지정하고 보안 그룹을 추가해야 한다. 그러면Lambda가 서브넷에 ENI를 생성해 VPC에서 실행되는 Amazon RDS 등의 서비스에 접근할 수 있게 된다.
@@ -151,7 +151,7 @@
   * 단계 함수 워크플로우를 시작하거나 직접 SQS에 메시지를 게시할 수 있다.
   *   인증, 퍼블릭 배포, 속도 제한을 추가하는 것이 목적이다.
 
-      <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 엔드포인트 유형
 

@@ -4,7 +4,7 @@
 
 * 데이터 센터에서는 보안 장비를 디자인할 때 DDoS - 방화벽 - IPS - WAF 형태와 같이 여러 단계로 공격을 막도록 인라인 상에 여러 장비를 배치한다.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## DDoS 방어 장비
 
@@ -26,11 +26,11 @@
 * 증폭 공격이란 좀비 PC를 충분히 확보하지 못하거나 강력한 DDoS 공격을 위해 수백 Gbps \~ 1Tbps 이상의 높은 대역폭 공격을 하기 위해 수행된다. 공격자가 중간 리플렉터에 패킷을 보내면 타겟 네트워크로 수십\~수백 배의 공격 트래픽이 발생하게 된다.
 * 증폭 공격의 경우 DDoS 장비 하나로 방어가 불가능하므로 ISP나 Cloud DDoS 솔루션을 이용해 서비스 네트워크로 트래픽이 도달하지 못하도록 조치해야 한다.
 
-<figure><img src="../../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 클라우드 기반 서비스 사용 시 실제 서비스 네트워크가 가려지므로 별도 보안 장비 없이도 DDoS 공격을 방어할 수 있다.
 
-<figure><img src="../../../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * ex) NTP 증폭, DNS 증폭, UDP Flood, TCP Flood
 
@@ -52,7 +52,7 @@
 * 회선을 공급해주는 ISP나 네트워크 ISP와 연결되는 데이터 센터 네트워크의 가장 바깥쪽에 배치된다.
 * 탐지와 방어를 한 장비에서 수행하는 인라인 방식과 서로 다른 장비에서 수행하는 아웃 오브 패스 방식이 존재한다.
 
-<figure><img src="../../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 프로파일링 기법은 평소 데이터 흐름을 습득해 일반적인 대역폭, 세션량, 초기 접속량, 프로토콜별 사용량 등을 저장해두고, 데이터와 일치하지 않는 과도한 트래픽이 인입되면 알림을 발생시키고 차단한다.
 * IP 평판 데이터베이스 기반으로 DDoS 공격으로 사용된 IP는 차단하는 등의 방법을 사용할 수도 있다.
@@ -174,7 +174,7 @@
 * SPI 방화벽과 NAT 기능이 대중화되어 일반 사용자의 PC를 직접 공격하기 어려워졌다. 이에, 내부 사용자의 PC에 사용자가 직접 악성 코드를 내려받아 실행하도록 유도하여 공격을 시도한다.
 * 감염된 내부 PC가 외부와 공격을 위한 통신을 할 때 **실제 해당 서비스 포트에서 동작하는 프로토콜이 아닌 다른 프로토콜을 사용하는 경우**가 많아 이를 파악해 적절히 제어해야 한다.
 
-<figure><img src="../../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### NGIPS
 

@@ -46,7 +46,7 @@
 * 가시성 시간 초과는 애플리케이션에 적합하게 설정되어야 한다.
 * 0초에서 12시간까지 설정할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 롱 폴링
 
@@ -102,7 +102,7 @@
 
 ### Kinesis Data Streams
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 실시간 데이터를 Amazon Kinesis Data Stream으로 내보내거나 읽어오기 위한 서비스가 필요하다.
   * 프로듀서

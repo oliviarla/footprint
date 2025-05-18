@@ -15,7 +15,7 @@
 * **컨텍스트**란 전략을 참조하며 원하는 기능을 제공하기 위해 전략에 알고리즘 수행을 위임한다.
 * 클라이언트는 컨텍스트를 생성할 때 원하는 전략 구현체를 전달한다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 
@@ -36,7 +36,7 @@
 * 이 구현 방식은 Context와 Strategy를 실행 전에 원하는 모양으로 조립해두고 Context를 실행하는 **선 조립, 후 실행** 방식이다.
 * 이로 인해 Context를 실행할 때 마다 Strategy 클래스를 변경하기 어렵다.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Context 클래스
 
@@ -89,7 +89,7 @@ context2.execute();
 * 실행할 때 마다 전략을 유연하게 변경할 수 있다.
 * 하나의 Context 객체만 만들어두고, 실행 시점에 여러 전략을 인수로 전달해 유연하게 실행할 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Context 클래스에 Strategy 필드를 두지 않는 대신, 파라미터로 전달된 Strategy를 사용한다.
 
@@ -126,7 +126,7 @@ context.execute(() -> log.info("비즈니스 로직2 실행"));
 * 게임 캐릭터는 한 번에 하나의 무기를 사용해 싸울 수 있으므로 무기를 갖도록 Character 추상 클래스에 무기 관련 필드를 추가한다. 여기서 주목할 점은 **게임 캐릭터에는 무기가 있다**라는 점에서 컴포지션을 이용한 것이다.
 * 무기의 경우 어떻게 상대에 데미지를 입히는지 구현이 각각 다르다. 따라서 Weapon 인터페이스를 추가하고, 이를 구현하는 다양한 무기 클래스(ex. Axe, Sword, …)를 구성한다.
 
-<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **출처**
 

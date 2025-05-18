@@ -21,7 +21,7 @@ helm search repo <애플리케이션 이름> --versions
 * 헬름에서 **차트**란 애플리케이션의 패키지를 의미한다. 차트를 설치하면 릴리스라고 부르며, 하나의 클러스터에 같은 차트를 여러 개 설치할 수 있다.
 * 애플리케이션의 매니페스트 파일들과 파라미터값, 템플릿 변수 등을 디렉터리 혹은 압축 파일로 묶어 차트를 만들 수 있다.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * 차트에 포함된 파라미터 값의 기본값을 확인할 수 있으며, 설치 시 기본값을 수정할 수 있다.
 

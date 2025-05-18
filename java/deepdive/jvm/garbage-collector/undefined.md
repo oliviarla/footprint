@@ -34,7 +34,7 @@
 * 아래 그림과 같이 힙 영역을 **객체의 오래된 정도를 기준으로** 영역을 나누어, 가장 최신의 객체는 `Young Generation`, 오래된 객체는 `Old Generation`, 프로그램이 죽을 때까지 사용되는 객체는 `Permenent Generation`에 담을 수 있다.
 * 오래된 객체는 앞으로도 계속해서 참조될 확률이 높기 때문에 GC 빈도를 줄이고, 새로운 객체를 담는 영역은 비교적 자주 GC 작업을 하여 GC에 영향받는 메모리 영역을 대폭 줄일 수 있다.
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **young generation**
 
@@ -94,7 +94,7 @@ Minor GC에 비해 비교적 적게 발생하며, STW가 발생한다. 모든 
 
 * 또다시 eden 영역이 가득 차면 `minor GC` 작업을 진행한다. 참조 객체와 첫번째 survivor 영역의 객체들은 또다시 비어있는 survivor 영역(To survivor space)으로 이동한다. `minor GC` 작업이 완료되면 eden과 from survivor 영역이 모두 비워진다. 객체가 이동될 때 마다 age가 늘어나며, 이는 old generation으로 이동할 척도가 된다.
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2) (1) (1).png" alt="" width="375"><figcaption><p>마이너 GC 작업을 계속 진행하며 참조 객체의 age 증가</p></figcaption></figure>
 
 * 또다시 `minor GC`를 수행할 때 age가 특정 임계값을 넘긴 객체는 old generation으로 이동한다. 이러한 과정을 반복하며 old generation 영역이 가득 차게 되면 `major GC`가 발생한다.
 

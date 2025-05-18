@@ -5,7 +5,7 @@
 * Relational Database Service
 * **Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2, Aurora (AWS Proprietary database)** 를 제공한다.
 * DB의 기능 뿐만 아니라 자동화된 데이터베이스 프로비저닝, 자동화된 운영체제 패치 등을 제공한다.
-* Point in Time Restore를 통해 지속적으로 백업이 이루어져 특정 시점으로 복원할 수 있다.
+* (PITR)Point in Time Restore를 통해 지속적으로 백업이 이루어져 특정 시점으로 복원할 수 있다.
 * 데이터베이스 성능을 모니터링할 수 있는 대시보드를 제공한다.
 * Read Replicas 기능을 사용할 수 있다.
 * 가용성을 높이고 재해 복구에 유용하도록 Multi-AZ를 구성할 수 있다.

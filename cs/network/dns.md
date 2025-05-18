@@ -206,7 +206,7 @@ Domain. IN TXT "v=spf1 ip4:x.x.x.x -all"
           * NS으로부터 얻은 도메인 이름은 NS 값에 명시된 도메인 서버가 관리하므로, 도메인 이름에 대한 질의를 GSLB 서버에 보낸다.
           * GSLB에서 최종적으로 IP를 응답한다.
 
-        <figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 분산 방식
 
