@@ -5,7 +5,7 @@
 * Aurora가 MySQL, PostgreSQL과 호환되는 AWS 자체 RDBMS인 것처럼, DocumentDB는 MongoDB와 호환되는 AWS 자체 NoSQL Database이다.
 * MongoDB는 JSON 데이터를 저장, 쿼리, 인덱스하기 위해 사용된다.
 * Aurora와 배포 방식이 비슷하다. 완전히 관리되는 데이터베이스이고 가용성이 높다.
-* 데이터는 세 개의 가용 영역에 걸쳐 복제되며 DocumentDB 스토리지는 자동으로 10 GB까지 확장될 수 있다.
+* 데이터는 세 개의 가용 영역에 걸쳐 복제되며 DocumentDB 스토리지는 자동으로 10GB까지 확장될 수 있다.
 * 초당 수백만개의 요청을 작업할 수 있다.
 
 ## Neptune

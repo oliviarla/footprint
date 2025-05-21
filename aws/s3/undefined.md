@@ -14,7 +14,7 @@
 ### 버킷 정책
 
 * Amazon S3 버킷의 보안을 관리하는 가장 일반적인 JSON 기반의 정책이다.
-* S3 버킷 정책을 통해 특정 사용자가 들어올 수 있게 하거나 다른 계정의 사용자를 허용할 수 있다.
+* S3 버킷 정책을 통해 **특정 사용자가 들어올 수 있게 하거나 다른 계정의 사용자를 허용**할 수 있다.
 * 버킷 정책이 S3 버킷에 첨부되면 그 안에 있는 모든 객체에 액세스할 수 있다.
 * S3 콘솔에서 직접 할당할 수 있는 전체 버킷 규칙이다.
 
@@ -116,7 +116,7 @@ aws s3api put-bucket-versioning --bucket <bucket name> --versioning-configuratio
 ## 잠금 정책, Glacier Vault Lock
 
 * WORM(Write Once Read Many) 모델을 사용하기 위해 Glacier Vault Lock Policy를 생성할 수 있다.
-* S3 Glacier Vault Lock Policy를 생성하고 객체를 Glacier Valut에 두면, 객체를 더 이상 수정하거나 삭제할 수 없게 된다. 관리자나 AWS 서비스를 사용해도 삭제할 수 없다.
+* S3 Glacier Vault Lock Policy를 생성하고 객체를 Glacier Vault에 두면, 객체를 더 이상 수정하거나 삭제할 수 없게 된다. 관리자나 AWS 서비스를 사용해도 삭제할 수 없다.
 * 규정 준수와 데이터 보존에 유용하다.
 * S3 객체 잠금
   * 버저닝을 활성화해야 S3 객체 잠금을 활성화할 수 있다.

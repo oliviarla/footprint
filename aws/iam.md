@@ -62,11 +62,11 @@
     * YubiKey (단일 보안키를 사용해 여러 루트 및 IAM 사용자를 지원한다.)
     * Hardware Key Fob MFA Device (장치로부터 TOTP 토큰을 생성해 사용한다.)
 
-## IAM Roles
+## IAM 역할
 
-* AWS 서비스에게 할당하는 권한을 IAM Roles으로 관리한다.
-* 실제 사용자가 사용하지 않는다.
-* AWS에서 정보를 조회하기 위해 IAM Roles으로 접근 권한을 부여해야 한다.
+* AWS 서비스에게 할당하는 권한을 IAM 역할으로 관리한다. 이 경우에는 실제 사용자가 사용하지 않는다.
+* AWS에서 정보를 조회하기 위해 IAM 역할으로 접근 권한을 부여해야 한다.
+* IAM 사용자 또는 AWS 서비스는 AWS API 호출을 하는 데 사용할 수 있는 임시 보안 자격 증명을 얻기 위해 역할을 부여받을 수 있다. 이를 통해 리소스에 액세스하기 위한 장기적인 자격 증명을 공유하지 않아도 된다. IAM 역할을 이용하면 다른 계정의 리소스에 액세스할 수 있다. [참고](iam.md#iam-identity-center)
 
 ### Resource-base Policy와의 차이점
 
@@ -77,6 +77,7 @@
 * Amazon S3 버킷, SNS, SQS, Lambda 함수 등 점점 더 많은 AWS 서비스와 리소스가 리소스 기반 정책을 지원하고 있다.
 * Amazon EventBridge를 사용할 때 대상에 대한 권한이 필요한데, 대상이 리소스 기반 정책을 지원한다면 EventBridge가 대상에 리소스 기반 정책을 추가하여 EventBridge 규칙에서의 호출을 허용할 수 있다. 대상이 리소스 정책을 지원하지 않는다면 EventBridge는 IAM 역할을 사용하여 대상 서비스를 호출한다.
   * Kinesis Stream, EC2 Auto Scaling, System Manager Run Command, ECS 작업 등은 아직 리소스 기반 정책을 지원하지 않는다.
+* IAM 역할을 이용하면 일반적으로 여러분 조직의 AWS 리소스에 액세스할 수 없는 사용자나 서비스에게 액세스 권한을 위임할 수 있다.
 
 ## IAM Security Tools
 
@@ -167,7 +168,7 @@
     * 권한 셋을 사용하여 사용자를 그룹에 할당하는 하나 이상의 IAM 정책을 정의한다.
     * 예를 들면 다음과 같이 설정할 수 있다.
       * 데이터베이스 관리자를 위한 권한 셋에 Dev 계정의 RDS 또는 Aurora, Prod 계정의 RDS 또는 Aurora에 액세스할 수 있다고 정의한다.
-      * 사융자에 대해 IAM 역할이 자동으로 생성된다.
+      * 사용자에 대해 IAM 역할이 자동으로 생성된다.
       * 데이터베이스 관리자가 IAM 자격 증명 센터를 통해 로그인해서 Dev 계정 또는 Prod 계정의 콘솔에 액세스할 때 해당 계정에서 IAM 역할을 자동으로 위임한다.
 
     <figure><img src="../.gitbook/assets/image (15).png" alt="" width="347"><figcaption></figcaption></figure>

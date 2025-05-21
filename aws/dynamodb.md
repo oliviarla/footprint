@@ -41,7 +41,7 @@
 * 캐시 데이터에 **마이크로초 수준의 지연 시간**을 보장한다.
 * 기존 DynamoDB API와 호환되므로 애플리케이션 로직을 변경할 필요가 없다.
 * 캐시의 기본 TTL은 5분으로 설정되어 있으나 변경할 수 있다.
-* ElastiCache 대신 DAX를 사용하는 경우는 개별 객체 캐시와 쿼리와 스캔 캐시를 처리하기 위함이다. 집계 결과를 저장하는 경우에는 Amazon ElastiCache가 적합하다. 일반적으로 Amazon DynamoDB에 캐싱 솔루션을 추가할 때 DAX를 사용한다.
+* ElastiCache 대신 DAX를 사용하는 경우는 **개별 객체 캐시와 쿼리와 스캔 캐시를 처리하기 위함**이다. 집계 결과를 저장하는 경우에는 Amazon ElastiCache가 적합하다. 일반적으로 Amazon DynamoDB에 캐싱 솔루션을 추가할 때 DAX를 사용한다.
 
 ## Streams
 
@@ -56,14 +56,14 @@
   * 처리 계층을 두어 EC2 인스턴스에서 애플리케이션을 실행하기 위한 KCL Adapter나 Lambda 함수를 사용할 수 있다. 이 때 SNS로 알림을 보내거나, DynamoDB 테이블을 필터링하거나 변환하는 등의 작업을 수행할 수 있다.
 * Kinesis Data Streams
   * 보존 기간이 1년이고, 더 많은 수의 소비자 수를 가질 수 있다.
-  * AWS Lambda 함수, Kinesis Data Analytics, Kinesis Data Firehose, AWS Glue 스트리밍Streaming ETL 등을 사용할 수 있다.
+  * AWS Lambda 함수, Kinesis Data Analytics, Kinesis Data Firehose, AWS Glue 스트리밍, Streaming ETL 등을 사용할 수 있다.
 
 ## 글로벌 테이블
 
 * 여러 리전 간에 복제가 가능한 테이블
-* 두 테이블 간에는 양방향 복제가 가능합하다.
+* 두 테이블 간에는 양방향 복제가 가능하다.
 * 애플리케이션은 모든 리전에서 테이블을 읽고 쓸 수 있다.
-* DynamoDB 스트림을 활성화해야 사용 가능하다.
+* DynamoDB Streams를 활성화해야 사용 가능하다.
 
 ## TTL
 

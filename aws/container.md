@@ -5,14 +5,15 @@
 ### 개요
 
 * Elastic Container Service
-* AWS에서 컨테이너를 실행하면 ECS 클러스터에 ECS 태스크를 실행하는 형태로 동작한다.
+* AWS에서 컨테이너를 실행하면 **ECS 클러스터에 ECS 태스크를 실행**하는 형태로 동작한다.
 * EC2 시작 유형
   * ECS 클러스터에 여러 EC2 인스턴스를 두는 방식이다.
   * 인프라를 직접 프로비저닝하고 유지해야 한다.
   * ECS 인스턴스에는 각각 ECS 에이전트를 실행해야 한다. ECS 에이전트는 각 EC2 인스턴스를 Amazon ECS 서비스와 ECS 클러스터에 등록한다.&#x20;
   * ECS 태스크를 수행하기 시작하면 AWS가 컨테이너를 시작하거나 멈출 수 있다. 새 도커 컨테이너가 생기면 미리 프로비저닝된 EC2 인스턴스에 자동으로 배정된다.
 * Fargate 시작 유형
-  * 인프라를 프로비저닝하지 않아 EC2 인스턴스 등 인프라를 관리하지 않아도 된다. (Serverless) 따라서 **EC2 시작 유형보다 관리가 쉽다.**
+  * 인프라를 프로비저닝하지 않아 EC2 인스턴스 등 인프라를 관리하지 않아도 된다. (Serverless)
+  * **EC2 시작 유형보다 관리가 쉽다.**
   * ECS 클러스터가 있을 때 ECS 태스크를 정의하는 태스크 정의만 생성하면 필요한 CPU나 RAM에 따라 ECS 태스크를 AWS가 대신 실행한다.
   * 도커 컨테이너를 실행하면 어디서 실행되는지 알리지 않고 그냥 실행된다.
   * 인프라를 확장하려면 간단하게 태스크 수만 늘리면 된다.
@@ -83,8 +84,6 @@
   * EventBridge를 사용하여 실제로 여러분의 ECS 클러스터 안에서 발생한 이벤트를 가로챌 수 있다.
   * 태스크가 종료되거나 시작되면 EventBridge에서 이벤트로 트리거하도록 한다. 해당 정보를 SNS 토픽으로 보내 관리자에게 이메일을 전송할 수 있다. 이를 통해 ECS 클러스터에 있는 컨테이너들의 라이프사이클을 모니터링할 수 있다.
 
-
-
 ## ECR
 
 * Elastic Container Registry
@@ -104,7 +103,7 @@
 * 보통 회사가 온프레미스나 클라우드에서 Kubernetes나 Kubernetes API를 사용 중일 때 Kubernetes 클러스터를 관리하기 위해 Amazon EKS를 사용한다.
 * **Kubernetes는 cloud-agnostic**으로, Azure, Google Cloud 등 모든 클라우드에서 지원된다. 따라서 클라우드 또는 컨테이너 간 마이그레이션을 실행하는 경우 Amazon EKS가 간단한 솔루션이 될 수 있다.
 * CloudWatch Container Insights를 사용해 로그와 메트릭을 수집할 수 있다.
-* EKS 워커 노드를 생성하면 EC2 인스턴스가 구성된다. 각 노드는 EKS 포드를 실행한다.
+* EKS 워커 노드를 생성하면 EC2 인스턴스가 구성된다. 각 노드는 EKS 파드를 실행한다.
 * EKS 파드가 실행되는 EKS 노드는 오토 스케일링 그룹으로 관리할 수 있다.
 
 <figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>

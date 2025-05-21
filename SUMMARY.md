@@ -413,6 +413,7 @@
   * [Security](aws/security.md)
   * [VPC](aws/vpc.md)
   * [Data Migration](aws/data-migration.md)
+  * [기타 서비스](aws/undefined.md)
 
 ## 🏔️ CS
 

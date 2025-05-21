@@ -281,12 +281,12 @@
 * 머신러닝 기반의 지능형 위협 탐지를 이용해 AWS 계정을 보호할 수 있다.
 * 서드파티 데이터를 사용해서 위협을 탐지한다.
 * GuardDuty는 다음 데이터들을 감시한다.
-  * CloudTrail Event Logs 데이터에서 비정상적인 API 호출이나 무단 배포 이력을 탐색한다.
+  * **CloudTrail Event Logs** 데이터에서 비정상적인 API 호출이나 무단 배포 이력을 탐색한다.
     * CloudTrail Manatement Events: VPC 서브넷 생성 이벤트 등을 포함한다.
     * CloudTrail S3 Data Events: GetObject, ListObject, DeleteObject 이벤트 등을 포함한다.
-  * VPC Flow Logs에서 비정상적인 인터넷 트래픽, IP 주소를 탐색한다.
-  * DNS 로그에서 DNS 쿼리 안에서 인코딩된 데이터를 전송하는 EC2 인스턴스를 탐색한다.
-  * EKS 감사 로그나 RDS 및 Aurora 로그인 이벤트, EBS, 람다, S3 데이터 이벤트 등 다른 입력 데이터 소스도 탐색할 수 있다.
+  * **VPC Flow Logs**에서 비정상적인 인터넷 트래픽, IP 주소를 탐색한다.
+  * **DNS 로그**에서 DNS 쿼리 안에서 인코딩된 데이터를 전송하는 EC2 인스턴스를 탐색한다.
+  * **EKS 감사 로그나 RDS 및 Aurora 로그인 이벤트, EBS, 람다, S3 데이터 이벤트 등 다른 입력 데이터 소스도 탐색**할 수 있다.
 * EventBridge 규칙을 설정해서, 발견된 결과에 대해 자동으로 알림을 받을 수 있다.
 * 전문적인 탐지 기능이 제공되어 암호화폐 공격을 방어하기 좋다.
 

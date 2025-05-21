@@ -4,8 +4,7 @@
 
 * 보조 메모리를 마치 메인 메모리의 일부인 것처럼 사용할 수 있도록 하는 메모리 관리 기법
 * 하드웨어와 소프트웨어를 모두 사용하여 물리적 메모리 부족을 보완하도록 한다.
-* RAM(Random Access Memory)에서 디스크 스토리지로 데이터를 일시적으로 전송한다.
-* 메모리 청크를 디스크 파일에 매핑한다.
+* 최근 사용되지 않은 데이터를 디스크로 Swap하여 RAM(Random Access Memory) 공간을 늘리는 효과를 준다.
 
 <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (2).png" alt="" width="563"><figcaption></figcaption></figure>
 
