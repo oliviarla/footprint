@@ -59,7 +59,7 @@
     * 스냅샷을 다른 리전에 복사하기 위해 다른 리전의 KMS 키를 사용해서 그 스냅샷을 다시 암호화한다. 이는 AWS에서 대신 수행해준다.
     * 다른 리전에서는 EBS 스냅샷을 받은 후 KMS를 이용해서 원래 암호화되어 있던 EBS 볼륨으로 복구한다.
 
-    <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 * 암호화된 EBS 스냅샷을 계정 간 이동시키기
   * 고객 관리형 KMS 키로 암호화된 스냅샷을 생성하고, 교차 계정 액세스를 승인하기 위해 커스텀 키 정책을 첨부한다.
   * 암호화된 스냅샷을 다른 계정에 공유한다. 다른 계정은 자체적으로 스냅샷의 사본을 생성하고 다른 고객 관리형 키를 사용해서 암호화한다.
@@ -79,7 +79,7 @@
     * 전역 클라이언트 측 암호화: 한 리전에서 클라이언트 측 암호화를 하고 다른 리전에서 클라이언트 측 복호화를 하는 방식
   *   DynamoDB 전역 테이블과 KMS 다중 리전 키로 Client-Side 암호화하기
 
-      <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
       * 전체 테이블을 암호화하는 대신 테이블의 속성을 클라이언트에서 암호화하므로 특정 클라이언트만 사용할 수 있다. 데이터베이스 관리자도 사용할 수 없다.
       * 이 때 클라이언트는 Amazon DynamoDB 암호화 클라이언트를 사용한다.

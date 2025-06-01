@@ -4,7 +4,7 @@
 
 * 데이터 센터에서는 보안 장비를 디자인할 때 DDoS - 방화벽 - IPS - WAF 형태와 같이 여러 단계로 공격을 막도록 인라인 상에 여러 장비를 배치한다.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## DDoS 방어 장비
 
@@ -174,7 +174,7 @@
 * SPI 방화벽과 NAT 기능이 대중화되어 일반 사용자의 PC를 직접 공격하기 어려워졌다. 이에, 내부 사용자의 PC에 사용자가 직접 악성 코드를 내려받아 실행하도록 유도하여 공격을 시도한다.
 * 감염된 내부 PC가 외부와 공격을 위한 통신을 할 때 **실제 해당 서비스 포트에서 동작하는 프로토콜이 아닌 다른 프로토콜을 사용하는 경우**가 많아 이를 파악해 적절히 제어해야 한다.
 
-<figure><img src="../../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### NGIPS
 

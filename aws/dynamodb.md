@@ -22,7 +22,7 @@
   * 기본 키는 파티션 키와 정렬 키(optional)로 구성된다.
   *   속성 테이블이 존재한다. 각 아이템은 속성을 가질 수 있으며 나중에 추가될 수도, null이 될 수도 있다. 아이템마다 가지는 속성이 달라도 된다. (NoSQL이기 때문 😎)
 
-      <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * 읽기/쓰기 용량 모드
   * 프로비전 모드
     * 초당 읽기/쓰기 요청 수를 예측해서 미리 RCU(Read Capacity Units), WCU(Write Capacity Units)을 지정한다.
@@ -48,7 +48,7 @@
 * 테이블의 모든 수정 사항(생성, 업데이트, 삭제)을 포함한 스트림을 생성할 수 있다.
 * 이를 통해 사용자 테이블에 새로운 사용자가 등록됐을 때 환영 이메일을 보내는 등 DynamoDB 테이블의 변경 사항에 실시간으로 반응할 수 있다. 사용 패턴을 분석을 하거나 파생 테이블을 삽입하거나 리전 간 복제를 실행하거나 DynamoDB 테이블 변경 사항에 대해 Lambda 함수를 실행할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * DynamoDB 스트림
   * 보존 기간이 24시간이고 소비자 수가 제한된다.
