@@ -206,7 +206,7 @@
     * [item 78) 공유 중인 가변 데이터는 동기화해 사용하라](java/effective-java/11/item-78.md)
     * [item 79) 과도한 동기화는 피하라](java/effective-java/11/item-79.md)
     * [item 80) 스레드보다는 실행자, 태스크, 스트림을 애용하라](java/effective-java/11/item-80.md)
-    * [item 81) wait와 notify보다는 동시성 유틸리티를 애용하라](java/effective-java/11/item-81-wait-notify.md)
+    * [item 81) wait와 notify보다는 동시성 유틸리티를 애용하라](java/effective-java/11/item-81-wait-notify-page-3.md)
     * [item 82) 스레드 안전성 수준을 문서화하라](java/effective-java/11/item-82.md)
     * [item 83) 지연 초기화는 신중히 사용하라](java/effective-java/11/item-83.md)
     * [item 84) 프로그램의 동작을 스레드 스케줄러에 기대지 말라](java/effective-java/11/item-84.md)
@@ -248,7 +248,7 @@
     * [Executor, ExecutorService](java/variety/concurrent/executor-executorservice.md)
     * [Interrupt](java/variety/concurrent/interrupt.md)
   * [Assertions](java/variety/assertions.md)
-* [Netty](java/netty/README.md)
+* [Netty](spring/netty/README.md)
   * [네티 맛보기](java/netty/example.md)
   * [네티의 주요 특징](java/netty/features.md)
   * [채널 파이프라인](java/netty/channel-pipeline.md)
@@ -262,6 +262,8 @@
   * [UDP 브로드캐스팅](java/netty/udp.md)
 * [자바 병렬 프로그래밍](java/concurrency/README.md)
   * [2장: 스레드 안전성](java/concurrency/2.md)
+  * [3장: 객체 공유](java/concurrency/3.md)
+  * [4장: 객체 구성](java/concurrency/4.md)
   * [15장: 단일 연산 변수와 논블로킹 동기화](java/concurrency/15.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>

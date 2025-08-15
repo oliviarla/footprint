@@ -1,4 +1,4 @@
-# item 81) wait와 notify보다는 동시성 유틸리티를 애용하라Page 3
+# item 81) wait와 notify보다는 동시성 유틸리티를 애용하라
 
 ## wait, notify
 
