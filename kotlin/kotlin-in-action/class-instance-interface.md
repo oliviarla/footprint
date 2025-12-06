@@ -493,8 +493,7 @@ val facebookUser = User.newFacebookUser(4)
 
 
 
-      아래와 같이 동반 객체를 감싸는 클래스를 인터페이스의 인스턴스로 넘길 수 있다.\
-
+      아래와 같이 동반 객체를 감싸는 클래스를 인터페이스의 인스턴스로 넘길 수 있다.<br>
 
       ```kotlin
       fun loadJson(factory: JSONFactory<T>): T {

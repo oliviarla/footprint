@@ -91,28 +91,21 @@
 
 1.  **DHCP Discover** (클라이언트 → 릴레이 에이전트)
 
-    DHCP 클라이언트는 DHCP 서버를 찾기 위해 브로드캐스트로 패킷을 전송한다.\
-
+    DHCP 클라이언트는 DHCP 서버를 찾기 위해 브로드캐스트로 패킷을 전송한다.<br>
 2. **DHCP Discover** (릴레이 에이전트 →DHCP서버)\
    DHCP 릴레이 에이전트는 패킷을 받은 후, 출발지와 목적지를 릴레이 에이전트 IP 주소와 DHCP 서버 IP 주소로 재작성한다. 목적지가 브로드캐스트에서 DHCP 서버 IP 주소로 변경되었기 때문에 릴레이 에이전트가 DHCP 서버로 DHCP Discover 메시지를 보낼 때는 유니캐스트로 전송한다.\
-   출발지 주소는 DHCP 서버로 가기 위한 방향의 인터페이스 IP 주소이고, DHCP 메시지에 사용되는 릴레이 에이전트 IP 주소는 DHCP 클라이언트가 속한 내부 인터페이스의 IP 주소이다.\
-
+   출발지 주소는 DHCP 서버로 가기 위한 방향의 인터페이스 IP 주소이고, DHCP 메시지에 사용되는 릴레이 에이전트 IP 주소는 DHCP 클라이언트가 속한 내부 인터페이스의 IP 주소이다.<br>
 3. **DHCP Offer** (DHCP서버 → 릴레이 에이전트)\
    DHCP Discover를 수신한 DHCP 서버는 클라이언트에 할당할 IP 주소와 서브넷, 게이트웨이, DNS 정보, 임대 시간(Lease Time) 등의 정보를 포함한 DHCP 메시지를 DHCP 릴레이 에이전트에게 유니캐스트로 전송한다. \
-   이때 DHCP Server Identifier는 DHCP 서버 자신으로 둔다.\
-
+   이때 DHCP Server Identifier는 DHCP 서버 자신으로 둔다.<br>
 4. **DHCP Offer** (릴레이 에이전트 → 클라이언트)\
    DHCP 릴레이 에이전트는 DHCP Offer 메시지를 DHCP 클라이언트에 브로드캐스트로 다시 전송한다.\
-   DHCP Server Identifier 값만 실제 DHCP 서버의 IP 주소에서 릴레이 에이전트의 외부 인터페이스 IP 주소로 변경해 전송한다.\
-
+   DHCP Server Identifier 값만 실제 DHCP 서버의 IP 주소에서 릴레이 에이전트의 외부 인터페이스 IP 주소로 변경해 전송한다.<br>
 5. **DHCP Request** (클라이언트 → 릴레이 에이전트)\
-   DHCP 클라이언트는 DHCP 서버로부터 제안받은 IP 주소(Requested IP)와 DHCP 서버 정보(DHCP Server Identifier)를 포함한 DHCP 요청 메시지를 브로드캐스트로 전송한다.\
-
+   DHCP 클라이언트는 DHCP 서버로부터 제안받은 IP 주소(Requested IP)와 DHCP 서버 정보(DHCP Server Identifier)를 포함한 DHCP 요청 메시지를 브로드캐스트로 전송한다.<br>
 6. **DHCP Request** (릴레이 에이전트 →DHCP서버)\
-   DHCP 클라이언트에서 보낸 DHCP 요청 메시지를 유니캐스트로 변환해 DHCP 서버로 전달한다.\
-
+   DHCP 클라이언트에서 보낸 DHCP 요청 메시지를 유니캐스트로 변환해 DHCP 서버로 전달한다.<br>
 7. **DHCP ACK** (DHCP서버 → 릴레이 에이전트)\
-   DHCP 요청을 받은 DHCP 서버는 해당 IP를 어떤 클라이언트가 언제부터 사용하기 시작했는지 정보를 기록하고 DHCP Request 메시지를 정상적으로 수신했다는 응답을 DHCP 릴레이 에이전트에게 유니캐스트로 전송한다.\
-
+   DHCP 요청을 받은 DHCP 서버는 해당 IP를 어떤 클라이언트가 언제부터 사용하기 시작했는지 정보를 기록하고 DHCP Request 메시지를 정상적으로 수신했다는 응답을 DHCP 릴레이 에이전트에게 유니캐스트로 전송한다.<br>
 8. **DHCP ACK** (릴레이 에이전트 → 클라이언트)\
    DHCP 서버에서 받은 Ack 메시지를 클라이언트에 브로드캐스트로 다시 전달한다.

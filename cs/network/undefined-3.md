@@ -14,14 +14,12 @@
 <table><thead><tr><th width="173.359375">NAME</th><th>DESCRIPTION</th></tr></thead><tbody><tr><td>ONBOOT</td><td>부팅 시 인터페이스를 활성화시킬 것인지 결정(yes/no), 비활성화 상태이면 리부팅 시 네트워크에 연결되지 않는다.</td></tr><tr><td>BOOTPROTO</td><td>부팅 시 사용할 프로토콜(none, dhcp, static)</td></tr><tr><td>IPADDR</td><td>IP 주소</td></tr><tr><td>NETMASK</td><td>서브넷 마스크 예: 255.255.255.0</td></tr><tr><td>PREFIX</td><td>서브넷 마스크(비트 값으로 표기) 예: 24</td></tr><tr><td>GATEWAY</td><td>게이트웨이 주소</td></tr><tr><td>DNS1</td><td>주 DNS 정보 입력</td></tr><tr><td>DNS2</td><td>보조 DNS</td></tr></tbody></table>
 
 * 변경된 네트워크 인터페이스 설정 파일을 적용하려면 네트워크 서비스를 재시작하거나 인터페이스를 재시작해야 한다.
-  *   네트워크 재시작은 다음 명령을 사용해야 한다. 원격 상에서 잠시동안 지연이 발생하고 끊기지는 않는다. 단, 재시작이 오래 걸리는 경우에서는 원격 접속이 끊길 수 있다.\
-
+  *   네트워크 재시작은 다음 명령을 사용해야 한다. 원격 상에서 잠시동안 지연이 발생하고 끊기지는 않는다. 단, 재시작이 오래 걸리는 경우에서는 원격 접속이 끊길 수 있다.<br>
 
       ```
       systemctl restart network.service
       ```
-  *   특정 인터페이스만 종료하고 재시작할 수 있다. 이 과정 중에 네트워크가 끊기므로 다른 인터페이스로 접속하거나 콘솔 상태에서 작업해야 한다.\
-
+  *   특정 인터페이스만 종료하고 재시작할 수 있다. 이 과정 중에 네트워크가 끊기므로 다른 인터페이스로 접속하거나 콘솔 상태에서 작업해야 한다.<br>
 
       ```
       ifdown ifcfg-eth0
