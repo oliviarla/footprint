@@ -264,6 +264,7 @@
   * [5장: 구성 단위](java/concurrency/5.md)
   * [6장: 작업 실행](java/concurrency/6.md)
   * [7장: 중단 및 종료](java/concurrency/7.md)
+  * [8장: 스레드 풀 활용](java/concurrency/8.md)
   * [15장: 단일 연산 변수와 논블로킹 동기화](java/concurrency/15.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
@@ -308,6 +309,7 @@
   * [Spring Cloud Config](spring/spring-cloud/spring-cloud-config.md)
   * [MicroService Communication](spring/spring-cloud/microservice-communication.md)
   * [Microservice 간 분산 추적](spring/spring-cloud/microservice.md)
+* [Spring Batch](spring/spring-batch.md)
 * [Test](spring/test/README.md)
   * [테스트 용어 정리](spring/test/undefined.md)
   * [JUnit](spring/test/junit.md)

@@ -91,7 +91,7 @@
   * AWS config
     * AWS config에서 리소스가 준수되지 않은 것을 알게 된 경우, SSM 자동화를 실행하기 위해 자동으로 수정 조치를 취할 수 있다.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## AWS 비용 탐색기
 
@@ -158,7 +158,7 @@
 * 다양한 웹/모바일 애플리케이션용 프런트엔드 라이브러리, 프레임워크가 제공된다.
 * Amplify 콘솔을 이용해서 Amplify 자체에 배포하거나 Amazon CloudFront에 배포하여 웹 또는 모바일 애플리케이션을 제공할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (3).png" alt=""><figcaption></figcaption></figure>
 
 ## 인스턴스 스케줄러
 
