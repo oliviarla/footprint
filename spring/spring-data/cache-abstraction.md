@@ -1,8 +1,8 @@
-# Spring Data Couchbase
+# Cache Abstraction 사용법
 
-## Cache Abstraction 어노테이션 사용하기
+## Spring Data Couchbase 예시
 
-#### build.gradle 작성
+#### 1️⃣ build.gradle에 의존성 추가
 
 * Spring Data Couchbase 의존성을 추가해준다.
 
@@ -10,7 +10,7 @@
 implementation 'org.springframework.data:spring-data-couchbase'
 ```
 
-#### docker로 Couchbase 서버 실행하기
+#### 2️⃣ docker로 데이터베이스 실행하기
 
 * 캐싱 데이터를 저장할 Couchbase 서버를 docker를 이용해 간단히 실행한다.
 
@@ -18,7 +18,7 @@ implementation 'org.springframework.data:spring-data-couchbase'
 docker run -d --name couchbase-local -p 8091-8096:8091-8096 -p 11210-11211:11210-11211 couchbase
 ```
 
-#### Cache Configuration 작성
+#### 3️⃣ Cache Configuration 작성
 
 * Spring Data Couchbase를 사용하기 위해서 가장 첫번째 해야할 일은 couchbase 서버와 연결하는 것이다.
 * docker compose파일로 띄운 couchbase 서버에 연결하기 위해 아래와 같이 Configuration을 작성한다.
@@ -57,7 +57,7 @@ public class CouchbaseCacheConfig {
 }
 ```
 
-#### 캐시 어노테이션 사용하기
+#### 4️⃣ 캐시 어노테이션 붙이기
 
 * CouchbaseCacheManager 빈 등록 시 추가해준 CacheConfiguration의 이름을 명시하면, 해당 CacheConfiguration의 속성을 사용해 캐싱된다.
 

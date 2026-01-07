@@ -42,3 +42,14 @@ config.storage.replication.factor = 1
 ```
 bin/connect-mirror-maker.sh config/connect-mirror-maker.properties
 ```
+
+## Kafka 클러스터 전환 예시
+
+1. 새로운 Kafka 클러스터를 생성한다.
+2. MirrorMaker2를 통해 `기존 Kafka 클러스터 -> 새로운 Kafka 클러스터` 방향으로 복제한다.
+3. 두 클러스터의 데이터가 동기화된 상태가 되면, Consumer Group 단위로 새로운 Kafka 클러스터의 메시지를 소비하도록 전환한다.
+4. 모든 Consumer가 새로운 Kafka 클러스터에 연결되어 소비되는 것을 확인한 후, Producer도 새로운 Kafka 클러스터에 데이터를 보내도록 전환한다.
+
+**출처**
+
+[https://techblog.gccompany.co.kr/%EA%B3%B5%ED%86%B5-kafka-%EC%A0%84%ED<sup>%</sup>99%98%EA%B8%B0-part-2-%EA%B3%B5%ED%86%B5-kafka-%EC%A0%84%ED%99%98-%EC%97%AC%EC%A0%95-82519943d6f8](https://techblog.gccompany.co.kr/%EA%B3%B5%ED%86%B5-kafka-%EC%A0%84%ED%99%98%EA%B8%B0-part-2-%EA%B3%B5%ED%86%B5-kafka-%EC%A0%84%ED%99%98-%EC%97%AC%EC%A0%95-82519943d6f8)
