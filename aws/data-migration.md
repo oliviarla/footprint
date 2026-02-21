@@ -10,7 +10,7 @@
   * AWS Cloud 내부의 여러 리전을 두어 재해 복구를 수행할 수 있다.
 *   RPO vs RTO
 
-    <figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
     * RTO
       * Recovery Point Objective
@@ -50,7 +50,7 @@
 * 재해가 발생하면 프로덕션 로드로 확장할 수 있다.
 * 예를 들어 아래와 같이 기업 데이터 센터에 역방향 프록시와 애플리케이션 서버, 마스터 데이터베이스를 포함하고, AWS Cloud는 ELB, EC2 ASG, RDB Slave를 포함하도록 구성할 수 있다. Route 53는 DNS를 기업 데이터 센터로 가리키고 재해가 발생하면 ELB를 가리키도록 장애 조치를 할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (3).png" alt=""><figcaption></figcaption></figure>
 
 #### 핫 사이트 혹은 다중 사이트 접근
 
@@ -58,7 +58,7 @@
 * AWS와 온프레미스에서 active-active로 구성할 수도 있고 AWS 멀티 리전에서 active-active로 구성할 수도 있다.
 * 동시에 장애 조치 할 준비가 되어있으므로 다중 DC 유형 인프라를 실행할 수 있어 유용하다.
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (2).png" alt=""><figcaption></figcaption></figure>
 
 ### 재해 복구 팁
 

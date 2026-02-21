@@ -19,7 +19,7 @@
 * Reader / Writer
   * 처리할 데이터를 읽거나, 처리 완료된 데이터를 쓰는 작업을 맡는다.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 
 

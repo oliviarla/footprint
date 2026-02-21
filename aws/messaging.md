@@ -107,7 +107,7 @@
 
 ### Kinesis Data Streams
 
-<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 실시간 데이터를 Amazon Kinesis Data Streams로 내보내거나 읽어오기 위한 서비스가 필요하다.
   * 프로듀서
@@ -139,7 +139,7 @@
 
 ## Amazon Data Firehose
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (2).png" alt=""><figcaption></figcaption></figure>
 
 * 소스에서 타깃 목적지로 데이터를 전송하는 서비스이다.
 * 원래 Kinesis Data Firehose로 불렸지만, 현재는 Kinesis 이상의 기능을 수행하여 Amazon Data Firehose로 불린다.

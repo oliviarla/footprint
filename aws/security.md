@@ -59,7 +59,7 @@
     * 스냅샷을 다른 리전에 복사하기 위해 다른 리전의 KMS 키를 사용해서 그 스냅샷을 다시 암호화한다. 이는 AWS에서 대신 수행해준다.
     * 다른 리전에서는 EBS 스냅샷을 받은 후 KMS를 이용해서 원래 암호화되어 있던 EBS 볼륨으로 복구한다.
 
-    <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 * 암호화된 EBS 스냅샷을 계정 간 이동시키기
   * 고객 관리형 KMS 키로 암호화된 스냅샷을 생성하고, 교차 계정 액세스를 승인하기 위해 커스텀 키 정책을 첨부한다.
   * 암호화된 스냅샷을 다른 계정에 공유한다. 다른 계정은 자체적으로 스냅샷의 사본을 생성하고 다른 고객 관리형 키를 사용해서 암호화한다.

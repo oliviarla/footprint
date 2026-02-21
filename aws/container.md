@@ -73,7 +73,7 @@
   * EventBridge가 ECS 태스크를 호출해 특정 작업을 수행하도록 할 수 있다.
   *   예를 들어 Amazon Fargate로 구성된 ECS 클러스터가 있고 S3 버킷에 파일이 업로드되었다는 알람이 EventBridge로 들어오면, ECS 태스크를 수행하여 S3의 데이터를 DynamoDB로 업로드하도록 아키텍처를 구성할 수 있다.
 
-      <figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (7) (2).png" alt=""><figcaption></figcaption></figure>
 * EventBridge Schedule에 의한 주기적 ECS 태스크 호출
   * Amazon EventBridge에서 1시간마다 트리거되는 규칙을 스케줄링하여 Fargate에서 ECS 태스크를 실행하게 할 수 있다.
   * 예를 들어 태스크에서 Amazon S3의 특정 파일들에 대한 배치 프로세싱을 1시간마다 수행할 수 있다.
@@ -106,7 +106,7 @@
 * EKS 워커 노드를 생성하면 EC2 인스턴스가 구성된다. 각 노드는 EKS 파드를 실행한다.
 * EKS 파드가 실행되는 EKS 노드는 오토 스케일링 그룹으로 관리할 수 있다.
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (2).png" alt=""><figcaption></figcaption></figure>
 
 * ECS와 유사하게 EKS 서비스를 노출할 때는 프라이빗 로드 밸런서나 퍼블릭 로드 밸런서를 설정해 웹에 연결해야 한다.
 * 노드 타입
