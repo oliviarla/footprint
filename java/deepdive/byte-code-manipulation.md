@@ -47,7 +47,7 @@ try {
 * 속성
   * Can-Redefine-Classes
     * 에이전트에 의해 클래스를 재정의할 수 있는지 여부 설정
-  * can-Retransform-Classes
+  * Can-Retransform-Classes
     * 에이전트에 의해 클래스를 변형할 수 있는지 여부 설정
 
 ### 실습
@@ -84,8 +84,6 @@ tasks.named('jar') {
 ```
 java -javaagent:agent.jar -jar application.jar
 ```
-
-
 
 ## 바이트 코드 조작 활용
 

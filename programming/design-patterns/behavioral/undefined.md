@@ -1,75 +1,56 @@
-# 책임 연쇄 패턴
+# 비지터 패턴
 
 ## 접근
 
-* 1개 요청을 2개 이상의 객체에서 처리해야 할 때 컴포지트 형태 대신 체이닝 형태로 객체가 해당 요청을 검토하여 직접 처리하거나 다른 객체에 넘기도록 구현해야 한다.
+* 다양한 객체에 새로운 기능을 추가해야 할 때 모든 객체에 추가하는 대신 비지터 객체에만 새로운 기능을 추가한다.
+* 각각의 객체에 기능을 일일이 추가하는 것은 수정 과정에서 오류가 발생할 가능성도 있고 단일 책임 원칙을 깨게 될 수도 있다.
 
 ## 개념
 
-* **핸들러들의 체인​(사슬)​을 따라 요청을 전달**할 수 있게 하는 디자인 패턴이다. 영어로는 Chain of Responsibility Pattern 이라고 한다.
-* 핸들러란 특정 행동들을 독립적으로 실행할 수 있는 객체를 의미한다.
-* 각 핸들러는 요청을 받으면 **요청을 처리할지 아니면 체인의 다음 핸들러로 전달할지**를 결정한다.
+* 기존 클래스 대신 비지터 클래스에 새로운 행동을 추가하고, 비지터 클래스 메서드의 인자로 기존 클래스 객체를 입력받아 필요한 데이터를 사용할 수 있다.
+* 이 때 객체로부터 원하는 데이터를 받아와야만 하기 때문에 캡슐화가 깨질 수 있다.
+* 더블 디스패치라는 방법을 사용하여 타입 확인하는 조건문 없이 클래스에 맞는 비지터 메서드를 호출하도록 한다. 비지터 객체를 인자로 받는 accept 메서드를 각 클래스에 구현하고, 내부에서는 알맞는 비지터 메서드를 호출하면 된다.
 
-<figure><img src="../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+```java
+public class City {
+    public void accept(Visitor v) {
+        v.doForCity(this);
+    }
+    // ...
+}
 
-* 모든 구상 핸들러에 공통적인 핸들러 인터페이스를 선언하고, 필요하다면 BaseHandler를 생성해 다음 핸들러의 참조를 저장하도록 한다. 핸들러 인터페이스의 구현체에는 요청을 확인한 후 처리할 지 다음 핸들러에 넘길 지 등 세부 로직이 담긴다.
-* 클라이언트는 체인을 구성하여 필요한 요청을 보내면 된다.
+public class Industry {
+    public void accept(Visitor v) {
+        v.doForIndustry(this);
+    }
+    // ...
+}
+```
 
-<figure><img src="../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1).png" alt="" width="285"><figcaption></figcaption></figure>
+* 아래는 비지터 패턴의 구성요소이다.
+  * 비지터 인터페이스는 여러 클래스들을 인자로 받는 비지터 메서드들을 선언한다.
+  * 비지터 구현체는 다양한 클래스들에 대한 동일한 행동을 할 수 있도록 메서드를 구현한다.
+  * 각 클래스들은 accept 메서드를 가진 Element 인터페이스를 구현하여 알맞는 비지터 메서드가 호출되도록 한다.
+  * 클라이언트는 일반적으로 컬렉션 혹은 컴포지트 트리 등을 통해 비지터를 적용하게 된다.
 
-* 컴포지트 패턴은 컴포넌트의 체인에 의해 트리의 루트 노드까지 도달할 수 있다는 점에서 책임 연쇄 패턴과 다르다.
-* 데코레이터 패턴과 유사하게 실행을 일련의 객체들을 통해 재귀적인 합성에 의존하지만, 책임 연쇄 패턴의 핸들러들은 독립적으로 임의의 작업을 실행할 수 있고 데코레이터는 객체의 행동을 확장하며 흐름을 중단할 수 없다는 점에서 다르다.
+<figure><img src="../../../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
 
 ## 장단점
 
 * 장점
-  * 요청을 보낸 쪽과 받는 쪽을 분리할 수 있고, 처리 순서를 제어할 수 있다.
-  * 객체는 사슬 내부 구조나 각각의 처리 객체를 알 필요가 없다.
-  * 사슬 내부 객체나 순서를 바꿔 역할을 동적으로 추가/제거하거나 변경할 수 있다.
+  * 구조를 변경하지 않으면서 복합 객체 구조에 새로운 기능을 추가할 수 있다.
+  * 새로운 기능을 손쉽게 추가 가능하다.
+  * 비지터가 수행하는 기능과 관련된 코드를 한 곳에 모을 수 있다.
 * 단점
-  * 사슬 끝까지 갔지만 아무 객체도 요청을 처리하지 않을 수 있어, 요청이 반드시 수행된다는 보장이 없다.
-  * 실행 시에 과정을 살펴보거나 디버깅하기 어렵다.
-
-## 사용 방법
-
-* 핸들러 인터페이스를 선언하고, 요청을 처리하는 메서드 시그니처를 선언한다.
-* 핸들러 구현 클래스를 만들고 처리 로직 혹은 다음 핸들러로 전달하는 로직을 작성한다.
-* 클라이언트가 핸들러 체인을 조립하거나 미리 구축된 체인을 반환하는 팩토리 클래스를 만든다.
-* 체인에 요청을 보낸다.
+  * 복합 클래스의 캡슐화가 깨진다.
+  * 컬렉션 내 모든 항목에 접근하는 트레버서로 인해 복합 구조를 변경하기 어려워진다.
 
 ## 예시
 
-### 스프링 필터
-
-* 스프링 MVC에서 제공되는 필터는 체인 형태로 구성된다. 요청을 검증하여 부적절하다면 DispatcherServlet까지 도달하지 못하게 할 수 있다.
+* 자바의 바이트 코드를 조작하는 라이브러리인 ASM에서는 ClassReader라는 클래스를 통해 class 파일 내용을 읽고 파싱한 후 ClassNode라는 비지터 구현체의 visit 메서드들을 호출하게 된다. ClassNode는 class 파일으로부터 읽어들인 정보들을 읽기 쉽게 저장하기 때문에 `visit`, `visitOuterClass`, `visitAnnotation` 등의 메서드를 통해 ClassReader로부터 전달된 정보들을 가공하여 필드에 저장하게 된다.
 
 ```java
-public interface Filter {
-    default void init(FilterConfig filterConfig) throws ServletException {}
-    
-    void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException;
-    
-    default void destroy() {}
-}
-```
-
-* 다음은 WebFilter 어노테이션을 통해 커스텀 필터를 등록하는 예시이다. Order 어노테이션을 통해 필터 적용 순서를 지정할 수 있다.
-
-```java
-@Order(1)
-@WebFilter(urlPatterns = "/*")
-public class MyCustomFilter implements Filter {
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // 요청이 Controller에 도달하기 전 수행할 작업
-        System.out.println("Custom Filter: Request is being processed");
-
-        // 필터 체인의 다음 단계로 요청을 전달
-        chain.doFilter(request, response);
-
-        // 응답이 클라이언트로 돌아가기 전에 수행할 작업
-        System.out.println("Custom Filter: Response is being processed");
-    }
-}
+ClassReader classReader = new ClassReader("MyClass");
+ClassNode classNode = new ClassNode();
+classReader.accept(classNode, 0); // classNode에 읽어온 정보를 저장한다!
 ```
