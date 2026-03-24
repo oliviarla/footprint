@@ -37,24 +37,3 @@ description: 회원 인증을 처리하는 방법 중 하나
 * 로그인 창에서 username, password를 입력하면, 인증이 이뤄진 후 토큰을 생성해 클라이언트로 보낸다.
 * 이제 이 토큰은 API에 대한 열쇠와 같은 역할을 한다. 토큰이 있다면 토큰과 함께 마이페이지의 내 정보 API 요청을 보내게 된다.
 * 서버는 클라이언트로부터 받은 요청에 토큰이 있는지 확인하고, 토큰에 존재하는 권한을 체크한 후 API 요청 응답을 보낸다.
-
-## 클래스 별 설명
-
-#### TokenProvider
-
-* 토큰을 제공해주는 클래스
-* secretKey는 설정 파일에 등록해두고, 객체가 생성될 때 Base64로 인코딩해 사용한다.
-* createToken(): 토큰을 생성
-* getAuthentication()
-* getUserId()
-* resolveToken()
-* validateToken()
-
-#### TokenAuthenticationFilter
-
-* 한 번 로그인한 사용자가 JWT로 인가를 받기 위해서는, 토큰을 확인하여 인증 처리하는 필터를 구현해야 한다.
-* 필터 내부의 로직은 아래와 같다.
-  1. HTTP 요청으로부터 토큰을 추출해낸다.
-  2. 유효 시간, 위변조 확인 등 JWT 유효성 검사를 진행한다.
-  3. JWT 유효성 검사가 완료되면 `Authentication` 객체를 생성한다.
-  4. 생성된 `Authentication` 객체를 SecurityContext에 저장한다.

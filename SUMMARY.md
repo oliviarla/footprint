@@ -269,7 +269,8 @@
   * [스레드 풀 활용](java/concurrency/undefined-6.md)
   * [활동성을 최대로 높이기](java/concurrency/undefined-7.md)
   * [성능, 확장성](java/concurrency/undefined-8.md)
-  * [단일 연산 변수와 논블로킹 동기화](java/concurrency/undefined-9.md)
+  * [병렬 프로그래밍 테스트](java/concurrency/undefined-9.md)
+  * [단일 연산 변수와 논블로킹 동기화](java/concurrency/undefined-10.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
 
@@ -320,6 +321,7 @@
   * [JWT 인증 방식](spring/security/jwt.md)
   * [메소드별 인가 처리](spring/security/undefined-1.md)
   * [Spring WebFlux와 함께 사용하기](spring/security/spring-webflux.md)
+  * [OAuth 인증 방식](spring/security/oauth.md)
 * [Spring Data](spring/spring-data/README.md)
   * [Pageable](spring/spring-data/pageable.md)
   * [Cache Abstraction 사용법](spring/spring-data/cache-abstraction.md)
