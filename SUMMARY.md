@@ -271,6 +271,7 @@
   * [성능, 확장성](java/concurrency/undefined-8.md)
   * [병렬 프로그래밍 테스트](java/concurrency/test.md)
   * [명시적 락](java/concurrency/lock.md)
+  * [동기화 클래스 구현](java/concurrency/undefined-9.md)
   * [단일 연산 변수와 논블로킹 동기화](java/concurrency/atomic-variable-nonblocking-sync.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
