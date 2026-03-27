@@ -266,13 +266,14 @@
   * [구성 단위](java/concurrency/undefined-3.md)
   * [작업 실행](java/concurrency/undefined-4.md)
   * [작업 중단 및 종료](java/concurrency/undefined-5.md)
-  * [스레드 풀 활용](java/concurrency/undefined-6.md)
-  * [활동성을 최대로 높이기](java/concurrency/undefined-7.md)
-  * [성능, 확장성](java/concurrency/undefined-8.md)
+  * [스레드 풀 활용](java/concurrency/thread-pool.md)
+  * [활동성을 최대로 높이기](java/concurrency/liveness.md)
+  * [성능, 확장성](java/concurrency/performance.md)
   * [병렬 프로그래밍 테스트](java/concurrency/test.md)
   * [명시적 락](java/concurrency/lock.md)
-  * [동기화 클래스 구현](java/concurrency/undefined-9.md)
+  * [동기화 클래스 구현](java/concurrency/synchronize-class.md)
   * [단일 연산 변수와 논블로킹 동기화](java/concurrency/atomic-variable-nonblocking-sync.md)
+  * [자바 메모리 모델](java/concurrency/memory-model.md)
 
 ## 🏖️ 코틀린 <a href="#kotlin" id="kotlin"></a>
 
