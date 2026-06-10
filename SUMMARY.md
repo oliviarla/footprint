@@ -531,7 +531,6 @@
   * [내부 구조](etc/git/undefined.md)
   * [내가 자주 사용하는 명령어 모음](etc/git/undefined-1.md)
   * [Commit Convention](etc/git/commit-convention.md)
-* [이력서 작성하기](etc/undefined.md)
 * [Embedded](etc/embedded/README.md)
   * [라즈베리파이에서 네오픽셀 적용기](etc/embedded/undefined.md)
 * [기술블로그 모음집](etc/tech-blog.md)
